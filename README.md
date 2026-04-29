@@ -13,7 +13,7 @@
 
 ## Demo
 
-https://github.com/user-attachments/assets/demo.mp4
+https://github.com/zan-maker/strata/releases/download/v0.7.0/demo.mp4
 
 > _3-minute walkthrough: title & architecture, dual-axis CLI maturity assessment, visual heatmaps, 90-day phased roadmap, deliverable chain execution pipeline, 12 deliverables overview, and tech stack._
 
