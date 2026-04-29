@@ -1,0 +1,61 @@
+rubric_id: rb.competency.stakeholder
+scope: function
+name: Stakeholder Management and Communication
+version: 1
+description: >
+  Pillar 4 of the Modern CFO Handbook competency model. Scores the CFO's
+  trust-building and communication competency across four sub-dimensions.
+
+groups:
+
+  - id: board_reporting
+    name: Board reporting clarity and impact
+    weight: 0.25
+    characteristics:
+      - id: board_pack_quality
+        name: Board pack lands with clarity and drives decisions
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "1-page exec summary; decision-required asks named; board uses the pack to drive its agenda." }
+          - { level: Proficient, score: 3, anchor: "Concise pack; board reads it but discussion is reactive." }
+          - { level: Developing, score: 2, anchor: "Pack is comprehensive but bloated; key signal buried." }
+          - { level: Urgent,     score: 1, anchor: "Pack is a data dump; board ignores it." }
+
+  - id: investor_confidence
+    name: Investor confidence and transparency
+    weight: 0.25
+    characteristics:
+      - id: investor_relations_discipline
+        name: Cadence, candor, and accountability with investors
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Standing cadence; wins and losses both led with; prior commitments tracked vs actual; asks segmented." }
+          - { level: Proficient, score: 3, anchor: "Quarterly cadence; mostly candid; commitments tracked informally." }
+          - { level: Developing, score: 2, anchor: "Updates only when prompted; tone selectively positive." }
+          - { level: Urgent,     score: 1, anchor: "Investors learn of issues from the market or from the CEO." }
+
+  - id: cross_functional_partnership
+    name: Cross-functional partnership effectiveness
+    weight: 0.25
+    characteristics:
+      - id: peer_speaks_their_language
+        name: CFO speaks the language of each peer (sales, ops, product)
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "CFO sits in sales, ops, product reviews; finance team rotates into business units." }
+          - { level: Proficient, score: 3, anchor: "Standing cross-functional check-ins; finance shows up to operational forums." }
+          - { level: Developing, score: 2, anchor: "Engagement transactional; finance speaks finance." }
+          - { level: Urgent,     score: 1, anchor: "Finance is the place forecasts go to die." }
+
+  - id: visual_storytelling
+    name: Visual storytelling and jargon-free messaging
+    weight: 0.25
+    characteristics:
+      - id: visual_storytelling_quality
+        name: Replaces dense decks with one-page visuals and plain language
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Default output is a one-page dashboard or infographic; jargon removed; conclusions land in 10 seconds." }
+          - { level: Proficient, score: 3, anchor: "Visuals used in major comms; some jargon remains." }
+          - { level: Developing, score: 2, anchor: "Slides are dense; charts are default Excel outputs." }
+          - { level: Urgent,     score: 1, anchor: "Communication is tables of numbers without narrative." }

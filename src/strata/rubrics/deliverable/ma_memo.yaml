@@ -1,0 +1,93 @@
+rubric_id: rb.deliverable.ma_memo
+scope: deliverable
+name: M&A Investment Committee Memo
+version: 1
+description: >
+  Grades an IC memo for a proposed acquisition on strategic rationale,
+  financial diligence, risk assessment, and decision-frame clarity.
+
+groups:
+
+  - id: strategic_rationale
+    name: Strategic Rationale
+    weight: 0.30
+    characteristics:
+      - id: thesis_clarity
+        name: Thesis clarity
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Single-sentence thesis; tied to acquirer strategy with named stakeholder owner." }
+          - { level: Developing, score: 3, anchor: "Thesis stated; strategic linkage implicit." }
+          - { level: Emerging,   score: 2, anchor: "Thesis is multiple competing rationales." }
+          - { level: Absent,     score: 1, anchor: "No clear thesis." }
+      - id: synergy_substantiation
+        name: Synergy substantiation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each synergy line: dollar size, timing, owner, source workstream, sensitivity." }
+          - { level: Developing, score: 3, anchor: "Synergies sized and timed; owner/source patchy." }
+          - { level: Emerging,   score: 2, anchor: "Synergies asserted as a single pool, no decomposition." }
+          - { level: Absent,     score: 1, anchor: "Synergies hand-waved." }
+
+  - id: financial_diligence
+    name: Financial Diligence
+    weight: 0.30
+    characteristics:
+      - id: quality_of_earnings
+        name: Quality of earnings
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "QoE adjustments listed line by line with rationale; pro-forma EBITDA bridge shown." }
+          - { level: Developing, score: 3, anchor: "QoE adjustments aggregated; bridge shown." }
+          - { level: Emerging,   score: 2, anchor: "Reported earnings used as-is; adjustments mentioned generically." }
+          - { level: Absent,     score: 1, anchor: "No QoE work." }
+      - id: valuation_discipline
+        name: Valuation discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Triangulated DCF + peer multiples + transaction multiples; sensitivity to top 3 drivers." }
+          - { level: Developing, score: 3, anchor: "Two methods agree; sensitivity narrow." }
+          - { level: Emerging,   score: 2, anchor: "Single method; static." }
+          - { level: Absent,     score: 1, anchor: "Price asserted." }
+
+  - id: risk_assessment
+    name: Risk Assessment
+    weight: 0.20
+    characteristics:
+      - id: top_risks
+        name: Top risks named
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top 5 risks ranked by impact x likelihood; deal-breaker line drawn." }
+          - { level: Developing, score: 3, anchor: "Risks listed; ranking implicit." }
+          - { level: Emerging,   score: 2, anchor: "Generic risk register." }
+          - { level: Absent,     score: 1, anchor: "Risks omitted." }
+      - id: mitigation_specificity
+        name: Mitigation specificity
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each top risk has named mitigation, owner, and pre-close gating action." }
+          - { level: Developing, score: 3, anchor: "Mitigations stated; owner implicit." }
+          - { level: Emerging,   score: 2, anchor: "Generic mitigations." }
+          - { level: Absent,     score: 1, anchor: "No mitigations." }
+
+  - id: decision_frame
+    name: Decision Frame
+    weight: 0.20
+    characteristics:
+      - id: recommendation_clarity
+        name: Recommendation clarity
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Specific ask: approve / reject / approve-conditional with named conditions." }
+          - { level: Developing, score: 3, anchor: "Approve / reject; conditions listed loosely." }
+          - { level: Emerging,   score: 2, anchor: "Recommendation buried." }
+          - { level: Absent,     score: 1, anchor: "No recommendation." }
+      - id: walk_away_terms
+        name: Walk-away terms
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Pre-committed walk-away price, terms, and post-LOI conditions; signed by IC chair." }
+          - { level: Developing, score: 3, anchor: "Walk-away price stated; terms vague." }
+          - { level: Emerging,   score: 2, anchor: "Walk-away mentioned aspirationally." }
+          - { level: Absent,     score: 1, anchor: "No walk-away discipline." }

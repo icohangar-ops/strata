@@ -1,0 +1,93 @@
+rubric_id: rb.deliverable.three_statement
+scope: deliverable
+name: Three-Statement Model
+version: 1
+description: >
+  Grades an integrated P&L / balance-sheet / cash-flow model on linking
+  integrity, driver structure, scenario architecture, and validation.
+
+groups:
+
+  - id: linking_integrity
+    name: Linking Integrity
+    weight: 0.30
+    characteristics:
+      - id: pl_to_bs
+        name: P&L to balance-sheet links
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Net income flows to retained earnings; D&A flows to PP&E and accumulated dep; no broken links." }
+          - { level: Developing, score: 3, anchor: "Top-line links work; minor balance-sheet items hardcoded." }
+          - { level: Emerging,   score: 2, anchor: "Several balance-sheet items disconnected from P&L." }
+          - { level: Absent,     score: 1, anchor: "P&L and BS are independent worksheets." }
+      - id: cash_reconciliation
+        name: Cash flow reconciliation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Indirect-method CF derives from P&L + BS deltas; ending cash on CF equals BS cash to the dollar." }
+          - { level: Developing, score: 3, anchor: "CF reconciles within rounding; minor manual ties." }
+          - { level: Emerging,   score: 2, anchor: "CF computed independently; reconciliation manual." }
+          - { level: Absent,     score: 1, anchor: "Cash does not reconcile." }
+
+  - id: driver_structure
+    name: Driver Structure
+    weight: 0.25
+    characteristics:
+      - id: driver_clarity
+        name: Driver clarity
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Inputs sheet clearly separated; each driver labeled, units stated, source noted." }
+          - { level: Developing, score: 3, anchor: "Inputs separated; some labels missing." }
+          - { level: Emerging,   score: 2, anchor: "Drivers scattered through formula cells." }
+          - { level: Absent,     score: 1, anchor: "No discoverable driver model." }
+      - id: hardcode_discipline
+        name: Hardcoded vs formula discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Hardcodes only on inputs sheet; formula cells are pure formulas." }
+          - { level: Developing, score: 3, anchor: "Most calc cells are formulas; occasional hardcoded plug." }
+          - { level: Emerging,   score: 2, anchor: "Mixed hardcodes and formulas in calc cells." }
+          - { level: Absent,     score: 1, anchor: "Pervasive hardcoded plugs." }
+
+  - id: scenario_engineering
+    name: Scenario Engineering
+    weight: 0.20
+    characteristics:
+      - id: toggle_architecture
+        name: Toggle architecture
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Scenario toggle drives all variable inputs from a single named cell." }
+          - { level: Developing, score: 3, anchor: "Toggle drives most inputs; a few manual swaps." }
+          - { level: Emerging,   score: 2, anchor: "Scenarios live in copies of the workbook." }
+          - { level: Absent,     score: 1, anchor: "No scenario architecture." }
+      - id: sensitivity_tables
+        name: Sensitivity tables
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Two-way sensitivity tables on top three drivers; auto-refresh on input change." }
+          - { level: Developing, score: 3, anchor: "One-way sensitivity tables." }
+          - { level: Emerging,   score: 2, anchor: "Manual sensitivity by overwriting inputs." }
+          - { level: Absent,     score: 1, anchor: "No sensitivities." }
+
+  - id: validation
+    name: Validation
+    weight: 0.25
+    characteristics:
+      - id: balance_check
+        name: Balance-sheet balance check
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Assets = Liabilities + Equity check on every period; conditional flag if off by > $1." }
+          - { level: Developing, score: 3, anchor: "Balance check on summary period." }
+          - { level: Emerging,   score: 2, anchor: "Manual eyeball check." }
+          - { level: Absent,     score: 1, anchor: "No balance check." }
+      - id: tie_out_audit
+        name: Tie-out audit trail
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Source-document tie-out tab; each historical input traces to filed financials with cell links." }
+          - { level: Developing, score: 3, anchor: "Tie-out tab present; partial coverage." }
+          - { level: Emerging,   score: 2, anchor: "Source noted in comments; not auditable." }
+          - { level: Absent,     score: 1, anchor: "No source trail." }

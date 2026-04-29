@@ -1,0 +1,118 @@
+rubric_id: rb.deliverable.board_pack
+scope: deliverable
+name: Monthly Board Pack
+version: 1
+description: >
+  Grades a monthly board-pack draft on narrative quality, numerical integrity,
+  forward-looking insight, and executive readability. Independently authored
+  by Strata; not derived from any third-party rubric.
+
+groups:
+
+  - id: numerical_integrity
+    name: Numerical Integrity
+    weight: 0.30
+    characteristics:
+      - id: tie_out
+        name: Tie-out to source ledger
+        weight: 0.40
+        attributes:
+          - { level: Mature,     score: 4, anchor: "All headline numbers tie to ledger to the dollar; reconciling items disclosed." }
+          - { level: Developing, score: 3, anchor: "Headline numbers tie; subtotals tie; minor unexplained roundings." }
+          - { level: Emerging,   score: 2, anchor: "Headline numbers tie but supporting subtotals drift." }
+          - { level: Absent,     score: 1, anchor: "Numbers do not tie to source." }
+      - id: period_consistency
+        name: Period-over-period consistency
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Comparatives restated for any reclass; methodology footnoted." }
+          - { level: Developing, score: 3, anchor: "Comparatives consistent; reclasses noted." }
+          - { level: Emerging,   score: 2, anchor: "Some comparatives consistent; reclasses unflagged." }
+          - { level: Absent,     score: 1, anchor: "Periods not comparable." }
+      - id: unit_currency_hygiene
+        name: Units and currency hygiene
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Units, currency, FX rate, and reporting basis labeled on every exhibit." }
+          - { level: Developing, score: 3, anchor: "Units and currency labeled at section level." }
+          - { level: Emerging,   score: 2, anchor: "Units inferred from context; mixed bases." }
+          - { level: Absent,     score: 1, anchor: "Units or currency missing or inconsistent." }
+
+  - id: variance_narrative
+    name: Variance Narrative
+    weight: 0.25
+    characteristics:
+      - id: driver_attribution
+        name: Driver attribution depth
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each variance attributed to volume, price, mix, or one-time, with quantified contribution." }
+          - { level: Developing, score: 3, anchor: "Driver named and direction quantified." }
+          - { level: Emerging,   score: 2, anchor: "Driver named, not quantified." }
+          - { level: Absent,     score: 1, anchor: "Variance restated without explanation." }
+      - id: action_orientation
+        name: Action orientation
+        weight: 0.25
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each adverse variance pairs with named owner, action, and date." }
+          - { level: Developing, score: 3, anchor: "Each adverse variance has an action; ownership implicit." }
+          - { level: Emerging,   score: 2, anchor: "Some variances have actions; many do not." }
+          - { level: Absent,     score: 1, anchor: "No actions tied to variances." }
+      - id: signal_vs_noise
+        name: Signal vs. noise discipline
+        weight: 0.25
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Materiality threshold disclosed; only material variances narrated." }
+          - { level: Developing, score: 3, anchor: "Material variances prioritized; minor noise filtered." }
+          - { level: Emerging,   score: 2, anchor: "All variances narrated equally regardless of materiality." }
+          - { level: Absent,     score: 1, anchor: "Noise dominates; signal lost." }
+
+  - id: forward_view
+    name: Forward View
+    weight: 0.20
+    characteristics:
+      - id: forecast_revision
+        name: Forecast revision basis
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Revision quantified vs prior forecast with named drivers; bridge provided." }
+          - { level: Developing, score: 3, anchor: "Revision direction and drivers stated." }
+          - { level: Emerging,   score: 2, anchor: "New forecast presented; not bridged." }
+          - { level: Absent,     score: 1, anchor: "No forward view." }
+      - id: scenario_disclosure
+        name: Scenario / sensitivity disclosure
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Base / upside / downside with named assumption deltas." }
+          - { level: Developing, score: 3, anchor: "Base + one alternative case." }
+          - { level: Emerging,   score: 2, anchor: "Single point estimate with caveats." }
+          - { level: Absent,     score: 1, anchor: "No scenarios." }
+
+  - id: executive_readability
+    name: Executive Readability
+    weight: 0.25
+    characteristics:
+      - id: lede_quality
+        name: Lede / one-page summary
+        weight: 0.40
+        attributes:
+          - { level: Mature,     score: 4, anchor: "First page answers: what happened, why, what we are doing, what to decide." }
+          - { level: Developing, score: 3, anchor: "First page answers what and why." }
+          - { level: Emerging,   score: 2, anchor: "First page is a recap, not a synthesis." }
+          - { level: Absent,     score: 1, anchor: "No summary; reader must assemble it." }
+      - id: visual_hierarchy
+        name: Visual hierarchy
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Charts pre-attentive; titles state the conclusion; no chart junk." }
+          - { level: Developing, score: 3, anchor: "Charts readable; titles describe the data." }
+          - { level: Emerging,   score: 2, anchor: "Mixed chart quality; some default outputs." }
+          - { level: Absent,     score: 1, anchor: "Tables of raw numbers; no charting." }
+      - id: decision_clarity
+        name: Decision clarity
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each ask labeled FYI / FYA / decision-required, with options and CFO recommendation." }
+          - { level: Developing, score: 3, anchor: "Asks labeled by type; recommendation present." }
+          - { level: Emerging,   score: 2, anchor: "Asks present but not categorized." }
+          - { level: Absent,     score: 1, anchor: "No asks; reader must infer." }

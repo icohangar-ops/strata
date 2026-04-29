@@ -1,0 +1,86 @@
+rubric_id: rb.deliverable.earnings_script
+scope: deliverable
+name: Quarterly Earnings Call Script
+version: 1
+description: >
+  Grades a CFO earnings-call script (prepared remarks + Q&A prep) for a public
+  or PE-backed quarterly call. Distinct from an investor-update letter:
+  spoken-word constraints, guidance discipline, and analyst-question rehearsal.
+
+groups:
+
+  - id: prepared_remarks
+    name: Prepared Remarks
+    weight: 0.30
+    characteristics:
+      - id: spoken_word_pacing
+        name: Spoken-word pacing and time discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Word count fits CFO's measured pace; remarks <= 8 minutes; transitions tested aloud." }
+          - { level: Developing, score: 3, anchor: "Word count fits target; transitions on paper only." }
+          - { level: Emerging,   score: 2, anchor: "Long; would run over." }
+          - { level: Absent,     score: 1, anchor: "No timing." }
+      - id: numbers_then_narrative
+        name: Numbers spoken then narrated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each headline number stated, then 1-2 sentences on what drove it; no unsupported claims." }
+          - { level: Developing, score: 3, anchor: "Numbers and narrative present; some drift." }
+          - { level: Emerging,   score: 2, anchor: "Narrative without numbers, or vice versa." }
+          - { level: Absent,     score: 1, anchor: "Reads like a press release." }
+
+  - id: guidance_discipline
+    name: Guidance Discipline
+    weight: 0.25
+    characteristics:
+      - id: forward_statements_bracketed
+        name: Forward statements bracketed by safe-harbor language
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "All forward-looking statements wrapped in safe-harbor; assumptions named explicitly." }
+          - { level: Developing, score: 3, anchor: "Safe-harbor present; assumptions partial." }
+          - { level: Emerging,   score: 2, anchor: "Safe-harbor at top only." }
+          - { level: Absent,     score: 1, anchor: "Forward statements without protection." }
+      - id: guidance_change_explained
+        name: Guidance change explained with bridge
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Any change to prior guidance has a quantified bridge: prior -> what changed -> new." }
+          - { level: Developing, score: 3, anchor: "Change directional; bridge approximate." }
+          - { level: Emerging,   score: 2, anchor: "Change asserted; not bridged." }
+          - { level: Absent,     score: 1, anchor: "Guidance changed silently." }
+
+  - id: capital_allocation_message
+    name: Capital Allocation Message
+    weight: 0.20
+    characteristics:
+      - id: capital_rationale_spoken
+        name: Capital allocation rationale spoken
+        weight: 1.0
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Clear narrative on how capital was deployed this quarter and why; ties to ROIC trajectory." }
+          - { level: Developing, score: 3, anchor: "Capital deployment described; ROIC link implicit." }
+          - { level: Emerging,   score: 2, anchor: "Capital topic addressed only if asked." }
+          - { level: Absent,     score: 1, anchor: "Capital allocation absent." }
+
+  - id: q_and_a_rehearsal
+    name: Q&A Rehearsal
+    weight: 0.25
+    characteristics:
+      - id: top_analyst_questions_drafted
+        name: Top analyst questions drafted with answers
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top 10 likely analyst questions drafted with crisp answers; tough questions surfaced and rehearsed." }
+          - { level: Developing, score: 3, anchor: "Top 5-7 questions drafted." }
+          - { level: Emerging,   score: 2, anchor: "Generic FAQ." }
+          - { level: Absent,     score: 1, anchor: "No prep." }
+      - id: dont_know_protocol
+        name: I-do-not-know protocol established
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Pre-agreed phrases for 'we do not disclose that' and 'we will follow up' to avoid off-script disclosures." }
+          - { level: Developing, score: 3, anchor: "Phrases agreed; not memorized." }
+          - { level: Emerging,   score: 2, anchor: "CFO improvises." }
+          - { level: Absent,     score: 1, anchor: "Disclosure risk on every call." }

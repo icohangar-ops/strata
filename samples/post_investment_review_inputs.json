@@ -1,0 +1,36 @@
+{
+  "company": "Acme Robotics",
+  "project_name": "Platform v2 Launch",
+  "review_window_months": 12,
+  "review_date": "2026-03-31",
+  "original_memo_date": "2025-03-15",
+  "actual_irr_pct": 18,
+  "projected_irr_pct": 28,
+  "actual_payback_months": 34,
+  "projected_payback_months": 26,
+  "actual_cumulative_cash_m": 4.2,
+  "projected_cumulative_cash_m": 6.8,
+  "variance_drivers": [
+    {"driver": "volume",   "contribution_m": -1.4, "narrative": "EU volume 22% below plan; competitor priced below us"},
+    {"driver": "price",    "contribution_m": -0.6, "narrative": "Discounting deeper than modeled to defend wins"},
+    {"driver": "mix",      "contribution_m": 0.3,  "narrative": "Higher services attach than modeled"},
+    {"driver": "timing",   "contribution_m": -0.7, "narrative": "Launch slipped 2 months on regulatory approvals"},
+    {"driver": "one_time", "contribution_m": -0.2, "narrative": "Recall provision in Q4"}
+  ],
+  "decisions_to_revisit": [
+    "Underestimated competitor reaction speed",
+    "Built ramp curve from US precedent; EU dynamics differ"
+  ],
+  "verdict": "yes-with-changes",
+  "verdict_conditions": [
+    "Add competitor-response sensitivity to all future memos",
+    "Use region-specific ramp curves, not US precedent"
+  ],
+  "lessons": [
+    {"lesson": "Add competitor-reaction sensitivity scenario", "owner": "VP FP&A", "criteria_update": "Add to capex memo template stage 2"},
+    {"lesson": "Region-specific ramp curves required", "owner": "VP FP&A", "criteria_update": "Add to forecast methodology"},
+    {"lesson": "Regulatory timing buffer needed for EU launches", "owner": "GC", "criteria_update": "Add 8-week buffer to international timelines"}
+  ],
+  "go_forward_decision": "continue at reduced pace; reallocate 30% of remaining capital to platform v3",
+  "next_review_date": "2027-03-31"
+}

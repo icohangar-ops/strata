@@ -1,0 +1,114 @@
+rubric_id: rb.function.ma
+scope: function
+name: M&A Diligence and IC Discipline
+version: 1
+description: >
+  Maturity of the M&A workflow from sourcing through IC and post-close,
+  scored on the same five lenses used for the other finance capabilities.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: thesis_articulated
+        name: Acquisition thesis articulated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each deal has a single-sentence thesis tied to corporate strategy with named sponsor." }
+          - { level: Developing, score: 3, anchor: "Thesis stated; strategic linkage implicit." }
+          - { level: Emerging,   score: 2, anchor: "Thesis is post-hoc rationalization." }
+          - { level: Absent,     score: 1, anchor: "Deals pursued opportunistically without thesis." }
+      - id: integration_owner_known
+        name: Integration owner identified pre-LOI
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Integration owner named pre-LOI; participates in diligence." }
+          - { level: Developing, score: 3, anchor: "Integration owner named at signing." }
+          - { level: Emerging,   score: 2, anchor: "Integration owner named post-close." }
+          - { level: Absent,     score: 1, anchor: "Integration is an afterthought." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: ic_memo_template
+        name: IC memo template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Versioned IC memo template covering thesis, valuation, risks, walk-away, conditions." }
+          - { level: Developing, score: 3, anchor: "IC memo template exists; sections drift between deals." }
+          - { level: Emerging,   score: 2, anchor: "Each memo built from prior deal." }
+          - { level: Absent,     score: 1, anchor: "No template." }
+      - id: diligence_workstream_map
+        name: Diligence workstream map
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standard workstream map (financial, commercial, legal, tech, HR, IT) with named leads and deliverables." }
+          - { level: Developing, score: 3, anchor: "Workstreams covered; leads informal." }
+          - { level: Emerging,   score: 2, anchor: "Diligence ad-hoc per deal." }
+          - { level: Absent,     score: 1, anchor: "Diligence reactive." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: synergy_realization_tracked
+        name: Synergy realization tracked post-close
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Synergy lines tracked vs IC commitments quarterly for 8+ quarters; variances explained." }
+          - { level: Developing, score: 3, anchor: "Synergy realization tracked for 4 quarters." }
+          - { level: Emerging,   score: 2, anchor: "Synergy realization measured once at year 1." }
+          - { level: Absent,     score: 1, anchor: "Synergies declared closed at signing; never measured." }
+      - id: deal_pipeline_metrics
+        name: Deal pipeline metrics
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Pipeline conversion (sourced -> LOI -> closed) tracked with cycle time per stage." }
+          - { level: Developing, score: 3, anchor: "Pipeline tracked at top-of-funnel and closed; stages opaque." }
+          - { level: Emerging,   score: 2, anchor: "Pipeline reviewed informally." }
+          - { level: Absent,     score: 1, anchor: "No pipeline view." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: ic_discipline
+        name: IC discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "IC meets on a calendar; deals presented against template; minutes captured; decisions binding." }
+          - { level: Developing, score: 3, anchor: "IC meets per deal; minutes informal." }
+          - { level: Emerging,   score: 2, anchor: "IC is the CEO and CFO over coffee." }
+          - { level: Absent,     score: 1, anchor: "No IC." }
+      - id: walk_away_discipline
+        name: Walk-away discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Walk-away price pre-committed before negotiation; honored without exception." }
+          - { level: Developing, score: 3, anchor: "Walk-away price set; occasionally adjusted in late innings." }
+          - { level: Emerging,   score: 2, anchor: "Walk-away discussed but flexible." }
+          - { level: Absent,     score: 1, anchor: "No walk-away discipline." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: deal_data_room_tooling
+        name: Deal data-room tooling
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Single VDR template; access controls auto-provisioned; activity logs reviewed." }
+          - { level: Developing, score: 3, anchor: "VDR per deal; access manual." }
+          - { level: Emerging,   score: 2, anchor: "Email-based file exchange." }
+          - { level: Absent,     score: 1, anchor: "Files scattered." }
+      - id: model_template_reuse
+        name: Deal model template reuse
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standard deal-model template; QoE adjustments and synergy build identical across deals." }
+          - { level: Developing, score: 3, anchor: "Template exists; per-deal modifications heavy." }
+          - { level: Emerging,   score: 2, anchor: "Each deal modeled from scratch." }
+          - { level: Absent,     score: 1, anchor: "No standard model." }

@@ -1,0 +1,133 @@
+# Sample self-assessment for the maturity engine.
+# Each entry is a (rubric_id -> [characteristic_id -> score]) mapping.
+# Scores are integers 1..4. Use for the L1 demo.
+
+target_id: "Acme Robotics"
+
+rb.function.close:
+  team_understands_close_target: 3
+  stakeholders_know_calendar:    3
+  written_close_runbook:         2
+  review_evidence_trail:         2
+  cycle_time_measured:           2
+  error_rate_tracked:            1
+  bus_follow_calendar:           3
+  cross_functional_handoffs:     2
+  recurring_entries_automated:   2
+  tie_outs_machine_checked:      1
+
+rb.function.reconcile:
+  risk_ranking_known:            3
+  definition_of_reconciled:      2
+  standard_template:             3
+  aging_disposition_policy:      2
+  completion_rate_tracked:       2
+  aged_item_metric:              1
+  reviewer_independence:         3
+  cross_entity_consistency:      2
+  auto_match_coverage:           2
+  evidence_attachment_workflow:  2
+
+rb.function.board_pack:
+  audience_understood:           3
+  prior_pack_feedback_loop:      2
+  pack_template:                 3
+  section_ownership:             2
+  prep_cycle_time:               2
+  late_changes_metric:           1
+  cross_function_inputs:         2
+  ceo_alignment:                 3
+  data_pull_automation:          1
+  format_consistency_engine:     2
+
+rb.function.bva:
+  budget_owners_known:           3
+  variance_thresholds_published: 2
+  variance_explanation_template: 2
+  budget_change_control:         2
+  explained_variance_pct:        2
+  time_to_variance_close:        1
+  owner_self_serve:              1
+  leadership_uses_bva:           3
+  variance_calc_automated:       2
+  driver_decomposition_engine:   1
+
+rb.function.forecast:
+  purpose_clear:                 3
+  assumption_visibility:         2
+  forecast_methodology:          2
+  input_collection_workflow:     2
+  accuracy_tracked:              1
+  bias_correction_loop:          1
+  leaders_use_forecast:          2
+  ops_finance_alignment:         2
+  rolling_refresh:               1
+  scenario_engine:               2
+
+rb.function.ma:
+  thesis_articulated:            2
+  integration_owner_known:       1
+  ic_memo_template:              2
+  diligence_workstream_map:      2
+  synergy_realization_tracked:   1
+  deal_pipeline_metrics:         1
+  ic_discipline:                 2
+  walk_away_discipline:          2
+  deal_data_room_tooling:        2
+  model_template_reuse:          1
+
+rb.function.risk:
+  risk_taxonomy_known:           2
+  appetite_articulated:          1
+  risk_register_template:        2
+  control_mapping_process:       2
+  heat_map_quantified:           1
+  control_effectiveness_score:   1
+  risk_council_active:           1
+  risk_in_capital_decisions:     1
+  register_tooling:              1
+  kri_dashboards:                1
+
+rb.function.capital_allocation:
+  hurdles_published:             2
+  portfolio_view_known:          2
+  stage_gate_process:            2
+  capex_memo_template:           1
+  actual_vs_projected_tracked:   1
+  cycle_time_tracked:            1
+  capital_council_runs:          2
+  feedback_into_criteria:        1
+  pipeline_dashboard:            2
+  model_template_reuse:          1
+
+# ---------- Competency axis (CFO Handbook Tool 1) ----------
+
+rb.competency.strategic_leadership:
+  thinks_like_a_gm:              3
+  peer_partnership:              3
+  drives_change:                 2
+  builds_bench:                  3
+
+rb.competency.fpna:
+  rolling_forecast_practice:     2
+  scenario_discipline:           2
+  decisions_reference_data:      3
+  capital_council:               1
+
+rb.competency.digital:
+  modern_finance_stack:          2
+  rpa_coverage:                  2
+  data_governance_maturity:      2
+  cyber_vendor_oversight:        1
+
+rb.competency.stakeholder:
+  board_pack_quality:            3
+  investor_relations_discipline: 2
+  peer_speaks_their_language:    3
+  visual_storytelling_quality:   2
+
+rb.competency.risk_governance:
+  erm_in_use:                    1
+  audit_readiness:               2
+  esg_in_capital_decisions:      1
+  governance_structure_intact:   2

@@ -1,0 +1,93 @@
+rubric_id: rb.deliverable.investor_update
+scope: deliverable
+name: Investor Update Letter
+version: 1
+description: >
+  Grades a monthly or quarterly investor update letter on metric integrity,
+  narrative honesty, ask framing, and signal cadence.
+
+groups:
+
+  - id: metric_integrity
+    name: Metric Integrity
+    weight: 0.25
+    characteristics:
+      - id: metric_continuity
+        name: Metric continuity
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Same headline metrics every period; restatements footnoted with reason." }
+          - { level: Developing, score: 3, anchor: "Most metrics consistent; occasional swap with footnote." }
+          - { level: Emerging,   score: 2, anchor: "Metrics drift period to period, no explanation." }
+          - { level: Absent,     score: 1, anchor: "Metrics swapped to flatter the narrative." }
+      - id: definition_discipline
+        name: Definition discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each metric definition published once; deviations explicitly called out." }
+          - { level: Developing, score: 3, anchor: "Definitions stable; not always cited." }
+          - { level: Emerging,   score: 2, anchor: "Definitions implicit." }
+          - { level: Absent,     score: 1, anchor: "No standard definitions." }
+
+  - id: narrative_honesty
+    name: Narrative Honesty
+    weight: 0.30
+    characteristics:
+      - id: win_loss_balance
+        name: Win-loss balance
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Wins and losses both led with; losses named specifically with what was learned." }
+          - { level: Developing, score: 3, anchor: "Losses acknowledged briefly." }
+          - { level: Emerging,   score: 2, anchor: "Losses softened with hedging language." }
+          - { level: Absent,     score: 1, anchor: "Wins only." }
+      - id: forward_calibration
+        name: Forward-looking calibration
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Prior-period commitments tracked vs actual; gaps explained without excuses." }
+          - { level: Developing, score: 3, anchor: "Most prior commitments tracked." }
+          - { level: Emerging,   score: 2, anchor: "Prior commitments not revisited." }
+          - { level: Absent,     score: 1, anchor: "No accountability loop." }
+
+  - id: ask_framing
+    name: Ask Framing
+    weight: 0.20
+    characteristics:
+      - id: specific_asks
+        name: Specific asks
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each ask is specific (named role, named target company), bounded, with deadline." }
+          - { level: Developing, score: 3, anchor: "Asks specific; no deadline." }
+          - { level: Emerging,   score: 2, anchor: "Asks generic ('intros welcome')." }
+          - { level: Absent,     score: 1, anchor: "No asks." }
+      - id: network_leverage
+        name: Network leverage
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Asks routed by investor (recipient-specific), drawing on each investor's network." }
+          - { level: Developing, score: 3, anchor: "One ask block, applicable to most investors." }
+          - { level: Emerging,   score: 2, anchor: "Asks are broadcasts." }
+          - { level: Absent,     score: 1, anchor: "No segmentation." }
+
+  - id: cadence_and_signal
+    name: Cadence and Signal
+    weight: 0.25
+    characteristics:
+      - id: period_progress
+        name: Period-over-period progress
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every metric shown vs prior period and vs same-period-last-year." }
+          - { level: Developing, score: 3, anchor: "Metrics shown vs prior period." }
+          - { level: Emerging,   score: 2, anchor: "Single-point snapshot." }
+          - { level: Absent,     score: 1, anchor: "No comparisons." }
+      - id: kpi_focus
+        name: KPI focus
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Three to five KPIs only; same KPIs every period; everything else is appendix." }
+          - { level: Developing, score: 3, anchor: "Five to eight KPIs; mostly stable." }
+          - { level: Emerging,   score: 2, anchor: "Ten plus KPIs; reader has to find the signal." }
+          - { level: Absent,     score: 1, anchor: "Metric soup." }

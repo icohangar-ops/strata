@@ -1,0 +1,62 @@
+rubric_id: rb.competency.strategic_leadership
+scope: function
+name: Strategic Financial Leadership
+version: 1
+description: >
+  Pillar 1 of the Modern CFO Handbook competency model. Scores the CFO's
+  strategic-leadership competency across four sub-dimensions. Strata's 1-4
+  scale maps to the handbook's 1-5 scale by linear scaling.
+
+groups:
+
+  - id: strategic_thinking
+    name: Strategic thinking and business partnership
+    weight: 0.25
+    characteristics:
+      - id: thinks_like_a_gm
+        name: Thinks like a general manager, not just an accountant
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Invited to strategic conversations early; shapes business model decisions, not just validates them." }
+          - { level: Proficient, score: 3, anchor: "Contributes business perspective in leadership forums; brings external market insight." }
+          - { level: Developing, score: 2, anchor: "Speaks finance fluently; business framing is occasional and reactive." }
+          - { level: Urgent,     score: 1, anchor: "Brought in at the end to 'make the numbers work'; not in strategy meetings." }
+
+  - id: cross_functional_influence
+    name: Cross-functional collaboration and influence
+    weight: 0.25
+    characteristics:
+      - id: peer_partnership
+        name: Standing partnerships with CEO, COO, CRO, and CIO
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Weekly 1:1s with CEO; co-owned roadmap with CIO; speaks the language of each peer function." }
+          - { level: Proficient, score: 3, anchor: "Regular peer cadences; trusted across most functions." }
+          - { level: Developing, score: 2, anchor: "Cordial relationships; strategic alignment ad-hoc." }
+          - { level: Urgent,     score: 1, anchor: "Finance is siloed; peers route around the CFO." }
+
+  - id: innovation_catalyst
+    name: Innovation catalyst and change agent
+    weight: 0.25
+    characteristics:
+      - id: drives_change
+        name: Drives transformation rather than reacting to it
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Champions a named transformation each year (close, FP&A, ERP, IR) with measurable outcomes." }
+          - { level: Proficient, score: 3, anchor: "Sponsors at least one transformation; co-led with another exec." }
+          - { level: Developing, score: 2, anchor: "Supports change initiatives others lead." }
+          - { level: Urgent,     score: 1, anchor: "Defends the status quo; transformation seen as a distraction." }
+
+  - id: talent_development
+    name: Talent development and team building
+    weight: 0.25
+    characteristics:
+      - id: builds_bench
+        name: Builds and grows a strategic finance bench
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Documented succession plan; eNPS > 50; people get promoted up and out into business roles." }
+          - { level: Proficient, score: 3, anchor: "Active 1:1s and growth conversations; retention healthy." }
+          - { level: Developing, score: 2, anchor: "Hires for tactical needs; development is informal." }
+          - { level: Urgent,     score: 1, anchor: "Team turnover high; finance treated as cost center." }

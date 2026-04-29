@@ -1,0 +1,93 @@
+rubric_id: rb.deliverable.bva_commentary
+scope: deliverable
+name: Budget vs Actual Commentary
+version: 1
+description: >
+  Grades a BvA commentary draft on driver attribution depth, ownership and
+  action discipline, threshold compliance, and bridge-to-reforecast quality.
+
+groups:
+
+  - id: driver_attribution
+    name: Driver Attribution
+    weight: 0.30
+    characteristics:
+      - id: vpm_decomposition
+        name: Volume / price / mix decomposition
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each variance decomposed into volume, price, and mix with quantified contribution." }
+          - { level: Developing, score: 3, anchor: "Decomposition shown for revenue lines; cost lines aggregate." }
+          - { level: Emerging,   score: 2, anchor: "Single-driver explanation per line." }
+          - { level: Absent,     score: 1, anchor: "No decomposition." }
+      - id: one_off_isolation
+        name: One-time / non-recurring isolation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "One-time items called out, sized, and excluded from run-rate trends." }
+          - { level: Developing, score: 3, anchor: "One-time items identified but not excluded from trend." }
+          - { level: Emerging,   score: 2, anchor: "Mixed in with recurring." }
+          - { level: Absent,     score: 1, anchor: "No isolation." }
+
+  - id: ownership_action
+    name: Ownership and Action
+    weight: 0.30
+    characteristics:
+      - id: named_owner
+        name: Named owner per material variance
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every material variance has a named human owner." }
+          - { level: Developing, score: 3, anchor: "Department-level owner named." }
+          - { level: Emerging,   score: 2, anchor: "Some variances unowned." }
+          - { level: Absent,     score: 1, anchor: "No ownership stated." }
+      - id: action_with_eta
+        name: Action with target date
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every adverse variance pairs with a specific action and target close date." }
+          - { level: Developing, score: 3, anchor: "Action stated; date implicit." }
+          - { level: Emerging,   score: 2, anchor: "Generic actions like 'monitor'." }
+          - { level: Absent,     score: 1, anchor: "No actions." }
+
+  - id: threshold_discipline
+    name: Threshold Discipline
+    weight: 0.20
+    characteristics:
+      - id: materiality_filter
+        name: Materiality filter applied
+        weight: 0.60
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Threshold disclosed; only material variances narrated." }
+          - { level: Developing, score: 3, anchor: "Threshold disclosed; minor variances also narrated." }
+          - { level: Emerging,   score: 2, anchor: "All variances narrated equally." }
+          - { level: Absent,     score: 1, anchor: "No threshold concept." }
+      - id: signed_convention
+        name: Signed-variance convention
+        weight: 0.40
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Favorable / unfavorable convention applied consistently with sign legend." }
+          - { level: Developing, score: 3, anchor: "Convention used; legend missing." }
+          - { level: Emerging,   score: 2, anchor: "Inconsistent signs." }
+          - { level: Absent,     score: 1, anchor: "Sign confusion." }
+
+  - id: forward_bridge
+    name: Forward Bridge
+    weight: 0.20
+    characteristics:
+      - id: reforecast_link
+        name: Bridge from variance to reforecast
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each persistent variance has a quantified impact on reforecast." }
+          - { level: Developing, score: 3, anchor: "Reforecast reflects variances qualitatively." }
+          - { level: Emerging,   score: 2, anchor: "Reforecast change asserted without bridge." }
+          - { level: Absent,     score: 1, anchor: "No reforecast linkage." }
+      - id: rolling_trend
+        name: Rolling-trend context
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Variance contextualized vs trailing-3-month and YoY trend." }
+          - { level: Developing, score: 3, anchor: "Variance vs prior month only." }
+          - { level: Emerging,   score: 2, anchor: "Single-period view." }
+          - { level: Absent,     score: 1, anchor: "No context." }

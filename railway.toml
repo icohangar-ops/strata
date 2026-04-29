@@ -1,0 +1,22 @@
+# Railway deploy configuration.
+# Run `railway up` from the project root after `railway login` and `railway link`.
+# Set env vars in the Railway dashboard:
+#   - DASHSCOPE_API_KEY (or OPENAI_API_KEY / ANTHROPIC_API_KEY)
+#   - DATABASE_URL (Railway will auto-inject if you attach a Postgres plugin)
+#   - STRATA_LLM_BACKEND=openai
+#   - STRATA_GRADER_MODEL=qwen3.6-flash
+#   - STRATA_AUTHOR_MODEL=qwen3.6-flash
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# Run alembic upgrade against the attached Postgres before booting Streamlit.
+# If DATABASE_URL is missing, alembic upgrade will be skipped via STRATA_TEST_DB fallback.
+startCommand = "sh -c 'alembic upgrade head || true; streamlit run streamlit_app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true --browser.gatherUsageStats=false'"
+healthcheckPath = "/_stcore/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+numReplicas = 1

@@ -1,0 +1,115 @@
+rubric_id: rb.function.risk
+scope: function
+name: Enterprise Risk Management
+version: 1
+description: >
+  Maturity of the Enterprise Risk Management function across the five lenses.
+  Modeled on Tool 4 of the Modern CFO Handbook: identification, assessment,
+  control mapping, monitoring, and governance.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: risk_taxonomy_known
+        name: Risk taxonomy is published and shared
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Categories (financial, operational, strategic, compliance, cyber, reputational, ESG) defined; team uses them consistently." }
+          - { level: Developing, score: 3, anchor: "Most categories named; reputational and ESG patchy." }
+          - { level: Emerging,   score: 2, anchor: "Risk discussed informally; no taxonomy." }
+          - { level: Absent,     score: 1, anchor: "Risk = whatever fire is burning today." }
+      - id: appetite_articulated
+        name: Risk appetite articulated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Board-approved risk appetite statement; tolerance ranges per category." }
+          - { level: Developing, score: 3, anchor: "Risk appetite discussed; not formalized." }
+          - { level: Emerging,   score: 2, anchor: "Implicit appetite, varies by leader." }
+          - { level: Absent,     score: 1, anchor: "No appetite concept." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: risk_register_template
+        name: Risk register template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Versioned register: category, description, likelihood, impact, control state, owner, mitigation plan, due date." }
+          - { level: Developing, score: 3, anchor: "Register exists; some fields inconsistent." }
+          - { level: Emerging,   score: 2, anchor: "Spreadsheet of risks per leader." }
+          - { level: Absent,     score: 1, anchor: "No template." }
+      - id: control_mapping_process
+        name: Control mapping process
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each high-heat risk mapped to existing controls, gaps, and remediation owner with deadline." }
+          - { level: Developing, score: 3, anchor: "Mapping done for top risks; gaps noted." }
+          - { level: Emerging,   score: 2, anchor: "Controls listed without mapping to risks." }
+          - { level: Absent,     score: 1, anchor: "No control mapping." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: heat_map_quantified
+        name: Heat map with quantified likelihood x impact
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "1-5 scoring on both axes; threshold (>15) drives escalation; movement vs prior period tracked." }
+          - { level: Developing, score: 3, anchor: "Heat map produced; movement informal." }
+          - { level: Emerging,   score: 2, anchor: "Risks ranked qualitatively." }
+          - { level: Absent,     score: 1, anchor: "No heat map." }
+      - id: control_effectiveness_score
+        name: Control effectiveness measured
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Control effectiveness scored 1-5; tested annually; failures trigger remediation." }
+          - { level: Developing, score: 3, anchor: "Controls tested annually; scoring informal." }
+          - { level: Emerging,   score: 2, anchor: "Controls assumed effective absent evidence." }
+          - { level: Absent,     score: 1, anchor: "Controls untested." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: risk_council_active
+        name: Executive risk council operates on calendar
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standing monthly council; cross-functional; minutes captured; decisions binding." }
+          - { level: Developing, score: 3, anchor: "Quarterly council; decisions advisory." }
+          - { level: Emerging,   score: 2, anchor: "Risk discussed only on-demand." }
+          - { level: Absent,     score: 1, anchor: "No council." }
+      - id: risk_in_capital_decisions
+        name: Risk informs capital allocation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Capital decisions explicitly cite risk register and appetite; no exceptions." }
+          - { level: Developing, score: 3, anchor: "Risk cited for major decisions only." }
+          - { level: Emerging,   score: 2, anchor: "Risk discussed post-decision." }
+          - { level: Absent,     score: 1, anchor: "Capital decisions ignore risk view." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: register_tooling
+        name: Register lives in tooling, not a spreadsheet
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "GRC platform with workflow, approvals, and audit trail; risks assigned and aged automatically." }
+          - { level: Developing, score: 3, anchor: "Shared workspace with version history." }
+          - { level: Emerging,   score: 2, anchor: "Spreadsheet on a shared drive." }
+          - { level: Absent,     score: 1, anchor: "Per-leader documents." }
+      - id: kri_dashboards
+        name: Key-risk-indicator dashboards
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "KRIs auto-pulled (e.g. customer concentration, vendor SOC2 status, days-since-pen-test); thresholds trigger alerts." }
+          - { level: Developing, score: 3, anchor: "Some KRIs computed; manual refresh." }
+          - { level: Emerging,   score: 2, anchor: "KRIs discussed without dashboards." }
+          - { level: Absent,     score: 1, anchor: "No KRIs." }

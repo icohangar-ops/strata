@@ -1,0 +1,94 @@
+rubric_id: rb.deliverable.post_investment_review
+scope: deliverable
+name: Post-Investment Review
+version: 1
+description: >
+  Grades a 12-month or 24-month post-investment review on attribution rigor,
+  honest assessment, learning capture, and forward action. Modeled on Tool 5
+  Stage 4 of the Modern CFO Handbook.
+
+groups:
+
+  - id: attribution_rigor
+    name: Attribution Rigor
+    weight: 0.30
+    characteristics:
+      - id: actual_vs_projected_quantified
+        name: Actual vs projected returns quantified
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Headline returns (IRR, payback, cumulative cash) shown actual vs projected with absolute and % delta." }
+          - { level: Developing, score: 3, anchor: "Returns shown vs projected; deltas narrated." }
+          - { level: Emerging,   score: 2, anchor: "Returns shown without comparator." }
+          - { level: Absent,     score: 1, anchor: "No quantified comparison." }
+      - id: variance_decomposition
+        name: Variance decomposition into named drivers
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Variance decomposed into volume, price, mix, timing, and one-time items with quantified contribution." }
+          - { level: Developing, score: 3, anchor: "Variance attributed to top driver." }
+          - { level: Emerging,   score: 2, anchor: "Variance narrated qualitatively." }
+          - { level: Absent,     score: 1, anchor: "No decomposition." }
+
+  - id: honest_assessment
+    name: Honest Assessment
+    weight: 0.25
+    characteristics:
+      - id: blame_free_specific
+        name: Specific findings without scapegoating
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Findings name decisions and assumptions, not people; failure modes documented as system-level lessons." }
+          - { level: Developing, score: 3, anchor: "Findings specific; some person-level attribution." }
+          - { level: Emerging,   score: 2, anchor: "Findings vague to avoid friction." }
+          - { level: Absent,     score: 1, anchor: "No findings." }
+      - id: would_we_redo
+        name: Would-we-redo verdict explicit
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Explicit verdict (yes / no / yes-with-changes) with named conditions." }
+          - { level: Developing, score: 3, anchor: "Verdict implicit." }
+          - { level: Emerging,   score: 2, anchor: "Verdict avoided." }
+          - { level: Absent,     score: 1, anchor: "No retrospective verdict." }
+
+  - id: learning_capture
+    name: Learning Capture
+    weight: 0.25
+    characteristics:
+      - id: lessons_named_and_owned
+        name: Lessons named with owners and target updates
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each lesson states what changed, who owns it, and which checklist / hurdle / template gets updated." }
+          - { level: Developing, score: 3, anchor: "Lessons listed; ownership patchy." }
+          - { level: Emerging,   score: 2, anchor: "Lessons in narrative." }
+          - { level: Absent,     score: 1, anchor: "No lessons." }
+      - id: criteria_update_proposed
+        name: Concrete criteria update proposed
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Specific changes to hurdles, due-diligence checklist, or weighting criteria proposed and routed for approval." }
+          - { level: Developing, score: 3, anchor: "General improvement areas suggested." }
+          - { level: Emerging,   score: 2, anchor: "Lessons noted; no criteria update." }
+          - { level: Absent,     score: 1, anchor: "No proposal." }
+
+  - id: forward_action
+    name: Forward Action
+    weight: 0.20
+    characteristics:
+      - id: continue_kill_or_double_down
+        name: Continue / kill / double-down decision
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Explicit go-forward decision with capital implications and timeline." }
+          - { level: Developing, score: 3, anchor: "Decision implied by narrative." }
+          - { level: Emerging,   score: 2, anchor: "Decision punted to next review." }
+          - { level: Absent,     score: 1, anchor: "No decision." }
+      - id: governance_routing
+        name: Routing to capital council and board
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Lessons routed to capital council; material findings escalated to board; cadence for next review set." }
+          - { level: Developing, score: 3, anchor: "Routed to council." }
+          - { level: Emerging,   score: 2, anchor: "Sat in shared drive." }
+          - { level: Absent,     score: 1, anchor: "Not routed." }

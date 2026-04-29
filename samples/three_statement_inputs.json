@@ -1,0 +1,16 @@
+{
+  "company": "Acme Robotics",
+  "as_of": "2026-03-31",
+  "forecast_horizon_years": 5,
+  "scenarios": ["base", "upside", "downside"],
+  "historical_periods": ["2024", "2025", "2026Q1"],
+  "top_drivers": [
+    {"name": "ARR growth rate", "base": 0.45, "upside": 0.65, "downside": 0.25},
+    {"name": "Gross margin %", "base": 0.62, "upside": 0.68, "downside": 0.55},
+    {"name": "Sales & marketing % of revenue", "base": 0.38, "upside": 0.32, "downside": 0.45}
+  ],
+  "validation": {
+    "balance_check_required": true,
+    "tie_out_to_filed_financials": true
+  }
+}

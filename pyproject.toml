@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "strata"
+version = "0.6.0"
+description = "Maturity-assessed, rubric-graded AI copilot for the CFO / VP Finance function"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Shyam Desigan" }]
+license = { text = "Proprietary" }
+dependencies = [
+    "pydantic>=2.6",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "psycopg[binary]>=3.1",
+    "pyyaml>=6.0",
+    "jsonschema>=4.21",
+    "python-dotenv>=1.0",
+    "typer>=0.12",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+llm = [
+    "anthropic>=0.34",
+    "openai>=1.40",
+]
+ui = [
+    "streamlit>=1.31",
+    "pandas>=2.1",
+    "altair>=5.2",
+]
+
+[project.scripts]
+strata = "strata.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/strata"]
+# YAML rubrics + catalog ship with the package by default since they live
+# inside src/strata. No force-include needed.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "live_llm: hits real Anthropic; runs only when ANTHROPIC_API_KEY is set",
+    "live_postgres: hits a live Postgres at DATABASE_URL; opt-in",
+]
+
+[tool.coverage.run]
+source = ["src/strata"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true

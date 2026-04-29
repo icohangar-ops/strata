@@ -1,0 +1,24 @@
+{
+  "company": "Acme Robotics",
+  "peer_function": "sales",
+  "peer_leader": "CRO",
+  "period": "Mar 12, 2026",
+  "performance_review": {
+    "pipeline_qoq_pct": 18,
+    "win_rate_pct": 24,
+    "win_rate_target_pct": 28,
+    "avg_acv_k": 145,
+    "avg_acv_target_k": 160
+  },
+  "open_decisions": [
+    {"decision": "Approve hiring 2 enterprise AEs in EU", "owner": "CRO", "options": ["approve now", "defer to Q3"], "recommendation": "approve now", "deadline": "2026-03-26"},
+    {"decision": "Quota relief for Q1 misses on EU territory", "owner": "CFO", "options": ["full relief", "partial relief", "none"], "recommendation": "partial relief", "deadline": "2026-03-31"}
+  ],
+  "dependencies": [
+    {"item": "Pricing-tool data feed", "owner_finance": "Director Revops Finance", "owner_peer": "Director Sales Ops", "due": "2026-03-19"},
+    {"item": "Forecast template alignment", "owner_finance": "VP FP&A", "owner_peer": "CRO Chief of Staff", "due": "2026-03-26"}
+  ],
+  "carry_forward_action_items": [
+    {"item": "Land deal-desk SLA agreement", "owner": "Director Revops Finance", "due": "2026-03-12 (today)", "status": "in progress"}
+  ]
+}

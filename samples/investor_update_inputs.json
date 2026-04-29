@@ -1,0 +1,28 @@
+{
+  "company": "Acme Robotics",
+  "period": "Q1 2026",
+  "currency": "USD",
+  "arr": 22400000,
+  "arr_prior_period": 20100000,
+  "arr_prior_year": 14800000,
+  "net_new_arr_q": 2300000,
+  "gross_margin_pct": 62.4,
+  "burn_q": 4100000,
+  "runway_months": 14,
+  "headline_kpis": ["ARR", "Net new ARR", "Gross margin", "Burn", "Runway"],
+  "wins": [
+    "Closed two design wins with tier-1 contract manufacturers.",
+    "Hired VP of Engineering from competitor."
+  ],
+  "losses": [
+    "Lost one POC to incumbent on integration timeline; learned to pre-build connector library before pilot."
+  ],
+  "prior_period_commitments": [
+    {"commitment": "Ship gripper-actuator GA", "status": "shipped on time"},
+    {"commitment": "Hit $20M ARR by EOQ", "status": "missed by 6 weeks; closed in early Q2"}
+  ],
+  "asks": [
+    {"ask": "Warm intro to Head of Automation at TopTier Manufacturing", "for_investor": "Acme Ventures"},
+    {"ask": "Reference for staff platform engineer hire", "for_investor": "any"}
+  ]
+}

@@ -1,0 +1,114 @@
+rubric_id: rb.function.board_pack
+scope: function
+name: Board Pack Production
+version: 1
+description: >
+  Maturity of the board-pack production capability (the function), distinct
+  from grading any single deliverable.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: audience_understood
+        name: Board audience understood
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each director's information needs and red lines mapped; pack tailored." }
+          - { level: Developing, score: 3, anchor: "Aggregate audience understood; not director-specific." }
+          - { level: Emerging,   score: 2, anchor: "Audience treated generically." }
+          - { level: Absent,     score: 1, anchor: "Audience needs unknown." }
+      - id: prior_pack_feedback_loop
+        name: Prior-pack feedback loop
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Post-board debrief captured; changes tracked into next pack." }
+          - { level: Developing, score: 3, anchor: "Verbal feedback collected; sometimes acted on." }
+          - { level: Emerging,   score: 2, anchor: "Feedback informal." }
+          - { level: Absent,     score: 1, anchor: "No feedback loop." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: pack_template
+        name: Versioned pack template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Template versioned; section ownership and SLAs defined." }
+          - { level: Developing, score: 3, anchor: "Template exists; versioning informal." }
+          - { level: Emerging,   score: 2, anchor: "Each pack rebuilt from prior period." }
+          - { level: Absent,     score: 1, anchor: "No template." }
+      - id: section_ownership
+        name: Section ownership and review
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each section has a named owner, drafter, and reviewer; SLA tracked." }
+          - { level: Developing, score: 3, anchor: "Owners named; reviewer ad-hoc." }
+          - { level: Emerging,   score: 2, anchor: "CFO drafts everything." }
+          - { level: Absent,     score: 1, anchor: "Ownership unclear." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: prep_cycle_time
+        name: Prep cycle-time tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Days from close to pack-ready tracked; trend reviewed." }
+          - { level: Developing, score: 3, anchor: "Tracked informally." }
+          - { level: Emerging,   score: 2, anchor: "Estimated post-hoc." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+      - id: late_changes_metric
+        name: Late changes / churn metric
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Edits after the freeze counted with cause; targeted reduction." }
+          - { level: Developing, score: 3, anchor: "Late edits noticed; not measured." }
+          - { level: Emerging,   score: 2, anchor: "Pack churn high but unquantified." }
+          - { level: Absent,     score: 1, anchor: "No freeze concept." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: cross_function_inputs
+        name: Cross-function inputs land on time
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Sales, ops, product feed clean inputs by deadline; standardized." }
+          - { level: Developing, score: 3, anchor: "Inputs land; finance reformats." }
+          - { level: Emerging,   score: 2, anchor: "Inputs late; finance scrambles." }
+          - { level: Absent,     score: 1, anchor: "Finance produces everything." }
+      - id: ceo_alignment
+        name: CEO alignment on narrative
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "CEO and CFO co-author the narrative; pre-board sync standard." }
+          - { level: Developing, score: 3, anchor: "Pre-board sync usually happens." }
+          - { level: Emerging,   score: 2, anchor: "Sync only when topics are sensitive." }
+          - { level: Absent,     score: 1, anchor: "Pack lands cold." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: data_pull_automation
+        name: Data pull automation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Headline numbers refresh automatically from source; humans curate narrative only." }
+          - { level: Developing, score: 3, anchor: "Some sections auto-refresh; others manual." }
+          - { level: Emerging,   score: 2, anchor: "Most numbers manually copied." }
+          - { level: Absent,     score: 1, anchor: "Fully manual rebuild." }
+      - id: format_consistency_engine
+        name: Format consistency engine
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Formatting enforced by tool (template variables); human cannot drift." }
+          - { level: Developing, score: 3, anchor: "Style guide; enforced by review." }
+          - { level: Emerging,   score: 2, anchor: "Style guide ignored." }
+          - { level: Absent,     score: 1, anchor: "Visual chaos." }

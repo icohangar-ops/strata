@@ -1,0 +1,41 @@
+{
+  "company": "Acme Robotics",
+  "period": "March 2026",
+  "currency": "USD",
+  "units": "thousands",
+  "materiality_threshold_pct": 5,
+  "gl_extract_path": "samples/gl_extract.csv",
+  "lines": [
+    {
+      "name": "Revenue - Hardware",
+      "actual": 3200,
+      "budget": 3500,
+      "drivers": {"volume_units_actual": 320, "volume_units_budget": 350, "asp_actual": 10.0, "asp_budget": 10.0},
+      "owner": "VP Sales"
+    },
+    {
+      "name": "Revenue - Services",
+      "actual": 1620,
+      "budget": 1600,
+      "drivers": {"volume_hours_actual": 27000, "volume_hours_budget": 26500, "rate_actual": 60.0, "rate_budget": 60.4},
+      "owner": "VP Services"
+    },
+    {
+      "name": "COGS - Materials",
+      "actual": 1180,
+      "budget": 1050,
+      "drivers": {"unit_cost_actual": 3.69, "unit_cost_budget": 3.00},
+      "owner": "Director Operations"
+    },
+    {
+      "name": "Opex - R&D Headcount",
+      "actual": 1100,
+      "budget": 1050,
+      "drivers": {"avg_headcount_actual": 22, "avg_headcount_budget": 21},
+      "owner": "VP Engineering"
+    }
+  ],
+  "one_time_items": [
+    {"name": "Settlement expense", "amount": 75, "category": "Opex - Legal"}
+  ]
+}

@@ -1,0 +1,111 @@
+rubric_id: rb.deliverable.cfo_dashboard
+scope: deliverable
+name: CFO Value-Creation Dashboard
+version: 1
+description: >
+  One-page executive dashboard that answers "is the business creating value?"
+  in 10 seconds. Distinct from a board pack: this is the CFO's standing
+  artifact, refreshed monthly, and shared with peer execs and investors as a
+  shorthand for company health. Modeled on Tool 2 of the Modern CFO Handbook.
+
+groups:
+
+  - id: value_creation_top
+    name: Value-creation top section
+    weight: 0.30
+    characteristics:
+      - id: eva_present
+        name: Economic Value Added (EVA) present and trended
+        weight: 0.40
+        attributes:
+          - { level: Mature,     score: 4, anchor: "EVA shown vs target with trailing-12-month trend; sign convention legend included." }
+          - { level: Developing, score: 3, anchor: "EVA shown vs target; no trend." }
+          - { level: Emerging,   score: 2, anchor: "EVA computed but buried below the fold." }
+          - { level: Absent,     score: 1, anchor: "No EVA." }
+      - id: roic_vs_wacc
+        name: ROIC vs WACC spread
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "ROIC and WACC reported separately; spread highlighted; > 10% spread flagged green." }
+          - { level: Developing, score: 3, anchor: "Spread reported; methodology footnoted." }
+          - { level: Emerging,   score: 2, anchor: "ROIC alone; WACC implicit." }
+          - { level: Absent,     score: 1, anchor: "Neither shown." }
+      - id: free_cash_flow
+        name: Free cash flow trend
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Trailing-12-month FCF with YoY comparison; bridge from EBITDA shown." }
+          - { level: Developing, score: 3, anchor: "FCF shown vs prior period." }
+          - { level: Emerging,   score: 2, anchor: "FCF as a single point." }
+          - { level: Absent,     score: 1, anchor: "Cash flow absent." }
+
+  - id: operating_metrics
+    name: Operating performance
+    weight: 0.25
+    characteristics:
+      - id: revenue_breakdown
+        name: Revenue growth segmented (product / customer / region)
+        weight: 0.40
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Revenue % growth segmented by at least two cuts; mix shift highlighted." }
+          - { level: Developing, score: 3, anchor: "Total growth + one segmentation." }
+          - { level: Emerging,   score: 2, anchor: "Total growth only." }
+          - { level: Absent,     score: 1, anchor: "No growth view." }
+      - id: gross_margin_segmented
+        name: Gross margin by customer or product segment
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "GM% by segment; trend across segments; outliers explained." }
+          - { level: Developing, score: 3, anchor: "Total GM% with one segment cut." }
+          - { level: Emerging,   score: 2, anchor: "Aggregate GM% only." }
+          - { level: Absent,     score: 1, anchor: "No GM%." }
+      - id: working_capital_days
+        name: Working-capital days (DSO, DPO, DIO)
+        weight: 0.30
+        attributes:
+          - { level: Mature,     score: 4, anchor: "DSO, DPO, DIO trended; cash conversion cycle computed and labeled." }
+          - { level: Developing, score: 3, anchor: "DSO and DPO present; DIO inconsistent." }
+          - { level: Emerging,   score: 2, anchor: "DSO only." }
+          - { level: Absent,     score: 1, anchor: "Working capital not tracked." }
+
+  - id: risk_dashboard
+    name: Risk dashboard
+    weight: 0.20
+    characteristics:
+      - id: top_risks_with_score
+        name: Top 5 risks with likelihood x impact heat score
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top 5 risks with likelihood/impact scores, owner, and control status; movement vs prior period flagged." }
+          - { level: Developing, score: 3, anchor: "Top 5 risks listed with owners; scores informal." }
+          - { level: Emerging,   score: 2, anchor: "Risks listed without owner or score." }
+          - { level: Absent,     score: 1, anchor: "No risk view." }
+      - id: control_status_visible
+        name: Control status per risk
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each risk has explicit control state (adequate / remediating / gap)." }
+          - { level: Developing, score: 3, anchor: "Control state visible for top risks." }
+          - { level: Emerging,   score: 2, anchor: "Controls implied but not stated." }
+          - { level: Absent,     score: 1, anchor: "No control view." }
+
+  - id: capital_pipeline
+    name: Capital allocation pipeline
+    weight: 0.25
+    characteristics:
+      - id: project_pipeline_with_roi
+        name: Capital project pipeline with stage and ROI gating
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each project has expected ROI vs hurdle, capital deployed, stage, and decision date." }
+          - { level: Developing, score: 3, anchor: "Pipeline shown with ROI and stage." }
+          - { level: Emerging,   score: 2, anchor: "Project list without ROI." }
+          - { level: Absent,     score: 1, anchor: "No pipeline." }
+      - id: portfolio_view
+        name: Portfolio view across investments
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Total capital deployed, weighted-average expected ROI, and risk distribution shown." }
+          - { level: Developing, score: 3, anchor: "Aggregate capital deployed; ROI unweighted." }
+          - { level: Emerging,   score: 2, anchor: "Project list, no aggregation." }
+          - { level: Absent,     score: 1, anchor: "No portfolio view." }

@@ -1,0 +1,30 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+.env
+.env.local
+.env.*.local
+
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+*.sqlite
+*.sqlite3
+
+# Streamlit user uploads (GL extracts, etc.)
+.streamlit_uploads/
+
+# Railway / deploy artifacts that shouldn't ship
+.railway/
+
+.idea/
+.vscode/
+.DS_Store

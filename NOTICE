@@ -1,0 +1,77 @@
+Strata
+Copyright (c) 2026 Shyam Desigan
+
+This product includes original work and clean-room re-implementations of
+publicly described patterns from the open-source projects below. No source
+code, prompts, or copyrighted prose were copied from these projects; only
+the underlying ideas, structures, and methodologies (which are not subject
+to copyright) were used as architectural inspiration. Names, definitions,
+rubric anchors, and skill identifiers in this product were independently
+authored.
+
+Where any upstream code is later incorporated, it will be marked at the
+file level with an attribution header per the upstream license and copies
+of the upstream LICENSE files will be placed under ./licenses/.
+
+================================================================================
+Architectural Inspirations
+================================================================================
+
+L1 - Maturity Assessment Pattern
+  Inspired by: FinOps Framework Maturity Assessment
+  Source:      https://github.com/finopsfoundation/frameworkassessment
+  License:     CC-BY 4.0 (FinOps Foundation framework content)
+  Used:        The general idea of a multi-lens, leveled maturity assessment
+               with capability-level weighting. Lens names, definitions, level
+               anchors, and capability list in this product were rewritten.
+  Trademark:   "FinOps" is a trademark of the FinOps Foundation and is not
+               used in this product's branding.
+
+L2 - Capability Decomposition Pattern
+  Inspired by: CFO Stack (Mike Chong)
+  Source:      https://github.com/MikeChongCan/cfo-stack
+  License:     MIT with custom LLM-use addendum
+  Used:        The general idea of decomposing CFO function into a sequenced
+               pipeline of named skills. The phase taxonomy and skill list in
+               this product are independently authored from CFO domain
+               experience and are NOT derived from the upstream skill catalog.
+               To remain outside the scope of the upstream LLM-use addendum,
+               this project does not ingest, train on, fine-tune on, evaluate
+               against, retrieve from, distill, or summarize the cfo-stack
+               repository in any pipeline.
+
+L3 - Multi-Agent Orchestration Pattern
+  Inspired by: FinRobot (AI4Finance Foundation)
+  Source:      https://github.com/AI4Finance-Foundation/FinRobot
+  License:     Apache License 2.0
+  Used:        The conceptual three-stage runtime (perception / reasoning /
+               action) and a director-routes-to-skill-chain orchestration
+               style. No code, class names, or prompts were copied.
+
+L4 - Persona + Self-Grading Iteration Pattern
+  Inspired by: jupyter-naas Awesome Notebooks (AI for Work)
+  Source:      https://github.com/jupyter-naas/awesome-notebooks
+  License:     BSD 3-Clause
+  Used:        The general iterate-with-rubric pattern (persona prompt -> draft
+               -> rubric grade -> revise until threshold). Rubric dimensions,
+               anchors, and scale wording in this product were rewritten.
+
+L5 - Hierarchical Rubric Schema
+  Inspired by: openRiskScore / Project Finance Scorecard (Open Risk)
+  Source:      https://github.com/open-risk/openRiskScore
+  License:     Apache License 2.0
+  Used:        The conceptual three-level Group -> Characteristic -> Attribute
+               hierarchy with weighted scoring. The schema implementation,
+               field names, validation rules, and JSON Schema definitions in
+               this product were independently authored.
+
+Reference Implementation
+  Inspired by: Financial Planning and Analysis AI Agent (Hassan Subhani)
+  Source:      https://github.com/Hassan0397/Financial-Planning-and-Analysis-AI-Agent
+  License:     MIT
+  Used:        Reference for Streamlit-based FP&A UX patterns. Not yet
+               incorporated; will attribute if/when used.
+
+================================================================================
+End of NOTICE
+================================================================================

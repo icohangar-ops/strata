@@ -1,0 +1,112 @@
+rubric_id: rb.function.reconcile
+scope: function
+name: Account Reconciliation
+version: 1
+description: Maturity of balance-sheet account reconciliation across the five lenses.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: risk_ranking_known
+        name: Account risk ranking is known
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Accounts classified high/med/low risk with cadence and reviewer per class." }
+          - { level: Developing, score: 3, anchor: "Risk ranking exists; cadence implicit." }
+          - { level: Emerging,   score: 2, anchor: "All accounts treated equally regardless of risk." }
+          - { level: Absent,     score: 1, anchor: "No risk ranking." }
+      - id: definition_of_reconciled
+        name: Definition of reconciled is shared
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Reconciled = balance + composition + age + supporting evidence; shared standard." }
+          - { level: Developing, score: 3, anchor: "Reconciled = balance + composition; evidence variable." }
+          - { level: Emerging,   score: 2, anchor: "Reconciled = balance ties; composition not validated." }
+          - { level: Absent,     score: 1, anchor: "No standard definition." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: standard_template
+        name: Standard reconciliation template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Single template across all accounts; preparer + reviewer fields enforced." }
+          - { level: Developing, score: 3, anchor: "Template per account class; minor drift." }
+          - { level: Emerging,   score: 2, anchor: "Free-form spreadsheets per preparer." }
+          - { level: Absent,     score: 1, anchor: "No template." }
+      - id: aging_disposition_policy
+        name: Reconciling-item aging policy
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Items > N days routed to disposition with named owner and resolution SLA." }
+          - { level: Developing, score: 3, anchor: "Aging tracked; disposition ad-hoc." }
+          - { level: Emerging,   score: 2, anchor: "Open items roll forward without action." }
+          - { level: Absent,     score: 1, anchor: "Aging not tracked." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: completion_rate_tracked
+        name: Completion rate tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "% of accounts reconciled by close-day-N reported with trend." }
+          - { level: Developing, score: 3, anchor: "Completion rate reported per close." }
+          - { level: Emerging,   score: 2, anchor: "Completion checked only at audit." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+      - id: aged_item_metric
+        name: Aged-item dollar metric
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Aged reconciling-item dollars trended; threshold drives escalation." }
+          - { level: Developing, score: 3, anchor: "Aged dollars known; no escalation rule." }
+          - { level: Emerging,   score: 2, anchor: "Dollars sized only on request." }
+          - { level: Absent,     score: 1, anchor: "Not measured." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: reviewer_independence
+        name: Independent reviewer separation
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Reviewer is always different from preparer; rotated periodically." }
+          - { level: Developing, score: 3, anchor: "Reviewer is different; rotation rare." }
+          - { level: Emerging,   score: 2, anchor: "Reviewer separation only on high-risk accounts." }
+          - { level: Absent,     score: 1, anchor: "Self-review common." }
+      - id: cross_entity_consistency
+        name: Cross-entity consistency
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Same standard across all entities; consolidated dashboard." }
+          - { level: Developing, score: 3, anchor: "Consistent at parent; entities drift." }
+          - { level: Emerging,   score: 2, anchor: "Each entity does its own thing." }
+          - { level: Absent,     score: 1, anchor: "No cross-entity view." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: auto_match_coverage
+        name: Auto-match coverage
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "> 90% of bank/IC/AR-cash items auto-matched; humans triage exceptions." }
+          - { level: Developing, score: 3, anchor: "50-90% auto-match coverage." }
+          - { level: Emerging,   score: 2, anchor: "< 50% auto-match; mostly manual." }
+          - { level: Absent,     score: 1, anchor: "All matching manual." }
+      - id: evidence_attachment_workflow
+        name: Evidence attachment workflow
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Evidence attached and validated by tooling; missing-evidence flag blocks signoff." }
+          - { level: Developing, score: 3, anchor: "Evidence attached; not validated." }
+          - { level: Emerging,   score: 2, anchor: "Evidence stored separately." }
+          - { level: Absent,     score: 1, anchor: "Evidence missing or untraceable." }

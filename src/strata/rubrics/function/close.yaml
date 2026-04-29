@@ -1,0 +1,114 @@
+rubric_id: rb.function.close
+scope: function
+name: Monthly Close
+version: 1
+description: >
+  Maturity of the monthly book-close capability across awareness, workflow,
+  instrumentation, adoption, and automation lenses.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: team_understands_close_target
+        name: Team understands close target state
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Team can articulate target close days and the reason for each gating control." }
+          - { level: Developing, score: 3, anchor: "Team knows the target close days; gating controls partially understood." }
+          - { level: Emerging,   score: 2, anchor: "Some team members know the target; controls treated as box-ticking." }
+          - { level: Absent,     score: 1, anchor: "Close days are an artifact, not a target." }
+      - id: stakeholders_know_calendar
+        name: Stakeholders know the close calendar
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Calendar published; cutoffs honored across business units without chasing." }
+          - { level: Developing, score: 3, anchor: "Calendar published; cutoffs require active reminders." }
+          - { level: Emerging,   score: 2, anchor: "Calendar known to finance; opaque to the business." }
+          - { level: Absent,     score: 1, anchor: "No published calendar." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: written_close_runbook
+        name: Written close runbook
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Step-by-step runbook with owners, dependencies, expected outputs, and rollback steps." }
+          - { level: Developing, score: 3, anchor: "Runbook exists with steps and owners; dependencies implicit." }
+          - { level: Emerging,   score: 2, anchor: "Partial checklist; some steps undocumented." }
+          - { level: Absent,     score: 1, anchor: "Tribal knowledge only." }
+      - id: review_evidence_trail
+        name: Review evidence trail
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each entry > threshold has reviewer signoff captured in tooling, queryable." }
+          - { level: Developing, score: 3, anchor: "Review signoffs captured but in scattered places." }
+          - { level: Emerging,   score: 2, anchor: "Review happens; evidence inconsistent." }
+          - { level: Absent,     score: 1, anchor: "No review evidence captured." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: cycle_time_measured
+        name: Cycle time measured
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Close days tracked per task with trend; SLAs reported to leadership." }
+          - { level: Developing, score: 3, anchor: "Total close days tracked period-over-period." }
+          - { level: Emerging,   score: 2, anchor: "Close days estimated post-hoc." }
+          - { level: Absent,     score: 1, anchor: "Not measured." }
+      - id: error_rate_tracked
+        name: Error rate tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Post-close adjustments measured by category; root-cause review monthly." }
+          - { level: Developing, score: 3, anchor: "Post-close adjustments counted; categorization patchy." }
+          - { level: Emerging,   score: 2, anchor: "Adjustments noticed when material; not tracked." }
+          - { level: Absent,     score: 1, anchor: "Errors absorbed silently." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: bus_follow_calendar
+        name: Business units follow the calendar
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "All BUs hit cutoffs; late submissions are exceptional and escalated." }
+          - { level: Developing, score: 3, anchor: "Most BUs hit cutoffs; one or two chronically late." }
+          - { level: Emerging,   score: 2, anchor: "BUs miss cutoffs frequently; finance compensates manually." }
+          - { level: Absent,     score: 1, anchor: "BUs ignore the close." }
+      - id: cross_functional_handoffs
+        name: Cross-functional handoffs work
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Handoffs (AP, AR, payroll, revops) tested; standing escalation paths." }
+          - { level: Developing, score: 3, anchor: "Handoffs documented; escalation ad-hoc." }
+          - { level: Emerging,   score: 2, anchor: "Handoffs informal; relies on personal relationships." }
+          - { level: Absent,     score: 1, anchor: "Handoffs break each close." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: recurring_entries_automated
+        name: Recurring entries automated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "All recurring accruals/allocations posted by template or rule with exception review only." }
+          - { level: Developing, score: 3, anchor: "Most recurring entries templated; some manual." }
+          - { level: Emerging,   score: 2, anchor: "Some templates exist; manual entry dominates." }
+          - { level: Absent,     score: 1, anchor: "Every entry manually posted." }
+      - id: tie_outs_machine_checked
+        name: Tie-outs machine-checked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Reconciliations auto-matched; humans triage exceptions only." }
+          - { level: Developing, score: 3, anchor: "Bank/IC reconciliations partially automated." }
+          - { level: Emerging,   score: 2, anchor: "Spreadsheet-based tie-outs." }
+          - { level: Absent,     score: 1, anchor: "Visual inspection." }

@@ -1,0 +1,86 @@
+rubric_id: rb.deliverable.cross_functional_brief
+scope: deliverable
+name: Cross-Functional Bi-Weekly Brief
+version: 1
+description: >
+  Grades a 30-minute bi-weekly check-in agenda between the CFO and a peer
+  function (sales, operations, product). Modeled on Tool 3 of the Modern CFO
+  Handbook.
+
+groups:
+
+  - id: agenda_discipline
+    name: Agenda Discipline
+    weight: 0.30
+    characteristics:
+      - id: timeboxed_sections
+        name: Timeboxed sections fit 30 minutes
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each section explicitly timeboxed; total <= 28 min leaving 2 min for soft close." }
+          - { level: Developing, score: 3, anchor: "Sections timeboxed; total close to 30 min." }
+          - { level: Emerging,   score: 2, anchor: "Agenda items listed; no time budgets." }
+          - { level: Absent,     score: 1, anchor: "Free-form discussion." }
+      - id: standing_sections
+        name: Standing sections cover review / pipeline / decisions
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Three standing sections: business performance review, pipeline / dependencies, decision-support items." }
+          - { level: Developing, score: 3, anchor: "Two of three sections present every meeting." }
+          - { level: Emerging,   score: 2, anchor: "Sections shift each meeting." }
+          - { level: Absent,     score: 1, anchor: "No structure." }
+
+  - id: peer_language
+    name: Peer Language
+    weight: 0.25
+    characteristics:
+      - id: speaks_their_metrics
+        name: Speaks the peer function's primary metrics
+        weight: 1.0
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Sales -> pipeline / win-rate / ACV; Ops -> cycle time / yield / OEE; Product -> activation / retention. CFO uses the peer's vocabulary." }
+          - { level: Developing, score: 3, anchor: "Peer metrics referenced; not always primary frame." }
+          - { level: Emerging,   score: 2, anchor: "Translation effort; CFO frames in finance terms." }
+          - { level: Absent,     score: 1, anchor: "All-finance vocabulary; peer disengages." }
+
+  - id: decision_support
+    name: Decision Support
+    weight: 0.25
+    characteristics:
+      - id: open_decisions_named
+        name: Open decisions named with deadlines
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each open decision has owner, options, recommendation, and a deadline." }
+          - { level: Developing, score: 3, anchor: "Decisions named; deadlines patchy." }
+          - { level: Emerging,   score: 2, anchor: "Decisions discussed; not tracked." }
+          - { level: Absent,     score: 1, anchor: "No decisions surfaced." }
+      - id: dependencies_tracked
+        name: Cross-team dependencies tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Dependencies tracked with named owners across both teams; carry-forwards visible." }
+          - { level: Developing, score: 3, anchor: "Tracked informally; sometimes lost." }
+          - { level: Emerging,   score: 2, anchor: "Discussed in the moment, not captured." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+
+  - id: continuity
+    name: Continuity
+    weight: 0.20
+    characteristics:
+      - id: action_items_carry_forward
+        name: Action items carry forward to next meeting
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every action item has owner, due date, and is reviewed at the next meeting; aging tracked." }
+          - { level: Developing, score: 3, anchor: "Items carry forward; aging implicit." }
+          - { level: Emerging,   score: 2, anchor: "Items carry forward inconsistently." }
+          - { level: Absent,     score: 1, anchor: "No carry-forward." }
+      - id: cadence_protected
+        name: Cadence protected
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standing meeting slot held; cancellations are exceptional and rescheduled within the same week." }
+          - { level: Developing, score: 3, anchor: "Cadence held most weeks." }
+          - { level: Emerging,   score: 2, anchor: "Cancellations frequent; cadence drifts." }
+          - { level: Absent,     score: 1, anchor: "Ad-hoc only." }

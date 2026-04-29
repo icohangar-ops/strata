@@ -1,0 +1,39 @@
+{
+  "company": "Acme Robotics",
+  "period": "March 2026",
+  "currency": "USD",
+
+  "eva_m": 12.5,
+  "eva_target_m": 15.0,
+  "roic_pct": 14.2,
+  "wacc_pct": 6.0,
+  "fcf_m": 18.0,
+  "fcf_yoy_pct": 22,
+
+  "revenue_growth_pct": 8.4,
+  "revenue_segments": [
+    {"segment": "Hardware",  "growth_pct": 6.1, "share_pct": 66},
+    {"segment": "Services",  "growth_pct": 14.0, "share_pct": 34}
+  ],
+  "gross_margin_pct": 62.4,
+  "gross_margin_by_segment": [
+    {"segment": "Hardware",  "gm_pct": 58.0},
+    {"segment": "Services",  "gm_pct": 71.0}
+  ],
+  "working_capital_days": {"dso": 47, "dpo": 33, "dio": 62, "ccc": 76},
+
+  "top_risks": [
+    {"risk": "Cybersecurity breach",     "likelihood": 4, "impact": 5, "owner": "CIO",   "control": "remediating"},
+    {"risk": "Key engineer attrition",   "likelihood": 3, "impact": 4, "owner": "CHRO",  "control": "monitoring"},
+    {"risk": "Supply-chain disruption",  "likelihood": 4, "impact": 3, "owner": "COO",   "control": "adequate"},
+    {"risk": "Customer concentration",   "likelihood": 2, "impact": 4, "owner": "CRO",   "control": "monitoring"},
+    {"risk": "Compliance / data privacy","likelihood": 3, "impact": 4, "owner": "CFO",   "control": "adequate"}
+  ],
+
+  "capital_pipeline": [
+    {"project": "EU expansion",       "stage": "diligence",  "expected_irr_pct": 28, "capital_m": 5.0, "risk": "medium", "decision_date": "Q2 2026"},
+    {"project": "Platform v3",        "stage": "execution",  "expected_irr_pct": 35, "capital_m": 3.0, "risk": "low",    "decision_date": "approved"},
+    {"project": "Cogwheel acquisition","stage": "diligence", "expected_irr_pct": 22, "capital_m": 185, "risk": "medium", "decision_date": "Q2 2026"}
+  ],
+  "irr_hurdle_pct": 20
+}

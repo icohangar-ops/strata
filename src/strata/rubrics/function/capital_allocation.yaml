@@ -1,0 +1,115 @@
+rubric_id: rb.function.capital_allocation
+scope: function
+name: Capital Allocation Discipline
+version: 1
+description: >
+  Maturity of the capital-deployment workflow across the five lenses.
+  Modeled on Tool 5 of the Modern CFO Handbook: ideation -> diligence ->
+  execution -> post-investment review with stage gates and IRR hurdles.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: hurdles_published
+        name: ROI hurdles and approval thresholds published
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Min IRR (e.g. 20%), max payback (e.g. 3 yrs), strategic-fit score, and dollar approval thresholds documented." }
+          - { level: Developing, score: 3, anchor: "Hurdles known to leaders; not always cited in proposals." }
+          - { level: Emerging,   score: 2, anchor: "Hurdles informal." }
+          - { level: Absent,     score: 1, anchor: "No hurdles." }
+      - id: portfolio_view_known
+        name: Leaders know the portfolio of in-flight investments
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Leadership can name the top 5 in-flight investments and their expected returns." }
+          - { level: Developing, score: 3, anchor: "Top 3 known; smaller projects opaque." }
+          - { level: Emerging,   score: 2, anchor: "Each leader knows their own; no portfolio view." }
+          - { level: Absent,     score: 1, anchor: "Investments tracked individually only." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: stage_gate_process
+        name: Documented stage-gate process
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Ideation / Diligence / Execution / Post-investment-review gates defined; deliverables per gate; named owners." }
+          - { level: Developing, score: 3, anchor: "Gates exist; deliverables vary by deal." }
+          - { level: Emerging,   score: 2, anchor: "Loose stage concept; informal." }
+          - { level: Absent,     score: 1, anchor: "No gating process." }
+      - id: capex_memo_template
+        name: Capex memo template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Versioned template covering thesis, financials, sensitivity, risks, and walk-away conditions." }
+          - { level: Developing, score: 3, anchor: "Template exists; content drifts deal to deal." }
+          - { level: Emerging,   score: 2, anchor: "Each memo built from scratch." }
+          - { level: Absent,     score: 1, anchor: "No memo discipline." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: actual_vs_projected_tracked
+        name: Actual vs projected returns tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "12-month and 24-month look-backs on every >$500K project; variance attributed to drivers." }
+          - { level: Developing, score: 3, anchor: "Look-backs on big projects; smaller ones skipped." }
+          - { level: Emerging,   score: 2, anchor: "Look-backs only when prompted." }
+          - { level: Absent,     score: 1, anchor: "Returns not measured post-deployment." }
+      - id: cycle_time_tracked
+        name: Cycle time per stage tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Days in each stage tracked; bottlenecks named and attacked." }
+          - { level: Developing, score: 3, anchor: "Total cycle time tracked; per-stage informal." }
+          - { level: Emerging,   score: 2, anchor: "Cycle time guessed at." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: capital_council_runs
+        name: Capital council runs on a calendar
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standing monthly council; cross-functional members; gating decisions binding." }
+          - { level: Developing, score: 3, anchor: "Council meets per deal; decisions sometimes overruled." }
+          - { level: Emerging,   score: 2, anchor: "Council exists in name; CEO + CFO decide ad-hoc." }
+          - { level: Absent,     score: 1, anchor: "No council." }
+      - id: feedback_into_criteria
+        name: Post-investment lessons feed back into criteria
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Lessons from look-backs systematically update hurdles, due diligence checklist, or weighting criteria." }
+          - { level: Developing, score: 3, anchor: "Lessons captured; criteria updates ad-hoc." }
+          - { level: Emerging,   score: 2, anchor: "Lessons captured in deck; rarely revisited." }
+          - { level: Absent,     score: 1, anchor: "No feedback loop." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: pipeline_dashboard
+        name: Pipeline dashboard auto-refreshes
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Live dashboard with stage, capital deployed, expected ROI, and decision date; refreshes from project tracker." }
+          - { level: Developing, score: 3, anchor: "Dashboard refreshed manually each council meeting." }
+          - { level: Emerging,   score: 2, anchor: "Spreadsheet rebuilt per meeting." }
+          - { level: Absent,     score: 1, anchor: "No dashboard." }
+      - id: model_template_reuse
+        name: Standard project-model template reuse
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Project-financial model template enforced; sensitivity tables built-in; comparable across deals." }
+          - { level: Developing, score: 3, anchor: "Template exists; per-deal modifications heavy." }
+          - { level: Emerging,   score: 2, anchor: "Each project modeled from scratch." }
+          - { level: Absent,     score: 1, anchor: "No standard model." }

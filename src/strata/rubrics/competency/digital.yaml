@@ -1,0 +1,61 @@
+rubric_id: rb.competency.digital
+scope: function
+name: Digital Transformation and Technology
+version: 1
+description: >
+  Pillar 3 of the Modern CFO Handbook competency model. Scores the CFO's
+  ownership of the finance technology stack and data governance.
+
+groups:
+
+  - id: cloud_erp_xpna
+    name: Cloud ERP and xP&A platform adoption
+    weight: 0.25
+    characteristics:
+      - id: modern_finance_stack
+        name: Modern, integrated cloud finance stack
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Cloud ERP (NetSuite / Workday / S/4HANA) + xP&A (Anaplan / Adaptive) integrated end-to-end; one source of truth." }
+          - { level: Proficient, score: 3, anchor: "Cloud ERP in place; xP&A adopted but partially integrated." }
+          - { level: Developing, score: 2, anchor: "On-prem or hybrid ERP; spreadsheet-based planning." }
+          - { level: Urgent,     score: 1, anchor: "Legacy GL with disconnected spreadsheets; no planning platform." }
+
+  - id: automation_rpa
+    name: Automation and RPA coverage
+    weight: 0.25
+    characteristics:
+      - id: rpa_coverage
+        name: High-volume / low-judgment work is automated
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Recurring entries, reconciliations, AP processing automated; humans triage exceptions only." }
+          - { level: Proficient, score: 3, anchor: "Top three repeat tasks automated; ROI measured." }
+          - { level: Developing, score: 2, anchor: "Pilot automations exist; not scaled." }
+          - { level: Urgent,     score: 1, anchor: "Manual entry dominates the close." }
+
+  - id: data_governance
+    name: Data governance and analytics enablement
+    weight: 0.25
+    characteristics:
+      - id: data_governance_maturity
+        name: Documented data ownership, definitions, and access controls
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Data dictionary published; metric definitions canonical; access controls audited; self-serve BI in place." }
+          - { level: Proficient, score: 3, anchor: "Definitions documented for top metrics; BI deployed; governance partial." }
+          - { level: Developing, score: 2, anchor: "Definitions in finance heads; BI fragmented." }
+          - { level: Urgent,     score: 1, anchor: "No data governance; metrics drift between teams." }
+
+  - id: cyber_vendor_risk
+    name: Cybersecurity and vendor risk management
+    weight: 0.25
+    characteristics:
+      - id: cyber_vendor_oversight
+        name: Active oversight of cyber and vendor risk in finance systems
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Joint CFO-CIO ownership; SOC2 / pen-test cadence; vendor risk register reviewed quarterly." }
+          - { level: Proficient, score: 3, anchor: "Annual reviews; named owner." }
+          - { level: Developing, score: 2, anchor: "Reactive — addressed when an incident or audit forces it." }
+          - { level: Urgent,     score: 1, anchor: "No oversight; finance systems not in cyber scope." }

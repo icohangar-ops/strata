@@ -1,0 +1,32 @@
+{
+  "company": "Acme Robotics",
+  "period": "Q1 2026",
+  "risk_appetite_summary": "Moderate. Tolerate operational and growth-related risk; low tolerance for cyber, compliance, and reputational risk.",
+  "calibration_anchors": {
+    "likelihood": {
+      "1": "rare (<10%)",
+      "2": "unlikely (10-25%)",
+      "3": "possible (25-50%)",
+      "4": "likely (50-75%)",
+      "5": "almost certain (>75%)"
+    },
+    "impact": {
+      "1": "negligible (<$100K)",
+      "2": "minor ($100K-$1M)",
+      "3": "moderate ($1M-$5M)",
+      "4": "major ($5M-$10M)",
+      "5": "catastrophic (>$10M or existential)"
+    }
+  },
+  "risks": [
+    {"category": "cyber",         "description": "Customer-data breach via vendor API",  "likelihood": 4, "impact": 5, "owner": "CIO",  "controls": ["SOC2 audit", "vendor risk reviews"], "control_effectiveness": 3, "gap": "API rate-limit telemetry incomplete", "remediation_owner": "VP InfoSec", "remediation_due": "2026-06-30"},
+    {"category": "compliance",    "description": "GDPR breach via shadow data store",    "likelihood": 3, "impact": 4, "owner": "CFO",  "controls": ["DPA review process"],                  "control_effectiveness": 3, "gap": "Shadow stores not inventoried", "remediation_owner": "Data Protection Officer", "remediation_due": "2026-05-15"},
+    {"category": "operational",   "description": "Single-source supplier of gripper actuator", "likelihood": 4, "impact": 3, "owner": "COO", "controls": ["12-week safety stock"],            "control_effectiveness": 3, "gap": "No qualified second source",   "remediation_owner": "VP Operations", "remediation_due": "2026-09-01"},
+    {"category": "strategic",     "description": "Competitor consolidation reduces market access", "likelihood": 3, "impact": 4, "owner": "CEO", "controls": ["M&A scouting"], "control_effectiveness": 2, "gap": "No standing M&A pipeline", "remediation_owner": "VP Corp Dev", "remediation_due": "2026-07-01"},
+    {"category": "reputational",  "description": "Quality recall on flagship product",   "likelihood": 2, "impact": 4, "owner": "VP Eng", "controls": ["QA test gates"], "control_effectiveness": 4, "gap": "None material", "remediation_owner": "VP Eng", "remediation_due": null},
+    {"category": "ESG",           "description": "Disclosure miss on Scope 2 emissions", "likelihood": 3, "impact": 2, "owner": "CFO", "controls": ["Annual sustainability disclosure"], "control_effectiveness": 2, "gap": "No automated emissions data feed", "remediation_owner": "Sustainability Lead", "remediation_due": "2026-08-01"},
+    {"category": "financial",     "description": "Customer concentration: top 3 = 48% of revenue", "likelihood": 2, "impact": 4, "owner": "CRO", "controls": ["Quarterly diversification review"], "control_effectiveness": 3, "gap": "No customer-loss runway model", "remediation_owner": "CFO", "remediation_due": "2026-05-31"}
+  ],
+  "escalation_threshold": 15,
+  "last_committee_review": "Q4 2025"
+}

@@ -1,0 +1,112 @@
+rubric_id: rb.function.forecast
+scope: function
+name: Forecasting
+version: 1
+description: Maturity of the forecasting capability across the five lenses.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: purpose_clear
+        name: Forecast purpose is clear
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Cadence, audience, and decision use of each forecast (rolling, board, lender) defined." }
+          - { level: Developing, score: 3, anchor: "Audience clear; decision use implicit." }
+          - { level: Emerging,   score: 2, anchor: "Forecast produced because it is expected." }
+          - { level: Absent,     score: 1, anchor: "Purpose unclear." }
+      - id: assumption_visibility
+        name: Assumption visibility
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top assumptions named, sourced, and challengeable; sensitivity quantified." }
+          - { level: Developing, score: 3, anchor: "Assumptions named; sources patchy." }
+          - { level: Emerging,   score: 2, anchor: "Assumptions buried in spreadsheets." }
+          - { level: Absent,     score: 1, anchor: "Black box." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: forecast_methodology
+        name: Forecast methodology documented
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Methodology per line (driver-based, run-rate, vendor-quoted) documented and audited." }
+          - { level: Developing, score: 3, anchor: "Methodology documented at category level." }
+          - { level: Emerging,   score: 2, anchor: "Methodology lives in one analyst's head." }
+          - { level: Absent,     score: 1, anchor: "No documented methodology." }
+      - id: input_collection_workflow
+        name: Input collection workflow
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Input owners assigned; submission deadlines and templates enforced." }
+          - { level: Developing, score: 3, anchor: "Owners assigned; templates inconsistent." }
+          - { level: Emerging,   score: 2, anchor: "Inputs requested ad-hoc." }
+          - { level: Absent,     score: 1, anchor: "Forecast built without owner input." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: accuracy_tracked
+        name: Forecast accuracy tracked
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Accuracy by line, by lookback (1m/3m/6m) trended; bias measured." }
+          - { level: Developing, score: 3, anchor: "Accuracy at top-of-house tracked." }
+          - { level: Emerging,   score: 2, anchor: "Accuracy reviewed only when off." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+      - id: bias_correction_loop
+        name: Bias correction loop
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Persistent bias triggers methodology review with documented adjustments." }
+          - { level: Developing, score: 3, anchor: "Bias reviewed quarterly." }
+          - { level: Emerging,   score: 2, anchor: "Bias acknowledged; not corrected." }
+          - { level: Absent,     score: 1, anchor: "Bias unmeasured." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: leaders_use_forecast
+        name: Leaders use the forecast for decisions
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Hiring, spend, capacity decisions reference current forecast routinely." }
+          - { level: Developing, score: 3, anchor: "Forecast used for major decisions only." }
+          - { level: Emerging,   score: 2, anchor: "Forecast consulted occasionally." }
+          - { level: Absent,     score: 1, anchor: "Forecast ignored." }
+      - id: ops_finance_alignment
+        name: Ops-finance alignment
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Finance forecast and ops capacity plan reconcile; one source of truth." }
+          - { level: Developing, score: 3, anchor: "Reconciliation happens at quarterly cadence." }
+          - { level: Emerging,   score: 2, anchor: "Two divergent forecasts coexist." }
+          - { level: Absent,     score: 1, anchor: "No reconciliation." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: rolling_refresh
+        name: Rolling refresh
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Forecast refreshes automatically each close; analysts curate deltas." }
+          - { level: Developing, score: 3, anchor: "Partial refresh; manual on key lines." }
+          - { level: Emerging,   score: 2, anchor: "Manual rebuild monthly." }
+          - { level: Absent,     score: 1, anchor: "Forecast updated quarterly by hand." }
+      - id: scenario_engine
+        name: Scenario engine
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Toggle-driven scenarios producing P&L, cash, and headcount in minutes." }
+          - { level: Developing, score: 3, anchor: "Scenarios producible but slow." }
+          - { level: Emerging,   score: 2, anchor: "Each scenario rebuilt from scratch." }
+          - { level: Absent,     score: 1, anchor: "No scenario capability." }

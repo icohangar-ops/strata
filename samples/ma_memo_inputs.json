@@ -1,0 +1,25 @@
+{
+  "acquirer": "Acme Robotics",
+  "target_name": "Cogwheel Systems",
+  "deal_period": "Q2 2026",
+  "headline_purchase_price_m": 185,
+  "ev_to_ltm_ebitda": 9.2,
+  "ev_to_ntm_ebitda": 7.8,
+  "deal_structure": "100% cash, no rollover",
+  "thesis_in_one_sentence": "Acquire Cogwheel to close gripper-actuator capability gap before competitor consolidates supply.",
+  "synergies": [
+    {"line": "Bill-of-materials consolidation", "amount_m_yr2": 6.0, "owner": "VP Operations", "workstream": "supply chain integration"},
+    {"line": "Direct-sales overlap", "amount_m_yr2": 3.5, "owner": "CRO", "workstream": "go-to-market"},
+    {"line": "G&A consolidation", "amount_m_yr2": 2.2, "owner": "CFO", "workstream": "back-office integration"}
+  ],
+  "qoe_adjustments": [
+    {"item": "Owner add-backs", "amount_m": 2.1},
+    {"item": "Non-recurring legal", "amount_m": 0.6}
+  ],
+  "top_risks": [
+    {"risk": "Key engineer retention", "impact": "high", "likelihood": "medium"},
+    {"risk": "Customer concentration (top 3 = 48%)", "impact": "high", "likelihood": "low"},
+    {"risk": "Working-capital normalization", "impact": "medium", "likelihood": "medium"}
+  ],
+  "walk_away_price_m": 205
+}

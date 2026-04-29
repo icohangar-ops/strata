@@ -1,0 +1,31 @@
+{
+  "company": "Acme Robotics",
+  "project_name": "EU Manufacturing Expansion",
+  "deal_period": "Q2 2026",
+  "capital_request_m": 8.5,
+  "tranches": [
+    {"amount_m": 2.5, "milestone": "site selection + permits"},
+    {"amount_m": 4.0, "milestone": "facility build-out at 50% complete"},
+    {"amount_m": 2.0, "milestone": "first commercial production line live"}
+  ],
+  "expected_irr_pct": 27,
+  "hurdle_irr_pct": 20,
+  "expected_payback_years": 2.6,
+  "payback_ceiling_years": 3.0,
+  "strategic_fit_score": 8,
+  "alternatives_considered": [
+    {"option": "build (this proposal)", "verdict": "selected", "reason": "controls timing and IP"},
+    {"option": "partner with EU contract manufacturer", "verdict": "rejected", "reason": "loses IP control"},
+    {"option": "defer 18 months", "verdict": "rejected", "reason": "competitor would lock supply"}
+  ],
+  "top_drivers_for_sensitivity": ["EU demand growth %", "labor cost / unit", "ramp speed (months to first revenue)"],
+  "downside_case": {"irr_pct": 12, "narrative": "Slow ramp + 15% labor inflation"},
+  "top_risks": [
+    {"risk": "Permitting delay", "likelihood": 3, "impact": 4, "mitigation_owner": "VP Operations", "pre_funding_action": "permits filed before Tranche 1 release"},
+    {"risk": "Labor unit cost overrun", "likelihood": 3, "impact": 3, "mitigation_owner": "VP HR", "pre_funding_action": "wage benchmarking + 2-year hedge"},
+    {"risk": "Cannibalization of US capacity utilization", "likelihood": 2, "impact": 3, "mitigation_owner": "COO", "pre_funding_action": "US line plan to absorb US-only SKUs"}
+  ],
+  "cannibalization_estimate_pct_of_us_revenue": 4,
+  "post_investment_review_owner": "CFO",
+  "review_dates": ["2027-Q3 (12-month)", "2028-Q3 (24-month)"]
+}

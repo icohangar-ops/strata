@@ -1,0 +1,93 @@
+rubric_id: rb.deliverable.risk_register
+scope: deliverable
+name: Enterprise Risk Register
+version: 1
+description: >
+  Grades a risk-register draft on coverage, scoring discipline, control mapping,
+  and governance fitness. Modeled on Tool 4 of the Modern CFO Handbook.
+
+groups:
+
+  - id: coverage
+    name: Coverage and Categorization
+    weight: 0.25
+    characteristics:
+      - id: category_coverage
+        name: Category coverage
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "All seven categories represented (financial, operational, strategic, compliance, cyber, reputational, ESG); no obvious blind spots." }
+          - { level: Developing, score: 3, anchor: "Five-six categories covered; ESG or reputational thin." }
+          - { level: Emerging,   score: 2, anchor: "Only financial / compliance covered." }
+          - { level: Absent,     score: 1, anchor: "Single-category register." }
+      - id: business_unit_coverage
+        name: Business-unit coverage
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each BU contributes risks; functional risks identified separately from operational." }
+          - { level: Developing, score: 3, anchor: "Most BUs represented; coverage uneven." }
+          - { level: Emerging,   score: 2, anchor: "Risks aggregated at corporate only." }
+          - { level: Absent,     score: 1, anchor: "BU view absent." }
+
+  - id: scoring_discipline
+    name: Scoring Discipline
+    weight: 0.30
+    characteristics:
+      - id: likelihood_impact_calibrated
+        name: Likelihood and impact calibrated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Both axes scored 1-5 with calibration anchors disclosed (e.g. impact >$10M = 5)." }
+          - { level: Developing, score: 3, anchor: "Both axes scored; anchors implicit." }
+          - { level: Emerging,   score: 2, anchor: "Single qualitative score (high/medium/low)." }
+          - { level: Absent,     score: 1, anchor: "No scoring." }
+      - id: heat_score_thresholded
+        name: Heat score with escalation threshold
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Heat score (likelihood x impact) with named threshold (>15) for board escalation; movement vs prior period flagged." }
+          - { level: Developing, score: 3, anchor: "Heat score computed; no escalation rule." }
+          - { level: Emerging,   score: 2, anchor: "Heat scoring narrative-only." }
+          - { level: Absent,     score: 1, anchor: "No heat scoring." }
+
+  - id: control_mapping
+    name: Control Mapping
+    weight: 0.25
+    characteristics:
+      - id: existing_controls_listed
+        name: Existing controls and effectiveness listed
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each high-heat risk lists existing controls with effectiveness score and last test date." }
+          - { level: Developing, score: 3, anchor: "Controls listed; effectiveness implied." }
+          - { level: Emerging,   score: 2, anchor: "Controls mentioned in narrative." }
+          - { level: Absent,     score: 1, anchor: "No control inventory." }
+      - id: gaps_with_remediation
+        name: Gaps with named remediation owner and date
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every control gap pairs with named owner and remediation deadline." }
+          - { level: Developing, score: 3, anchor: "Gaps named; ownership patchy." }
+          - { level: Emerging,   score: 2, anchor: "Gaps noted in commentary." }
+          - { level: Absent,     score: 1, anchor: "No gap tracking." }
+
+  - id: governance_fitness
+    name: Governance Fitness
+    weight: 0.20
+    characteristics:
+      - id: board_committee_routing
+        name: Routing to board / risk committee
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top risks routed to named committee with quarterly review cadence." }
+          - { level: Developing, score: 3, anchor: "Top risks shared with board; cadence ad-hoc." }
+          - { level: Emerging,   score: 2, anchor: "Reviewed only at audit committee." }
+          - { level: Absent,     score: 1, anchor: "No board routing." }
+      - id: appetite_referenced
+        name: Risk-appetite statement referenced
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Each risk's heat score compared to appetite; out-of-appetite risks flagged for action." }
+          - { level: Developing, score: 3, anchor: "Appetite cited at top of register; not per-risk." }
+          - { level: Emerging,   score: 2, anchor: "Appetite mentioned in narrative." }
+          - { level: Absent,     score: 1, anchor: "No appetite reference." }

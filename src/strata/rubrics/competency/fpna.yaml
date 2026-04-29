@@ -1,0 +1,61 @@
+rubric_id: rb.competency.fpna
+scope: function
+name: Advanced FP&A and Decision-Making
+version: 1
+description: >
+  Pillar 2 of the Modern CFO Handbook competency model. Scores the CFO's
+  decision-science competency across four sub-dimensions.
+
+groups:
+
+  - id: forecast_accuracy_maturity
+    name: Forecast accuracy and rolling forecast maturity
+    weight: 0.25
+    characteristics:
+      - id: rolling_forecast_practice
+        name: Rolling forecast is the operating cadence, not annual budget theater
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Rolling 12+12 forecast; accuracy > 95% within 5% variance; budget retired as primary tool." }
+          - { level: Proficient, score: 3, anchor: "Quarterly reforecast; accuracy 90-95%." }
+          - { level: Developing, score: 2, anchor: "Annual budget with mid-year update; accuracy 80-90%." }
+          - { level: Urgent,     score: 1, anchor: "Annual budget set once; little reforecasting; accuracy unmeasured or < 80%." }
+
+  - id: scenario_predictive
+    name: Scenario planning and predictive analytics
+    weight: 0.25
+    characteristics:
+      - id: scenario_discipline
+        name: Base / bull / bear scenarios with toggle-driven models
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Three scenarios live; ML or driver models inform forecasts; sensitivity tables routine." }
+          - { level: Proficient, score: 3, anchor: "Two scenarios for major decisions; sensitivity on top drivers." }
+          - { level: Developing, score: 2, anchor: "Single point estimate; scenarios on request." }
+          - { level: Urgent,     score: 1, anchor: "No scenarios; forecast is a single line." }
+
+  - id: data_driven_culture
+    name: Data-driven decision-making culture
+    weight: 0.25
+    characteristics:
+      - id: decisions_reference_data
+        name: Major decisions reference live KPIs, not vibes
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Hiring, spend, capacity decisions routinely cite forecast and unit economics; finance attends decision meetings." }
+          - { level: Proficient, score: 3, anchor: "Major decisions reference data; smaller decisions still vibe-based." }
+          - { level: Developing, score: 2, anchor: "Decisions occasionally reference finance; usually reactive." }
+          - { level: Urgent,     score: 1, anchor: "Decisions made on intuition; finance learns about them after the fact." }
+
+  - id: capital_allocation_discipline
+    name: Capital allocation discipline
+    weight: 0.25
+    characteristics:
+      - id: capital_council
+        name: Capital council with stage gates and IRR hurdles
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Standing capital council; >= 20% IRR hurdle, 3-yr payback ceiling, post-investment reviews on every project." }
+          - { level: Proficient, score: 3, anchor: "Council meets quarterly; gates exist; post-investment reviews patchy." }
+          - { level: Developing, score: 2, anchor: "Capital decisions made ad-hoc by CFO + CEO." }
+          - { level: Urgent,     score: 1, anchor: "Capital deployed reactively; no portfolio view." }

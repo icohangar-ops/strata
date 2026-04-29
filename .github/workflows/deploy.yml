@@ -1,0 +1,43 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: railway-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (for Railway CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Railway CLI
+        run: npm i -g @railway/cli@latest
+
+      - name: Print Railway CLI version
+        run: railway --version
+
+      - name: Deploy
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "::error::RAILWAY_TOKEN secret is not set on this repo."
+            echo "Create a project token in Railway -> Project -> Settings -> Tokens,"
+            echo "then add it to GitHub: Settings -> Secrets and variables -> Actions -> New repository secret."
+            exit 1
+          fi
+          # Railway picks up the project from railway.toml in the repo root.
+          # If you have multiple services, set RAILWAY_SERVICE_ID or pass --service.
+          railway up --ci

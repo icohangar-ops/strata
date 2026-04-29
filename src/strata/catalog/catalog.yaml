@@ -1,0 +1,146 @@
+# L2 — Capability Catalog
+#
+# Static skill registry, independently authored from CFO domain experience.
+# Not derived from the cfo-stack repository or any other upstream catalog.
+# See ./NOTICE for the project's clean-room policy.
+#
+# Five phases align to L1 capability rubrics:
+#   ingest   -> source-system pulls and document capture
+#   record   -> entry posting, classification, validation
+#   analyze  -> reconciliations, variance analysis, anomaly detection
+#   plan     -> forecasting, scenario modeling, treasury
+#   present  -> board pack, investor update, BvA narrative
+
+version: 1
+phases:
+  - id: ingest
+    name: Ingest
+    skills:
+      - id: ingest.gl_pull
+        name: General-ledger pull
+        outputs: ["trial_balance", "journal_lines"]
+        capability: rb.function.close
+      - id: ingest.bank_pull
+        name: Bank-feed pull
+        outputs: ["bank_statements"]
+        capability: rb.function.reconcile
+      - id: ingest.doc_capture
+        name: Document capture
+        outputs: ["normalized_documents"]
+        capability: rb.function.close
+
+  - id: record
+    name: Record
+    skills:
+      - id: record.classify
+        name: Transaction classifier
+        outputs: ["classified_lines"]
+        capability: rb.function.close
+      - id: record.post_entries
+        name: Journal-entry poster
+        outputs: ["posted_entries"]
+        capability: rb.function.close
+      - id: record.validate
+        name: Entry validator
+        outputs: ["validation_report"]
+        capability: rb.function.close
+
+  - id: analyze
+    name: Analyze
+    skills:
+      - id: analyze.reconcile
+        name: Account reconciler
+        outputs: ["reconciliation_report"]
+        capability: rb.function.reconcile
+      - id: analyze.variance
+        name: Variance analyzer
+        outputs: ["variance_report"]
+        capability: rb.function.bva
+      - id: analyze.driver_decomp
+        name: Driver decomposition
+        outputs: ["volume_price_mix"]
+        capability: rb.function.bva
+      - id: analyze.anomaly
+        name: Anomaly detector
+        outputs: ["anomaly_flags"]
+        capability: rb.function.close
+      - id: analyze.risk_register
+        name: Risk register builder
+        outputs: ["risk_register_draft"]
+        capability: rb.function.risk
+        deliverable_rubric: rb.deliverable.risk_register
+
+  - id: plan
+    name: Plan
+    skills:
+      - id: plan.rolling_forecast
+        name: Rolling-forecast refresh
+        outputs: ["refreshed_forecast"]
+        capability: rb.function.forecast
+      - id: plan.scenario
+        name: Scenario engine
+        outputs: ["scenario_set"]
+        capability: rb.function.forecast
+      - id: plan.cash_runway
+        name: Cash runway projector
+        outputs: ["runway_projection"]
+        capability: rb.function.forecast
+      - id: plan.three_statement_model
+        name: Three-statement model builder
+        outputs: ["three_statement_workbook"]
+        capability: rb.function.forecast
+        deliverable_rubric: rb.deliverable.three_statement
+      - id: plan.capex_memo
+        name: Capex memo writer
+        outputs: ["capex_memo_draft"]
+        capability: rb.function.capital_allocation
+        deliverable_rubric: rb.deliverable.capex_memo
+      - id: plan.post_investment_review
+        name: Post-investment review writer
+        outputs: ["post_investment_review_draft"]
+        capability: rb.function.capital_allocation
+        deliverable_rubric: rb.deliverable.post_investment_review
+
+  - id: present
+    name: Present
+    skills:
+      - id: present.board_pack
+        name: Board-pack assembler
+        outputs: ["board_pack_draft"]
+        capability: rb.function.board_pack
+        deliverable_rubric: rb.deliverable.board_pack
+      - id: present.bva_narrative
+        name: BvA narrative writer
+        outputs: ["bva_commentary"]
+        capability: rb.function.bva
+        deliverable_rubric: rb.deliverable.bva_commentary
+      - id: present.investor_update
+        name: Investor update writer
+        outputs: ["investor_update_draft"]
+        capability: rb.function.board_pack
+        deliverable_rubric: rb.deliverable.investor_update
+      - id: present.ic_memo
+        name: M&A IC memo writer
+        outputs: ["ic_memo_draft"]
+        capability: rb.function.ma
+        deliverable_rubric: rb.deliverable.ma_memo
+      - id: present.cfo_dashboard
+        name: CFO value-creation dashboard
+        outputs: ["cfo_dashboard"]
+        capability: rb.competency.stakeholder
+        deliverable_rubric: rb.deliverable.cfo_dashboard
+      - id: present.employee_all_hands
+        name: Employee all-hands finance segment
+        outputs: ["employee_all_hands_segment"]
+        capability: rb.competency.stakeholder
+        deliverable_rubric: rb.deliverable.employee_all_hands
+      - id: present.cross_functional_brief
+        name: Cross-functional bi-weekly brief
+        outputs: ["cross_functional_brief"]
+        capability: rb.competency.stakeholder
+        deliverable_rubric: rb.deliverable.cross_functional_brief
+      - id: present.earnings_script
+        name: Earnings call script and Q&A
+        outputs: ["earnings_script"]
+        capability: rb.competency.stakeholder
+        deliverable_rubric: rb.deliverable.earnings_script

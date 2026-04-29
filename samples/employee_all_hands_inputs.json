@@ -1,0 +1,30 @@
+{
+  "company": "Acme Robotics",
+  "period": "Q1 2026",
+  "target_duration_minutes": 10,
+  "headlines": [
+    "Closed two design wins with tier-1 contract manufacturers",
+    "Hired VP of Engineering",
+    "Shipped gripper-actuator GA on time"
+  ],
+  "growth_unblocks": [
+    {"customer": "TopTier Manufacturing", "what": "negotiated multi-year MSA with milestone-based pricing"},
+    {"project": "EU expansion diligence", "what": "modeled scenarios within 5 days of board ask"},
+    {"hire": "VP Engineering", "what": "moved offer through 3 budget cycles in one week"}
+  ],
+  "wins": [
+    "Net new ARR $2.3M, ahead of plan",
+    "Close cycle held at 7 days through ERP migration"
+  ],
+  "lessons": [
+    "Lost a POC on integration timeline; learning to pre-build connector library before pilot"
+  ],
+  "anticipated_questions": [
+    "Are we hiring or freezing?",
+    "How does the EU plan affect US headcount?",
+    "Why did we miss our Q1 ARR target by 6 weeks?",
+    "What is our runway?",
+    "When can we expect equity refresh decisions?"
+  ],
+  "non_disclosure_topics": ["specific compensation ranges", "individual customer pricing"]
+}

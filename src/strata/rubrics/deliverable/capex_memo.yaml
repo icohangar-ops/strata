@@ -1,0 +1,94 @@
+rubric_id: rb.deliverable.capex_memo
+scope: deliverable
+name: Capital Council Capex Memo
+version: 1
+description: >
+  Grades a capital-deployment memo (non-M&A) for the capital council on
+  thesis clarity, financial rigor, risk transparency, and decision frame.
+  Modeled on Tool 5 of the Modern CFO Handbook (Stage 2 - Diligence).
+
+groups:
+
+  - id: thesis
+    name: Thesis and Strategic Fit
+    weight: 0.25
+    characteristics:
+      - id: one_sentence_thesis
+        name: One-sentence thesis with strategic fit score
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Single-sentence thesis tied to strategy; strategic-fit score (>= 7/10) cited; named sponsor." }
+          - { level: Developing, score: 3, anchor: "Thesis stated; strategic fit narrative." }
+          - { level: Emerging,   score: 2, anchor: "Thesis spans paragraphs." }
+          - { level: Absent,     score: 1, anchor: "No clear thesis." }
+      - id: option_value_named
+        name: Option value and alternatives named
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Considered alternatives (build, partner, defer) with explicit reason for choosing this." }
+          - { level: Developing, score: 3, anchor: "One alternative considered." }
+          - { level: Emerging,   score: 2, anchor: "Alternatives waved off." }
+          - { level: Absent,     score: 1, anchor: "No alternatives discussed." }
+
+  - id: financial_rigor
+    name: Financial Rigor
+    weight: 0.30
+    characteristics:
+      - id: irr_vs_hurdle
+        name: IRR vs hurdle, payback vs ceiling
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Expected IRR exceeds hurdle (>= 20%); payback within ceiling (<= 3 yrs); both shown vs threshold." }
+          - { level: Developing, score: 3, anchor: "IRR shown vs hurdle; payback informal." }
+          - { level: Emerging,   score: 2, anchor: "IRR shown without comparator." }
+          - { level: Absent,     score: 1, anchor: "No IRR / payback." }
+      - id: sensitivity_disclosed
+        name: Sensitivity to top three drivers disclosed
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Two-way sensitivity table on the three drivers most affecting IRR; downside case bounded." }
+          - { level: Developing, score: 3, anchor: "One-way sensitivity on top driver." }
+          - { level: Emerging,   score: 2, anchor: "Sensitivity narrative-only." }
+          - { level: Absent,     score: 1, anchor: "Single point estimate." }
+
+  - id: risk_transparency
+    name: Risk Transparency
+    weight: 0.20
+    characteristics:
+      - id: top_risks_with_mitigation
+        name: Top risks with named mitigation owner
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top 3 risks ranked by impact x likelihood; each has named mitigation owner and pre-funding gating action." }
+          - { level: Developing, score: 3, anchor: "Top risks listed; mitigations partial." }
+          - { level: Emerging,   score: 2, anchor: "Generic risks." }
+          - { level: Absent,     score: 1, anchor: "No risk section." }
+      - id: cannibalization_disclosed
+        name: Cannibalization or substitution effects disclosed
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Quantified impact on existing revenue / margin streams; net effect computed." }
+          - { level: Developing, score: 3, anchor: "Cannibalization named; not quantified." }
+          - { level: Emerging,   score: 2, anchor: "Mentioned generically." }
+          - { level: Absent,     score: 1, anchor: "Ignored." }
+
+  - id: decision_frame
+    name: Decision Frame
+    weight: 0.25
+    characteristics:
+      - id: ask_with_amount
+        name: Specific ask with capital amount and tranche plan
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Total capital, tranche schedule, gating events between tranches; deferral plan if gates fail." }
+          - { level: Developing, score: 3, anchor: "Total capital + single tranche." }
+          - { level: Emerging,   score: 2, anchor: "Capital amount approximate." }
+          - { level: Absent,     score: 1, anchor: "No amount specified." }
+      - id: post_investment_review_committed
+        name: Post-investment review committed
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "12-month and 24-month look-back committed in writing; review owner named." }
+          - { level: Developing, score: 3, anchor: "12-month review committed." }
+          - { level: Emerging,   score: 2, anchor: "Review mentioned aspirationally." }
+          - { level: Absent,     score: 1, anchor: "No review commitment." }

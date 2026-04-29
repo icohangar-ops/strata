@@ -1,0 +1,22 @@
+period,account,account_type,amount
+March 2026,4000 - Hardware Revenue,revenue,3200000
+March 2026,4100 - Services Revenue,revenue,1620000
+March 2026,5000 - Materials,cogs,1180000
+March 2026,5100 - Direct Labor,cogs,640000
+March 2026,6000 - R&D Salaries,opex,1100000
+March 2026,6100 - S&M Salaries,opex,820000
+March 2026,6200 - G&A Salaries,opex,560000
+March 2026,6300 - Software & SaaS,opex,210000
+March 2026,6400 - Legal & Professional,opex,150000
+March 2026,6500 - Travel,opex,95000
+March 2026,1000 - Cash,asset,18900000
+March 2026,1100 - Accounts Receivable,asset,3200000
+March 2026,2000 - Accounts Payable,liability,940000
+March 2026,3000 - Common Stock,equity,21100000
+February 2026,4000 - Hardware Revenue,revenue,3050000
+February 2026,4100 - Services Revenue,revenue,1610000
+February 2026,5000 - Materials,cogs,1140000
+February 2026,5100 - Direct Labor,cogs,620000
+February 2026,6000 - R&D Salaries,opex,1080000
+February 2026,6100 - S&M Salaries,opex,800000
+February 2026,6200 - G&A Salaries,opex,540000

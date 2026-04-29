@@ -1,0 +1,41 @@
+{
+  "company": "Acme Robotics",
+  "period": "Q1 2026",
+  "call_type": "PE-backed quarterly investor call",
+  "revenue_m": 22.4,
+  "revenue_yoy_pct": 51,
+  "gross_margin_pct": 62.4,
+  "gross_margin_yoy_bps": 180,
+  "operating_margin_pct": 8.1,
+  "ending_cash_m": 18.9,
+  "runway_months": 14,
+
+  "guidance_change": {
+    "metric": "FY26 revenue",
+    "prior_m": 105,
+    "new_m": 102,
+    "drivers": [
+      {"name": "EU launch slip 2 months", "impact_m": -2.0},
+      {"name": "Hardware mix shift to lower-margin SKU", "impact_m": -1.0}
+    ]
+  },
+
+  "capital_allocation_q": {
+    "deployed_m": 4.0,
+    "uses": ["Platform v3 R&D ($2.5M)", "EU expansion diligence ($0.5M)", "Working capital ($1.0M)"],
+    "roic_trajectory_pct": 14.2
+  },
+
+  "anticipated_analyst_questions": [
+    "What is your confidence in the revised FY26 guide?",
+    "How do you think about EU vs platform v3 priority?",
+    "When do you expect EBITDA breakeven?",
+    "What is the customer-concentration trend?",
+    "Are there any remaining one-time items in COGS?"
+  ],
+
+  "non_disclosure_phrases": {
+    "we_do_not_disclose": "We don't disclose [topic] at this granularity, but I can share that [adjacent fact].",
+    "we_will_follow_up": "Let me follow up with you offline so I can give you a precise answer."
+  }
+}

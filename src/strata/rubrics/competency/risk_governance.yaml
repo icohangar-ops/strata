@@ -1,0 +1,61 @@
+rubric_id: rb.competency.risk_governance
+scope: function
+name: Risk Management and Governance
+version: 1
+description: >
+  Pillar 5 of the Modern CFO Handbook competency model. Scores the CFO's
+  integrated risk-and-governance competency across four sub-dimensions.
+
+groups:
+
+  - id: erm_framework
+    name: Enterprise risk management framework
+    weight: 0.25
+    characteristics:
+      - id: erm_in_use
+        name: ERM framework actively informs decisions
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Risk register kept current; heat map reviewed quarterly; ERM informs capital allocation." }
+          - { level: Proficient, score: 3, anchor: "Risk register exists; reviewed at audit committee; little decision impact." }
+          - { level: Developing, score: 2, anchor: "Annual risk discussion; no active register." }
+          - { level: Urgent,     score: 1, anchor: "Risk treated reactively when incidents occur." }
+
+  - id: compliance_audit
+    name: Compliance readiness and audit preparedness
+    weight: 0.25
+    characteristics:
+      - id: audit_readiness
+        name: Audit-ready every day, not just at year-end
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Controls evidenced in tooling; clean prior-year audits; no material weaknesses." }
+          - { level: Proficient, score: 3, anchor: "Controls documented; minor audit findings cleared timely." }
+          - { level: Developing, score: 2, anchor: "Controls activated near year-end; finding remediation slow." }
+          - { level: Urgent,     score: 1, anchor: "Material weaknesses; audit always a fire drill." }
+
+  - id: esg_integration
+    name: ESG integration into capital decisions
+    weight: 0.25
+    characteristics:
+      - id: esg_in_capital_decisions
+        name: ESG criteria embedded in capital allocation, not bolted on
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "ESG metrics scored alongside ROI in capital council; investor reporting integrates ESG." }
+          - { level: Proficient, score: 3, anchor: "ESG considered for major decisions; investor reporting separate from financials." }
+          - { level: Developing, score: 2, anchor: "ESG reporting exists but disconnected from capital decisions." }
+          - { level: Urgent,     score: 1, anchor: "No ESG framework." }
+
+  - id: internal_controls
+    name: Internal controls and governance structure
+    weight: 0.25
+    characteristics:
+      - id: governance_structure_intact
+        name: Audit / risk committees and disclosure controls function as designed
+        weight: 1.0
+        attributes:
+          - { level: Mastery,    score: 4, anchor: "Audit + risk committees meet on calendar; minutes captured; disclosure controls tested annually." }
+          - { level: Proficient, score: 3, anchor: "Committees meet; minutes informal; controls tested patchily." }
+          - { level: Developing, score: 2, anchor: "Committees exist but rarely meet substantively." }
+          - { level: Urgent,     score: 1, anchor: "Governance theater only." }

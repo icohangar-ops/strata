@@ -1,0 +1,94 @@
+rubric_id: rb.deliverable.employee_all_hands
+scope: deliverable
+name: Employee All-Hands Finance Update
+version: 1
+description: >
+  Grades a 10-minute employee all-hands segment from the CFO on plain-English
+  signal, visual storytelling, and connection to employees' work.
+  Modeled on Tool 3 of the Modern CFO Handbook.
+
+groups:
+
+  - id: plain_english
+    name: Plain English
+    weight: 0.30
+    characteristics:
+      - id: jargon_replaced
+        name: Finance jargon replaced with business outcomes
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Zero finance jargon; every term has a one-line plain-English equivalent." }
+          - { level: Developing, score: 3, anchor: "Most jargon translated; 1-2 lapses." }
+          - { level: Emerging,   score: 2, anchor: "Mixed; financial concepts assumed." }
+          - { level: Absent,     score: 1, anchor: "Sounds like an earnings call." }
+      - id: ten_minute_discipline
+        name: 10-minute time discipline
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Speakable in 10 minutes; explicit time-budget per section." }
+          - { level: Developing, score: 3, anchor: "Speakable in 12-15 minutes." }
+          - { level: Emerging,   score: 2, anchor: "Long; would run over." }
+          - { level: Absent,     score: 1, anchor: "No time discipline." }
+
+  - id: visual_storytelling
+    name: Visual Storytelling
+    weight: 0.25
+    characteristics:
+      - id: visual_per_concept
+        name: One visual per concept, not per data point
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every concept paired with a visual that states the conclusion in its title." }
+          - { level: Developing, score: 3, anchor: "Most concepts have visuals; titles describe data not conclusion." }
+          - { level: Emerging,   score: 2, anchor: "Charts present; some on instinct alone." }
+          - { level: Absent,     score: 1, anchor: "Tables of numbers." }
+      - id: infographic_polish
+        name: Infographic polish
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Templated, branded visuals; consistent palette; readable from the back of the room." }
+          - { level: Developing, score: 3, anchor: "Mostly polished; one off-brand slide." }
+          - { level: Emerging,   score: 2, anchor: "Default Excel chart aesthetic." }
+          - { level: Absent,     score: 1, anchor: "Visual chaos." }
+
+  - id: connection_to_work
+    name: Connection to Employees' Work
+    weight: 0.25
+    characteristics:
+      - id: how_finance_enables_growth
+        name: How-finance-enables-growth segment
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Specific examples of how finance unblocked growth this period (one customer, one project, one hire)." }
+          - { level: Developing, score: 3, anchor: "Generic statement about finance helping growth." }
+          - { level: Emerging,   score: 2, anchor: "Mentions finance role in passing." }
+          - { level: Absent,     score: 1, anchor: "No connection to work." }
+      - id: wins_and_lessons
+        name: Wins and lessons celebrated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Names specific wins AND specific lessons; people credited by name where appropriate." }
+          - { level: Developing, score: 3, anchor: "Wins highlighted; lessons softened." }
+          - { level: Emerging,   score: 2, anchor: "Wins generic." }
+          - { level: Absent,     score: 1, anchor: "No celebration." }
+
+  - id: q_and_a_readiness
+    name: Q&A Readiness
+    weight: 0.20
+    characteristics:
+      - id: anticipated_questions
+        name: Anticipated questions prepared
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Top 5 likely employee questions prepared with crisp answers; sensitive topics flagged." }
+          - { level: Developing, score: 3, anchor: "3-4 questions prepared." }
+          - { level: Emerging,   score: 2, anchor: "Generic FAQ." }
+          - { level: Absent,     score: 1, anchor: "No prep." }
+      - id: confidentiality_boundary_clear
+        name: Confidentiality boundary clear
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "What can / cannot be shared explicitly disclosed; reasons given without breach." }
+          - { level: Developing, score: 3, anchor: "Boundary stated when prompted." }
+          - { level: Emerging,   score: 2, anchor: "Boundary unclear; risk of off-the-cuff disclosure." }
+          - { level: Absent,     score: 1, anchor: "No boundary; over-shares or stonewalls." }

@@ -1,0 +1,19 @@
+{
+  "company": "Acme Robotics",
+  "period": "March 2026",
+  "currency": "USD",
+  "units": "thousands",
+  "revenue_actual": 4820,
+  "revenue_budget": 5100,
+  "gross_margin_actual_pct": 62.4,
+  "gross_margin_budget_pct": 64.0,
+  "opex_actual": 3210,
+  "opex_budget": 3050,
+  "ending_cash": 18900,
+  "runway_months_actual": 14.2,
+  "runway_months_prior": 15.0,
+  "key_decisions_required": [
+    "approve Q3 hiring plan",
+    "ratify revised FY26 forecast"
+  ]
+}

@@ -1,0 +1,112 @@
+rubric_id: rb.function.bva
+scope: function
+name: Budget vs Actual Analysis
+version: 1
+description: Maturity of the BvA capability across the five lenses.
+
+groups:
+
+  - id: awareness
+    name: Awareness
+    weight: 0.20
+    characteristics:
+      - id: budget_owners_known
+        name: Budget owners known per line
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Every budget line has a single named owner accountable for variance." }
+          - { level: Developing, score: 3, anchor: "Department-level ownership; line-level patchy." }
+          - { level: Emerging,   score: 2, anchor: "Cost-center ownership only." }
+          - { level: Absent,     score: 1, anchor: "Ownership unclear." }
+      - id: variance_thresholds_published
+        name: Variance materiality thresholds published
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "$ and % thresholds documented per line type; owners know when to explain." }
+          - { level: Developing, score: 3, anchor: "Single threshold across the company." }
+          - { level: Emerging,   score: 2, anchor: "Threshold informal." }
+          - { level: Absent,     score: 1, anchor: "Every variance gets equal treatment." }
+
+  - id: documented_workflow
+    name: Documented Workflow
+    weight: 0.20
+    characteristics:
+      - id: variance_explanation_template
+        name: Variance explanation template
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standard template: driver, quantification, action, owner, eta." }
+          - { level: Developing, score: 3, anchor: "Template; owners often skip fields." }
+          - { level: Emerging,   score: 2, anchor: "Free-text explanations." }
+          - { level: Absent,     score: 1, anchor: "No template." }
+      - id: budget_change_control
+        name: Budget change control
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Budget locked at start; reforecast and budget tracked separately with change log." }
+          - { level: Developing, score: 3, anchor: "Reforecast separated; change log informal." }
+          - { level: Emerging,   score: 2, anchor: "Budget overwritten silently mid-year." }
+          - { level: Absent,     score: 1, anchor: "No change control." }
+
+  - id: instrumentation
+    name: Instrumentation
+    weight: 0.20
+    characteristics:
+      - id: explained_variance_pct
+        name: "% of material variance explained"
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "> 95% of material variance has driver-level explanation by close+N days." }
+          - { level: Developing, score: 3, anchor: "70-95% explained on schedule." }
+          - { level: Emerging,   score: 2, anchor: "< 70% explained; finance fills gaps." }
+          - { level: Absent,     score: 1, anchor: "Not measured." }
+      - id: time_to_variance_close
+        name: Time-to-variance-close
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Days from variance flag to action-owner-assigned tracked and trending down." }
+          - { level: Developing, score: 3, anchor: "Tracked; trend flat." }
+          - { level: Emerging,   score: 2, anchor: "Tracked sporadically." }
+          - { level: Absent,     score: 1, anchor: "Not tracked." }
+
+  - id: adoption
+    name: Adoption
+    weight: 0.20
+    characteristics:
+      - id: owner_self_serve
+        name: Owners self-serve their own variance
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Owners log into BvA tool, write their own commentary; finance reviews." }
+          - { level: Developing, score: 3, anchor: "Owners email commentary; finance pastes it in." }
+          - { level: Emerging,   score: 2, anchor: "Finance interviews owners and writes the commentary." }
+          - { level: Absent,     score: 1, anchor: "Finance writes everything alone." }
+      - id: leadership_uses_bva
+        name: Leadership reviews BvA monthly
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Standing monthly review with action items tracked to close." }
+          - { level: Developing, score: 3, anchor: "Monthly review; actions sometimes tracked." }
+          - { level: Emerging,   score: 2, anchor: "Reviewed quarterly only." }
+          - { level: Absent,     score: 1, anchor: "Pack ignored." }
+
+  - id: automation
+    name: Automation
+    weight: 0.20
+    characteristics:
+      - id: variance_calc_automated
+        name: Variance calculation automated
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Variances and flags computed automatically on close; commentary slot pre-populated." }
+          - { level: Developing, score: 3, anchor: "Variances computed in tool; flags manual." }
+          - { level: Emerging,   score: 2, anchor: "Variances built in spreadsheets each month." }
+          - { level: Absent,     score: 1, anchor: "Computed by hand." }
+      - id: driver_decomposition_engine
+        name: Driver decomposition engine
+        weight: 0.50
+        attributes:
+          - { level: Mature,     score: 4, anchor: "Volume / price / mix decomposition computed automatically per line." }
+          - { level: Developing, score: 3, anchor: "Decomposition for revenue only." }
+          - { level: Emerging,   score: 2, anchor: "Manual decomposition occasionally." }
+          - { level: Absent,     score: 1, anchor: "Variance reported as a single delta." }
