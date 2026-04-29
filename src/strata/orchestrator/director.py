@@ -216,6 +216,7 @@ class Director:
         try:
             factory = self._build_factory(chain, rubric)
             result = factory.run(target_id=target_id, inputs=enriched_inputs)
+            self._maybe_ingest_exemplar(chain, result)
             if self._persist:
                 self._persist_scores(run_log_id, rubric, result)
                 self._close_run_log(
@@ -259,7 +260,16 @@ class Director:
         else:
             author = chain.mock_author
             grader = Grader(llm=MockLLM(), pass_threshold_pct=70.0)
-        return DeliverableFactory(rubric=rubric, author=author, grader=grader)
+        # Vector exemplar store is selected at request time so config changes
+        # (e.g. enabling Astra mid-session) take effect without restarting.
+        from strata.vector import get_default_store
+        return DeliverableFactory(
+            rubric=rubric,
+            author=author,
+            grader=grader,
+            exemplar_store=get_default_store(),
+            chain_id=chain.chain_id,
+        )
 
     # ---------------------------- persistence helpers ----------------------------
 
@@ -268,6 +278,45 @@ class Director:
         company = inputs.get("company", "company")
         period = inputs.get("period", "period")
         return f"{company}::{period}".lower().replace(" ", "_")
+
+    @staticmethod
+    def _maybe_ingest_exemplar(chain: Chain, result: FactoryResult) -> None:
+        """Auto-ingest high-quality passing drafts into the exemplar store.
+
+        Gates: passed=True AND normalized_pct >= 80%. The high bar prevents the
+        store from accumulating mediocre drafts. Failures here never propagate.
+        """
+        if not result.passed:
+            return
+        pct = result.final_report.report.normalized_pct
+        if pct < 80.0:
+            return
+        try:
+            from strata.config import get_settings
+            from strata.vector import (
+                Exemplar,
+                NullExemplarStore,
+                get_default_store,
+            )
+            from strata.vector.exemplars import make_exemplar_id
+
+            store = get_default_store()
+            if isinstance(store, NullExemplarStore):
+                return
+            ex = Exemplar(
+                id=make_exemplar_id(chain.chain_id, result.target_id),
+                chain_id=chain.chain_id,
+                target_id=result.target_id,
+                draft=result.final_draft,
+                score_pct=pct,
+                metadata={
+                    "rubric_id": result.rubric_id,
+                    "iterations": result.iterations,
+                },
+            )
+            store.upsert(ex)
+        except Exception:
+            return  # never fail a run because of vector ingest
 
     @staticmethod
     def _hash_inputs(inputs: dict[str, Any]) -> str:

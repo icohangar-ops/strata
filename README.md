@@ -202,9 +202,36 @@ Environment variables (full list in [`.env.example`](./.env.example)):
 | `STRATA_AUTHOR_MODEL` | `qwen3.6-flash` | Model used by the author |
 | `STRATA_MAX_ITERATIONS` | `5` | Cap on revise-and-grade loops |
 | `STRATA_PASS_THRESHOLD` | `8` | Score threshold (out of rubric max) for pass |
+| `ASTRA_DB_API_ENDPOINT` | _unset_ | Astra DB API URL (vector exemplar store; optional) |
+| `ASTRA_DB_APPLICATION_TOKEN` | _unset_ | Astra DB token |
+| `ASTRA_DB_KEYSPACE` | `default_keyspace` | Astra keyspace |
+| `STRATA_EXEMPLAR_TOP_K` | `3` | Past drafts to inject into the author prompt |
 
 Verified models on DashScope (lowercase): `qwen3.6-flash`, `qwen3.6-35b-a3b`,
 `qwen3.6-plus`, `qwen3.5-plus`. Use `qwen3.6-flash` for speed/cost.
+
+### Vector exemplar store (v0.7.0)
+
+When `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` are set, the
+deliverable factory queries Astra DB for the top-K most similar prior drafts
+of the same chain and splices them into the author prompt as exemplars. After
+each successful run with `normalized_pct >= 80%`, the draft is auto-ingested
+into the store so the corpus grows organically. **Postgres remains the
+relational core** — Astra is purely additive.
+
+```bash
+# Manually ingest a known-good draft as a seed exemplar
+strata exemplars ingest chain.bva_commentary.v1 prior_draft.md \
+  --target-id "acme::feb_2026" --score-pct 88
+
+# Search for similar past drafts
+strata exemplars search chain.bva_commentary.v1 \
+  --query "March 2026 hardware revenue miss volume mix"
+
+# How many exemplars do I have?
+strata exemplars count
+strata exemplars count --chain-id chain.bva_commentary.v1
+```
 
 ---
 

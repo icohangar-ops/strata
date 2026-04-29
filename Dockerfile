@@ -23,7 +23,7 @@ COPY samples ./samples
 COPY src/strata/rubrics ./src/strata/rubrics
 
 RUN pip install --upgrade pip \
- && pip install ".[ui,llm]"
+ && pip install ".[ui,llm,vector]"
 
 # ---- runtime ----
 FROM python:3.12-slim AS runtime

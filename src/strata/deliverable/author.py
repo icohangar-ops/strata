@@ -27,6 +27,7 @@ def build_author_prompt(
             + "\n".join(f"- {s.characteristic_id}: scored {s.score} — {s.rationale}" for s in weak)
             + f"\n\nPRIOR NORMALIZED SCORE: {last.report.normalized_pct:.1f}%."
         )
+    exemplars_block = _format_exemplars(inputs.pop("_exemplars", None))
     standards = "\n  - ".join(persona.standards)
     return (
         f"ROLE: {persona.role}\n"
@@ -34,9 +35,34 @@ def build_author_prompt(
         f"STANDARDS:\n  - {standards}\n\n"
         f"DELIVERABLE: {rubric.name}\n"
         f"INPUTS:\n{_dump_inputs(inputs)}\n"
+        f"{exemplars_block}"
         f"{feedback}\n\n"
         "Write the deliverable. Be terse, decision-oriented, and tight. "
         "Lead with a one-page synthesis."
+    )
+
+
+def _format_exemplars(exemplars: list[dict] | None) -> str:
+    """Splice retrieved past drafts into the author prompt as worked examples.
+
+    Each exemplar contributes a similarity score, target_id, and a truncated
+    body so the prompt stays bounded even with multiple high-quality matches.
+    """
+    if not exemplars:
+        return ""
+    blocks: list[str] = []
+    for i, ex in enumerate(exemplars, start=1):
+        body = (ex.get("draft") or "")[:1200]
+        sim = ex.get("similarity")
+        sim_str = f" (similarity {sim:.2f})" if isinstance(sim, (int, float)) else ""
+        blocks.append(
+            f"\n--- EXEMPLAR {i}: {ex.get('target_id', 'prior draft')}{sim_str} ---\n{body}"
+        )
+    return (
+        "\n\nPRIOR EXEMPLARS (top-K most similar past drafts of this same chain; "
+        "use these to calibrate voice and structure, not to copy verbatim):"
+        + "".join(blocks)
+        + "\n\nEND OF EXEMPLARS.\n"
     )
 
 

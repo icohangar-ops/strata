@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "strata"
-version = "0.6.0"
+version = "0.7.0"
 description = "Maturity-assessed, rubric-graded AI copilot for the CFO / VP Finance function"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -33,6 +33,9 @@ llm = [
     "anthropic>=0.34",
     "openai>=1.40",
 ]
+vector = [
+    "astrapy>=1.5",
+]
 ui = [
     "streamlit>=1.31",
     "pandas>=2.1",
@@ -53,6 +56,7 @@ addopts = "-ra --strict-markers"
 markers = [
     "live_llm: hits real Anthropic; runs only when ANTHROPIC_API_KEY is set",
     "live_postgres: hits a live Postgres at DATABASE_URL; opt-in",
+    "live_astra: hits a live Astra DB at ASTRA_DB_API_ENDPOINT; opt-in",
 ]
 
 [tool.coverage.run]

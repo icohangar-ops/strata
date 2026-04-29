@@ -26,10 +26,19 @@ class Settings:
     max_iterations: int
     pass_threshold: float
     project_root: Path
+    # Astra DB (vector exemplar store) — additive; Postgres stays relational core
+    astra_api_endpoint: str | None
+    astra_token: str | None
+    astra_keyspace: str
+    exemplar_top_k: int
 
     @property
     def has_llm_key(self) -> bool:
         return bool(self.llm_api_key)
+
+    @property
+    def has_astra(self) -> bool:
+        return bool(self.astra_api_endpoint and self.astra_token)
 
 
 @lru_cache(maxsize=1)
@@ -69,4 +78,8 @@ def get_settings() -> Settings:
         max_iterations=int(os.getenv("STRATA_MAX_ITERATIONS", "5")),
         pass_threshold=float(os.getenv("STRATA_PASS_THRESHOLD", "8")),
         project_root=PROJECT_ROOT,
+        astra_api_endpoint=os.getenv("ASTRA_DB_API_ENDPOINT") or None,
+        astra_token=os.getenv("ASTRA_DB_APPLICATION_TOKEN") or None,
+        astra_keyspace=os.getenv("ASTRA_DB_KEYSPACE", "default_keyspace"),
+        exemplar_top_k=int(os.getenv("STRATA_EXEMPLAR_TOP_K", "3")),
     )

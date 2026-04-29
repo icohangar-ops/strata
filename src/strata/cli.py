@@ -165,6 +165,84 @@ def roadmap(
         console.print(t)
 
 
+exemplars_app = typer.Typer(no_args_is_help=True, help="Manage the vector exemplar store (Astra DB)")
+app.add_typer(exemplars_app, name="exemplars")
+
+
+@exemplars_app.command("ingest")
+def exemplars_ingest(
+    chain_id: str = typer.Argument(..., help="e.g. chain.bva_commentary.v1"),
+    draft_file: Path = typer.Argument(..., exists=True, readable=True),
+    target_id: str = typer.Option(
+        ...,
+        "--target-id",
+        help="Stable identifier for this draft (e.g. 'acme::march_2026')",
+    ),
+    score_pct: float | None = typer.Option(None, "--score-pct"),
+) -> None:
+    """Add a past deliverable draft to the exemplar store."""
+    from strata.vector import Exemplar, get_default_store, NullExemplarStore
+    from strata.vector.exemplars import make_exemplar_id
+
+    store = get_default_store()
+    if isinstance(store, NullExemplarStore):
+        raise typer.BadParameter(
+            "Astra DB not configured. Set ASTRA_DB_API_ENDPOINT and ASTRA_DB_APPLICATION_TOKEN."
+        )
+    ex = Exemplar(
+        id=make_exemplar_id(chain_id, target_id),
+        chain_id=chain_id,
+        target_id=target_id,
+        draft=draft_file.read_text(encoding="utf-8"),
+        score_pct=score_pct,
+    )
+    store.upsert(ex)
+    console.print(f"[green]Ingested[/green] exemplar id={ex.id} for chain={chain_id}")
+
+
+@exemplars_app.command("search")
+def exemplars_search(
+    chain_id: str = typer.Argument(..., help="e.g. chain.bva_commentary.v1"),
+    query: str = typer.Option(..., "--query", "-q"),
+    top_k: int = typer.Option(3, "--top-k", "-k"),
+) -> None:
+    """Show top-K most similar past drafts for a chain."""
+    from strata.vector import get_default_store, NullExemplarStore
+
+    store = get_default_store()
+    if isinstance(store, NullExemplarStore):
+        raise typer.BadParameter(
+            "Astra DB not configured. Set ASTRA_DB_API_ENDPOINT and ASTRA_DB_APPLICATION_TOKEN."
+        )
+    hits = store.search(chain_id=chain_id, query=query, top_k=top_k)
+    if not hits:
+        console.print("[yellow]No exemplars found for this chain.[/yellow]")
+        return
+    t = Table("rank", "similarity", "target_id", "score_%", "draft (first 80 chars)")
+    for i, h in enumerate(hits, 1):
+        t.add_row(
+            str(i),
+            f"{h.similarity:.3f}",
+            h.exemplar.target_id,
+            f"{h.exemplar.score_pct:.1f}" if h.exemplar.score_pct is not None else "-",
+            (h.exemplar.draft[:80] + "...") if len(h.exemplar.draft) > 80 else h.exemplar.draft,
+        )
+    console.print(t)
+
+
+@exemplars_app.command("count")
+def exemplars_count(
+    chain_id: str | None = typer.Option(None, "--chain-id"),
+) -> None:
+    """Count exemplars in the store, optionally filtered by chain."""
+    from strata.vector import get_default_store
+
+    store = get_default_store()
+    n = store.count(chain_id=chain_id)
+    scope = chain_id or "all chains"
+    console.print(f"Exemplars in store ({scope}): [bold]{n}[/bold]")
+
+
 @app.command("rubrics")
 def list_rubrics() -> None:
     """List loaded rubrics."""

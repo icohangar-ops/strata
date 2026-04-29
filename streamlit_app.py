@@ -282,6 +282,49 @@ with tab_deliver:
         f"key: {'set' if (os.getenv('DASHSCOPE_API_KEY') or os.getenv('OPENAI_API_KEY') or os.getenv('ANTHROPIC_API_KEY')) else 'missing'})"
     )
     use_llm = st.checkbox(backend_label, value=False)
+
+    # Vector exemplars panel — only shown when Astra is configured.
+    astra_configured = bool(os.getenv("ASTRA_DB_API_ENDPOINT") and os.getenv("ASTRA_DB_APPLICATION_TOKEN"))
+    if astra_configured:
+        with st.expander("Similar prior drafts (Astra DB)", expanded=False):
+            st.caption(
+                "Top-K most similar past drafts of this same chain, retrieved by "
+                "vector search. These will be spliced into the author prompt at "
+                "draft time when 'Use LLM' is enabled."
+            )
+            try:
+                from strata.vector import get_default_store
+                exemplar_query = st.text_input(
+                    "Query (defaults to inputs.company + inputs.period at run time)",
+                    value="",
+                    key=f"exemplar_query_{chain_id}",
+                )
+                if exemplar_query:
+                    hits = get_default_store().search(
+                        chain_id=chain_id, query=exemplar_query, top_k=3
+                    )
+                    if not hits:
+                        st.info("No exemplars indexed yet for this chain.")
+                    else:
+                        for i, h in enumerate(hits, 1):
+                            st.markdown(
+                                f"**{i}. {h.exemplar.target_id}** — similarity {h.similarity:.3f}"
+                                + (f" · score {h.exemplar.score_pct:.1f}%" if h.exemplar.score_pct else "")
+                            )
+                            st.code(
+                                h.exemplar.draft[:600] + ("..." if len(h.exemplar.draft) > 600 else ""),
+                                language="markdown",
+                            )
+                else:
+                    n = get_default_store().count(chain_id=chain_id)
+                    st.write(f"Indexed exemplars for `{chain_id}`: **{n}**")
+            except Exception as e:
+                st.warning(f"Astra lookup failed: {type(e).__name__}: {e}")
+    else:
+        st.caption(
+            "_Vector exemplar store inactive (set `ASTRA_DB_API_ENDPOINT` + "
+            "`ASTRA_DB_APPLICATION_TOKEN` to enable similar-prior-draft retrieval)._"
+        )
     if st.button("Run chain", type="primary"):
         try:
             inputs = json.loads(inputs_text)
