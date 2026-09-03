@@ -146,7 +146,7 @@ Railway deployment.
 
 ```bash
 # 1) Clone
-git clone https://github.com/zan-maker/strata.git
+git clone https://github.com/Cubiczan/Strata.git
 cd strata
 
 # 2) Virtualenv + install (Windows bash; on macOS/Linux use .venv/bin/activate)

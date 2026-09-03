@@ -46,6 +46,11 @@ ui = [
 [project.scripts]
 strata = "strata.cli:app"
 
+[project.urls]
+Homepage = "https://github.com/Cubiczan/Strata"
+Repository = "https://github.com/Cubiczan/Strata"
+Issues = "https://github.com/Cubiczan/Strata/issues"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/strata"]
 # YAML rubrics + catalog ship with the package by default since they live
