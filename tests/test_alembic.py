@@ -12,6 +12,7 @@ Live checks (opt-in via STRATA_LIVE_POSTGRES_URL):
   - SQLAlchemy can read every table the ORM declares
   - downgrade base cleans up
 """
+
 from __future__ import annotations
 
 import os
@@ -58,13 +59,15 @@ def test_orm_tables_match_migration_tables(tmp_path):
         capture_output=True,
         text=True,
     )
-    assert result.returncode == 0, f"alembic upgrade failed:\nstdout={result.stdout}\nstderr={result.stderr}"
+    assert result.returncode == 0, (
+        f"alembic upgrade failed:\nstdout={result.stdout}\nstderr={result.stderr}"
+    )
 
     # Now reflect the DB and compare
     from sqlalchemy import create_engine, inspect
 
-    from strata.db import Base
     from strata import models  # noqa: F401  registers tables
+    from strata.db import Base
 
     engine = create_engine(db_url)
     inspector = inspect(engine)
@@ -84,17 +87,24 @@ def test_upgrade_head_then_downgrade_base_round_trips(tmp_path):
 
     up = subprocess.run(
         [sys.executable, "-m", "alembic", "-c", str(ALEMBIC_INI), "upgrade", "head"],
-        cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True,
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        capture_output=True,
+        text=True,
     )
     assert up.returncode == 0, up.stderr
 
     down = subprocess.run(
         [sys.executable, "-m", "alembic", "-c", str(ALEMBIC_INI), "downgrade", "base"],
-        cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True,
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        capture_output=True,
+        text=True,
     )
     assert down.returncode == 0, down.stderr
 
     from sqlalchemy import create_engine, inspect
+
     inspector = inspect(create_engine(db_url))
     remaining = set(inspector.get_table_names()) - {"alembic_version"}
     assert remaining == set(), f"tables left after downgrade base: {remaining}"
@@ -116,18 +126,24 @@ def test_alembic_upgrade_against_live_postgres():
     # Ensure clean start
     subprocess.run(
         [sys.executable, "-m", "alembic", "-c", str(ALEMBIC_INI), "downgrade", "base"],
-        cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True,
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        capture_output=True,
+        text=True,
     )
     up = subprocess.run(
         [sys.executable, "-m", "alembic", "-c", str(ALEMBIC_INI), "upgrade", "head"],
-        cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True,
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        capture_output=True,
+        text=True,
     )
     assert up.returncode == 0, up.stderr
 
     from sqlalchemy import create_engine, inspect
 
-    from strata.db import Base
     from strata import models  # noqa: F401
+    from strata.db import Base
 
     inspector = inspect(create_engine(_LIVE_PG))
     db_tables = set(inspector.get_table_names())

@@ -1,4 +1,5 @@
 """L2: catalog loads, references valid capability rubrics, and lookup works."""
+
 from __future__ import annotations
 
 from strata import registry

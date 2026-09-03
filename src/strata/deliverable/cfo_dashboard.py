@@ -1,4 +1,5 @@
 """CFO value-creation dashboard mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,40 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "economic", "value", "added", "trailing", "trend", "spread",
-    "ROIC", "WACC", "free", "cash", "flow", "segmented", "segment",
-    "gross", "margin", "working", "capital", "DSO", "DPO", "DIO",
-    "conversion", "cycle", "likelihood", "impact", "owner",
-    "control", "adequate", "remediating", "pipeline", "stage",
-    "hurdle", "deployed", "weighted", "portfolio",
+    "economic",
+    "value",
+    "added",
+    "trailing",
+    "trend",
+    "spread",
+    "ROIC",
+    "WACC",
+    "free",
+    "cash",
+    "flow",
+    "segmented",
+    "segment",
+    "gross",
+    "margin",
+    "working",
+    "capital",
+    "DSO",
+    "DPO",
+    "DIO",
+    "conversion",
+    "cycle",
+    "likelihood",
+    "impact",
+    "owner",
+    "control",
+    "adequate",
+    "remediating",
+    "pipeline",
+    "stage",
+    "hurdle",
+    "deployed",
+    "weighted",
+    "portfolio",
 ]
 
 

@@ -1,6 +1,7 @@
 """Coverage for the three new chains (M&A memo, investor update, 3-statement model)
 and for the multi-chain-per-capability tiebreaker.
 """
+
 from __future__ import annotations
 
 import json
@@ -11,7 +12,7 @@ import pytest
 from strata import registry
 from strata.deliverable.persona import get_persona
 from strata.maturity.assessor import CAPABILITY_RUBRIC_IDS, MaturityAssessor
-from strata.orchestrator import all_chains, chain_for_deliverable
+from strata.orchestrator import chain_for_deliverable
 from strata.orchestrator.director import Director
 from strata.schema import CharacteristicScore
 
@@ -37,7 +38,7 @@ def _scores(score_map: dict[str, int]) -> dict[str, list[CharacteristicScore]]:
 @pytest.mark.parametrize(
     "deliverable_id,chain_id",
     [
-        ("rb.deliverable.ma_memo",         "chain.ma_memo.v1"),
+        ("rb.deliverable.ma_memo", "chain.ma_memo.v1"),
         ("rb.deliverable.investor_update", "chain.investor_update.v1"),
         ("rb.deliverable.three_statement", "chain.three_statement.v1"),
     ],
@@ -85,7 +86,7 @@ def test_personas_registered(rubric_id):
 @pytest.mark.parametrize(
     "chain_id,inputs_file",
     [
-        ("chain.ma_memo.v1",         "ma_memo_inputs.json"),
+        ("chain.ma_memo.v1", "ma_memo_inputs.json"),
         ("chain.investor_update.v1", "investor_update_inputs.json"),
         ("chain.three_statement.v1", "three_statement_inputs.json"),
     ],
@@ -120,8 +121,7 @@ def test_chains_for_board_pack_capability_returns_two_sorted():
 def test_decide_picks_alphabetically_first_chain_when_capability_has_multiple():
     # board_pack now has TWO chains: board_pack + investor_update.
     # Tiebreaker: chain.board_pack.v1 < chain.investor_update.v1 alphabetically.
-    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.board_pack": 1})
+    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.board_pack": 1})
     assess = MaturityAssessor().assess(target_id="t", scores_by_rubric=by_rubric)
     decision = Director(persist=False).decide(assess)
     assert decision.weakest_capability == "rb.function.board_pack"
@@ -131,13 +131,15 @@ def test_decide_picks_alphabetically_first_chain_when_capability_has_multiple():
 
 def test_decide_single_candidate_omits_tiebreak_note():
     # BvA weakest; only one chain targets it.
-    by_rubric = _scores({
-        "rb.function.close":      4,
-        "rb.function.reconcile":  4,
-        "rb.function.board_pack": 4,
-        "rb.function.bva":        1,
-        "rb.function.forecast":   4,
-    })
+    by_rubric = _scores(
+        {
+            "rb.function.close": 4,
+            "rb.function.reconcile": 4,
+            "rb.function.board_pack": 4,
+            "rb.function.bva": 1,
+            "rb.function.forecast": 4,
+        }
+    )
     assess = MaturityAssessor().assess(target_id="t", scores_by_rubric=by_rubric)
     decision = Director(persist=False).decide(assess)
     assert decision.chain.chain_id == "chain.bva_commentary.v1"

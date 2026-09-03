@@ -1,7 +1,8 @@
 """SQLAlchemy models for the three persisted tables: rubric, rubric_score, run_log."""
+
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
 from sqlalchemy import JSON, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
@@ -22,7 +23,9 @@ class Rubric(Base):
     name: Mapped[str] = mapped_column(String(256))
     version: Mapped[int] = mapped_column(Integer, default=1)
     definition: Mapped[dict] = mapped_column(JSON)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(UTC)
+    )
 
     scores: Mapped[list[RubricScore]] = relationship(back_populates="rubric")
 
@@ -41,7 +44,9 @@ class RubricScore(Base):
     normalized_pct: Mapped[float] = mapped_column(Float)
     passed: Mapped[bool] = mapped_column(default=False)
     detail: Mapped[dict] = mapped_column(JSON)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(UTC), index=True
+    )
 
     rubric: Mapped[Rubric] = relationship(back_populates="scores")
     run_log_id: Mapped[UUID | None] = mapped_column(ForeignKey("run_log.id"), nullable=True)
@@ -55,7 +60,9 @@ class RunLog(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     chain_id: Mapped[str] = mapped_column(String(64), index=True)
     inputs_hash: Mapped[str] = mapped_column(String(64))
-    started_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
+    started_at: Mapped[datetime] = mapped_column(
+        DateTime, default=lambda: datetime.now(UTC), index=True
+    )
     finished_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     status: Mapped[str] = mapped_column(String(32), default="running", index=True)
     inputs: Mapped[dict] = mapped_column(JSON)
@@ -75,7 +82,9 @@ class RubricOverride(Base):
     __tablename__ = "rubric_override"
     __table_args__ = (
         UniqueConstraint(
-            "tenant_id", "rubric_id", "characteristic_id",
+            "tenant_id",
+            "rubric_id",
+            "characteristic_id",
             name="uq_rubric_override_tenant_rubric_char",
         ),
     )
@@ -90,5 +99,5 @@ class RubricOverride(Base):
     disabled: Mapped[bool] = mapped_column(default=False)
     note: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, default=lambda: datetime.now(timezone.utc)
+        DateTime, default=lambda: datetime.now(UTC)
     )

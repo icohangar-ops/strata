@@ -12,12 +12,15 @@ A rubric has the same shape regardless of whether it scores a *deliverable*
 Weights at every level are bounded [0.05, 0.60] and must sum to 1.0 within
 their parent. This single shape backs every rubric in the system.
 """
+
 from __future__ import annotations
 
 import math
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+from strata.rust_core import run_strata_core
 
 WEIGHT_MIN = 0.05
 WEIGHT_MAX = 1.0
@@ -134,19 +137,21 @@ class RubricScoreReport(BaseModel):
         scores: list[CharacteristicScore],
         pass_threshold_pct: float = 70.0,
     ) -> RubricScoreReport:
-        score_by_id = {s.characteristic_id: s.score for s in scores}
-        weighted = 0.0
-        for group in rubric.groups:
-            for char in group.characteristics:
-                if char.id not in score_by_id:
-                    raise ValueError(f"missing score for characteristic '{char.id}'")
-                weighted += group.weight * char.weight * score_by_id[char.id]
-        normalized = (weighted / rubric.max_score) * 100.0
-        return cls(
-            rubric_id=rubric.rubric_id,
-            target_id=target_id,
-            scores=tuple(scores),
-            weighted_total=weighted,
-            normalized_pct=normalized,
-            passed=normalized >= pass_threshold_pct,
+        expected = {
+            characteristic.id for group in rubric.groups for characteristic in group.characteristics
+        }
+        provided = {score.characteristic_id for score in scores}
+        missing = sorted(expected - provided)
+        if missing:
+            raise ValueError(f"missing score for characteristic '{missing[0]}'")
+
+        payload = run_strata_core(
+            "compute_rubric_score",
+            {
+                "rubric": rubric.model_dump(),
+                "target_id": target_id,
+                "scores": [score.model_dump() for score in scores],
+                "pass_threshold_pct": pass_threshold_pct,
+            },
         )
+        return cls.model_validate(payload["value"])

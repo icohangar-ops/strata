@@ -1,4 +1,5 @@
 """Earnings script mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,11 +12,31 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "spoken-word", "pacing", "transitions", "tested", "headline",
-    "narrated", "drove", "safe-harbor", "forward-looking", "assumptions",
-    "guidance", "bridge", "prior", "changed", "capital", "deployed",
-    "ROIC", "trajectory", "analyst", "questions", "rehearsed",
-    "protocol", "disclose", "follow", "off-script",
+    "spoken-word",
+    "pacing",
+    "transitions",
+    "tested",
+    "headline",
+    "narrated",
+    "drove",
+    "safe-harbor",
+    "forward-looking",
+    "assumptions",
+    "guidance",
+    "bridge",
+    "prior",
+    "changed",
+    "capital",
+    "deployed",
+    "ROIC",
+    "trajectory",
+    "analyst",
+    "questions",
+    "rehearsed",
+    "protocol",
+    "disclose",
+    "follow",
+    "off-script",
 ]
 
 

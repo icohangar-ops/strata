@@ -3,6 +3,7 @@
 Offline unit tests use the InMemoryExemplarStore. The live_astra marker covers
 real Astra DB integration; it is skipped without ASTRA_DB_API_ENDPOINT and
 ASTRA_DB_APPLICATION_TOKEN."""
+
 from __future__ import annotations
 
 import os
@@ -10,7 +11,7 @@ import os
 import pytest
 
 from strata import registry
-from strata.deliverable.author import build_author_prompt, _format_exemplars
+from strata.deliverable.author import _format_exemplars, build_author_prompt
 from strata.deliverable.board_pack import mock_author
 from strata.deliverable.factory import DeliverableFactory
 from strata.deliverable.grader import Grader, MockLLM
@@ -22,7 +23,6 @@ from strata.vector import (
     get_default_store,
 )
 from strata.vector.exemplars import _cosine, _trigram_vec, make_exemplar_id
-
 
 # ---------------------------- public types ----------------------------
 
@@ -47,8 +47,12 @@ def test_null_store_always_empty():
 
 def test_in_memory_store_round_trips():
     s = InMemoryExemplarStore()
-    s.upsert(Exemplar(id="e1", chain_id="c1", target_id="t1", draft="board pack March 2026 revenue"))
-    s.upsert(Exemplar(id="e2", chain_id="c1", target_id="t2", draft="bva commentary volume price mix"))
+    s.upsert(
+        Exemplar(id="e1", chain_id="c1", target_id="t1", draft="board pack March 2026 revenue")
+    )
+    s.upsert(
+        Exemplar(id="e2", chain_id="c1", target_id="t2", draft="bva commentary volume price mix")
+    )
     assert s.count() == 2
     assert s.count(chain_id="c1") == 2
     assert s.count(chain_id="c2") == 0
@@ -93,6 +97,7 @@ def test_get_default_store_returns_null_when_astra_unset(monkeypatch):
     monkeypatch.delenv("ASTRA_DB_API_ENDPOINT", raising=False)
     monkeypatch.delenv("ASTRA_DB_APPLICATION_TOKEN", raising=False)
     from strata import config
+
     config.get_settings.cache_clear()
     assert isinstance(get_default_store(), NullExemplarStore)
 
@@ -108,7 +113,7 @@ def test_format_exemplars_returns_empty_when_none():
 def test_format_exemplars_includes_target_id_and_similarity():
     exs = [
         {"target_id": "acme::feb_2026", "draft": "lorem ipsum", "similarity": 0.872},
-        {"target_id": "acme::jan_2026", "draft": "dolor sit",   "similarity": 0.701},
+        {"target_id": "acme::jan_2026", "draft": "dolor sit", "similarity": 0.701},
     ]
     out = _format_exemplars(exs)
     assert "PRIOR EXEMPLARS" in out
@@ -125,7 +130,9 @@ def test_build_author_prompt_includes_exemplars_when_present():
     inputs = {
         "company": "Acme",
         "period": "Mar 2026",
-        "_exemplars": [{"target_id": "acme::feb_2026", "draft": "prior draft body", "similarity": 0.9}],
+        "_exemplars": [
+            {"target_id": "acme::feb_2026", "draft": "prior draft body", "similarity": 0.9}
+        ],
     }
     prompt = build_author_prompt(persona, rb, inputs, history=[])
     assert "PRIOR EXEMPLARS" in prompt
@@ -163,12 +170,14 @@ def test_factory_with_chain_id_pulls_exemplars_into_inputs():
     """Verify the factory queries the store and passes exemplars to the author."""
     rb = registry.get("rb.deliverable.board_pack")
     store = InMemoryExemplarStore()
-    store.upsert(Exemplar(
-        id="e1",
-        chain_id="chain.board_pack.v1",
-        target_id="acme::feb_2026",
-        draft="board pack period feb 2026 acme robotics revenue ledger",
-    ))
+    store.upsert(
+        Exemplar(
+            id="e1",
+            chain_id="chain.board_pack.v1",
+            target_id="acme::feb_2026",
+            draft="board pack period feb 2026 acme robotics revenue ledger",
+        )
+    )
 
     captured: dict[str, list[dict] | None] = {"exemplars": None}
 

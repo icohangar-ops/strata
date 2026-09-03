@@ -1,7 +1,8 @@
 """Loads YAML rubrics from src/strata/rubrics/** and validates them against L5 schema."""
+
 from __future__ import annotations
 
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 
 import yaml
@@ -17,7 +18,7 @@ def load_rubric_file(path: Path) -> Rubric:
     return Rubric.model_validate(raw)
 
 
-@lru_cache(maxsize=None)
+@cache
 def load_all() -> dict[str, Rubric]:
     rubrics: dict[str, Rubric] = {}
     for path in RUBRICS_DIR.rglob("*.yaml"):

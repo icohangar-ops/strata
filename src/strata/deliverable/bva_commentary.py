@@ -1,4 +1,5 @@
 """BvA commentary mock author. Deterministic, used in offline mode and tests."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,10 +12,25 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "volume", "price", "mix", "decomposition", "owner", "action",
-    "target", "threshold", "materiality", "favorable", "unfavorable",
-    "one-time", "non-recurring", "reforecast", "bridge", "trailing",
-    "rolling", "trend", "quantified",
+    "volume",
+    "price",
+    "mix",
+    "decomposition",
+    "owner",
+    "action",
+    "target",
+    "threshold",
+    "materiality",
+    "favorable",
+    "unfavorable",
+    "one-time",
+    "non-recurring",
+    "reforecast",
+    "bridge",
+    "trailing",
+    "rolling",
+    "trend",
+    "quantified",
 ]
 
 

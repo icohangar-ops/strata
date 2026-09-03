@@ -1,4 +1,5 @@
 """L2 — Catalog loader. Reads catalog.yaml as a frozen dataclass tree."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

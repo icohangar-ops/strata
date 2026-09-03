@@ -12,6 +12,7 @@ Strata's L1 has two axes:
 Both axes share the same L5 schema and the same RubricScoreReport.compute path.
 The difference is just which rubrics are loaded.
 """
+
 from __future__ import annotations
 
 from strata.maturity.assessor import (
@@ -38,7 +39,7 @@ class CompetencyAssessor(MaturityAssessor):
 
 __all__ = [
     "COMPETENCY_RUBRIC_IDS",
-    "CompetencyAssessor",
     "AssessmentResult",
     "CapabilitySnapshot",
+    "CompetencyAssessor",
 ]

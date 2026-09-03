@@ -7,13 +7,14 @@ LLM choice is a Director-level toggle (`use_llm`). Mock by default — the same
 mock author/grader pair the test suite uses. When `use_llm=True`, the grader
 swaps to AnthropicLLM and the author swaps to the Anthropic-backed author.
 """
+
 from __future__ import annotations
 
 import hashlib
 import json
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from sqlalchemy import select
@@ -64,7 +65,9 @@ class Director:
         """Run a chain by its id."""
         chain = next((c for c in all_chains() if c.chain_id == chain_id), None)
         if chain is None:
-            raise KeyError(f"unknown chain '{chain_id}'. known: {[c.chain_id for c in all_chains()]}")
+            raise KeyError(
+                f"unknown chain '{chain_id}'. known: {[c.chain_id for c in all_chains()]}"
+            )
         return self._run_chain(chain, inputs)
 
     def route(
@@ -77,7 +80,9 @@ class Director:
         If `inputs.preferred_deliverable` names a deliverable rubric_id that targets
         the weakest capability, that chain wins and the rationale notes the user signal.
         """
-        decision = self.decide(assessment, preferred_deliverable=inputs.get("preferred_deliverable"))
+        decision = self.decide(
+            assessment, preferred_deliverable=inputs.get("preferred_deliverable")
+        )
         run = self._run_chain(decision.chain, inputs)
         return decision, run
 
@@ -117,7 +122,8 @@ class Director:
                 signal = preferred_deliverable
             else:
                 tiebreak_note = (
-                    "" if len(candidates) == 1
+                    ""
+                    if len(candidates) == 1
                     else f" (chose '{chosen.chain_id}' from {len(candidates)} candidates by chain_id sort)"
                 )
                 rationale = (
@@ -160,6 +166,7 @@ class Director:
         """Adapter to maturity.roadmap.plan_90_days, exposed on the Director for
         symmetry with route() / decide()."""
         from strata.maturity.roadmap import plan_90_days
+
         return plan_90_days(assessment, axis=axis)
 
     def chains_for_capability(self, capability_rubric_id: str) -> list[Chain]:
@@ -240,6 +247,7 @@ class Director:
     def _build_factory(self, chain: Chain, rubric) -> DeliverableFactory:
         if self._use_llm:
             from strata.config import get_settings
+
             backend = get_settings().llm_backend
             if backend == "anthropic":
                 from strata.deliverable.author import anthropic_author_factory
@@ -263,6 +271,7 @@ class Director:
         # Vector exemplar store is selected at request time so config changes
         # (e.g. enabling Astra mid-session) take effect without restarting.
         from strata.vector import get_default_store
+
         return DeliverableFactory(
             rubric=rubric,
             author=author,
@@ -292,7 +301,6 @@ class Director:
         if pct < 80.0:
             return
         try:
-            from strata.config import get_settings
             from strata.vector import (
                 Exemplar,
                 NullExemplarStore,
@@ -332,7 +340,7 @@ class Director:
                     id=run_id,
                     chain_id=chain.chain_id,
                     inputs_hash=self._hash_inputs(inputs),
-                    started_at=datetime.now(timezone.utc),
+                    started_at=datetime.now(UTC),
                     status="running",
                     inputs=inputs,
                 )
@@ -352,7 +360,7 @@ class Director:
             if row is None:
                 return
             row.status = status
-            row.finished_at = datetime.now(timezone.utc)
+            row.finished_at = datetime.now(UTC)
             row.outputs = outputs
             row.error = error
 

@@ -17,9 +17,9 @@ _DEFAULT_DASHSCOPE_BASE_URL = "https://dashscope-intl.aliyuncs.com/compatible-mo
 @dataclass(frozen=True)
 class Settings:
     database_url: str
-    llm_backend: str           # "openai" (DashScope-compatible) | "anthropic"
-    llm_api_key: str | None    # active backend key
-    llm_base_url: str | None   # active backend base URL (None = SDK default)
+    llm_backend: str  # "openai" (DashScope-compatible) | "anthropic"
+    llm_api_key: str | None  # active backend key
+    llm_base_url: str | None  # active backend base URL (None = SDK default)
     grader_model: str
     author_model: str
     anthropic_api_key: str | None  # legacy / fallback

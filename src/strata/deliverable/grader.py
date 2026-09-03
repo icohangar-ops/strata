@@ -1,4 +1,5 @@
 """Rubric grader. LLM-agnostic protocol with a deterministic mock and an Anthropic backend."""
+
 from __future__ import annotations
 
 import json
@@ -11,8 +12,7 @@ from strata.schema import CharacteristicScore, Rubric, RubricScoreReport
 
 
 class LLMClient(Protocol):
-    def complete(self, system: str, user: str) -> str:
-        ...
+    def complete(self, system: str, user: str) -> str: ...
 
 
 # ---------------------------- mock backend (offline-safe default) ----------------------------
@@ -37,7 +37,8 @@ class MockLLM:
         for group in rubric["groups"]:
             for char in group["characteristics"]:
                 cue = sum(
-                    1 for a in char["attributes"]
+                    1
+                    for a in char["attributes"]
                     for word in _keywords(a["anchor"])
                     if word in draft.lower()
                 )
@@ -163,14 +164,7 @@ class Grader:
 
     @staticmethod
     def _build_prompt(rubric: Rubric, draft: str) -> str:
-        return (
-            "<RUBRIC>\n"
-            f"{rubric.model_dump_json()}\n"
-            "</RUBRIC>\n\n"
-            "<DRAFT>\n"
-            f"{draft}\n"
-            "</DRAFT>"
-        )
+        return f"<RUBRIC>\n{rubric.model_dump_json()}\n</RUBRIC>\n\n<DRAFT>\n{draft}\n</DRAFT>"
 
 
 def _parse_scores(raw: str) -> list[CharacteristicScore]:

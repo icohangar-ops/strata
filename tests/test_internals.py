@@ -3,6 +3,7 @@
 These exist to prove behavior on error paths, helper functions, and
 optional-input branches that the happy-path tests never hit.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -21,7 +22,7 @@ from strata.deliverable.grader import (
     _parse_scores,
 )
 from strata.deliverable.persona import get_persona
-from strata.maturity.assessor import CAPABILITY_RUBRIC_IDS, MaturityAssessor
+from strata.maturity.assessor import MaturityAssessor
 from strata.orchestrator.director import Director
 from strata.schema import (
     Attribute,
@@ -31,7 +32,6 @@ from strata.schema import (
     Rubric,
     RubricScoreReport,
 )
-
 
 # ---------------------------- grader internals ----------------------------
 
@@ -73,7 +73,9 @@ def test_grader_system_prompt_is_nonempty():
 def test_mock_llm_returns_valid_json_for_real_rubric():
     rb = registry.get("rb.deliverable.board_pack")
     g = Grader(llm=MockLLM(base_score=2), pass_threshold_pct=70.0)
-    result = g.grade(rb, draft="numbers tie to ledger; variance attributed to driver", target_id="t")
+    result = g.grade(
+        rb, draft="numbers tie to ledger; variance attributed to driver", target_id="t"
+    )
     assert len(result.report.scores) == sum(len(g.characteristics) for g in rb.groups)
 
 
@@ -168,17 +170,23 @@ def _exploding_author(*_a, **_kw):
 def test_director_error_path_persists_failure(tmp_path, monkeypatch):
     monkeypatch.setenv("STRATA_TEST_DB", f"sqlite:///{tmp_path / 'd.sqlite'}")
     from strata import config, db
+
     config.get_settings.cache_clear()
     db._engine = None
     db._SessionLocal = None
-    from strata.db import Base, get_engine
     from strata import models  # noqa: F401
+    from strata.db import Base, get_engine
+
     Base.metadata.create_all(get_engine())
 
     # Replace the board-pack chain's mock_author with one that explodes.
     from dataclasses import replace
+
     import strata.orchestrator.chains as chains_mod
-    bad_chain = replace(chains_mod._REGISTRY["rb.deliverable.board_pack"], mock_author=_exploding_author)
+
+    bad_chain = replace(
+        chains_mod._REGISTRY["rb.deliverable.board_pack"], mock_author=_exploding_author
+    )
     monkeypatch.setitem(chains_mod._REGISTRY, "rb.deliverable.board_pack", bad_chain)
 
     director = Director(persist=True)
@@ -189,8 +197,10 @@ def test_director_error_path_persists_failure(tmp_path, monkeypatch):
     # log its own RunLog row before the patched chain explodes. Filter to the
     # failed board_pack run.
     from sqlalchemy import select
+
     from strata.db import session_scope as ss
     from strata.models import RunLog
+
     with ss() as s:
         row = s.execute(
             select(RunLog).where(
@@ -207,16 +217,17 @@ def test_director_error_path_persists_failure(tmp_path, monkeypatch):
 def test_session_scope_rolls_back_on_exception(tmp_path, monkeypatch):
     monkeypatch.setenv("STRATA_TEST_DB", f"sqlite:///{tmp_path / 'rb.sqlite'}")
     from strata import config, db
+
     config.get_settings.cache_clear()
     db._engine = None
     db._SessionLocal = None
-    from strata.db import Base, get_engine
     from strata import models  # noqa: F401
+    from strata.db import Base, get_engine
+
     Base.metadata.create_all(get_engine())
 
-    with pytest.raises(RuntimeError, match="boom"):
-        with session_scope() as _s:
-            raise RuntimeError("boom")
+    with pytest.raises(RuntimeError, match="boom"), session_scope() as _s:
+        raise RuntimeError("boom")
 
 
 # ---------------------------- schema compute missing-score branch ----------------------------
@@ -225,19 +236,23 @@ def test_session_scope_rolls_back_on_exception(tmp_path, monkeypatch):
 def test_compute_raises_on_missing_score():
     chars = (
         Characteristic(
-            id="c1", name="C1", weight=0.50,
+            id="c1",
+            name="C1",
+            weight=0.50,
             attributes=(
-                Attribute(level="Mature",     score=4, anchor="exemplary"),
+                Attribute(level="Mature", score=4, anchor="exemplary"),
                 Attribute(level="Developing", score=3, anchor="solid"),
-                Attribute(level="Emerging",   score=2, anchor="patchy"),
-                Attribute(level="Absent",     score=1, anchor="missing"),
+                Attribute(level="Emerging", score=2, anchor="patchy"),
+                Attribute(level="Absent", score=1, anchor="missing"),
             ),
         ),
         Characteristic(
-            id="c2", name="C2", weight=0.50,
+            id="c2",
+            name="C2",
+            weight=0.50,
             attributes=(
-                Attribute(level="Mature",     score=4, anchor="exemplary"),
-                Attribute(level="Absent",     score=1, anchor="missing"),
+                Attribute(level="Mature", score=4, anchor="exemplary"),
+                Attribute(level="Absent", score=1, anchor="missing"),
             ),
         ),
     )

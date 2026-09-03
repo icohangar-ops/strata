@@ -1,6 +1,7 @@
 """v5: ERM (rb.function.risk + rb.deliverable.risk_register) and
 Capital Allocation (rb.function.capital_allocation + rb.deliverable.capex_memo
 + rb.deliverable.post_investment_review)."""
+
 from __future__ import annotations
 
 import json
@@ -75,8 +76,8 @@ def test_persona_registered(rubric_id):
 @pytest.mark.parametrize(
     "deliverable_id,chain_id",
     [
-        ("rb.deliverable.risk_register",          "chain.risk_register.v1"),
-        ("rb.deliverable.capex_memo",             "chain.capex_memo.v1"),
+        ("rb.deliverable.risk_register", "chain.risk_register.v1"),
+        ("rb.deliverable.capex_memo", "chain.capex_memo.v1"),
         ("rb.deliverable.post_investment_review", "chain.post_investment_review.v1"),
     ],
 )
@@ -101,9 +102,13 @@ def test_chain_registry_includes_v5_chains():
 @pytest.mark.parametrize(
     "skill_id,capability,deliverable",
     [
-        ("analyze.risk_register",      "rb.function.risk",                "rb.deliverable.risk_register"),
-        ("plan.capex_memo",            "rb.function.capital_allocation",  "rb.deliverable.capex_memo"),
-        ("plan.post_investment_review","rb.function.capital_allocation",  "rb.deliverable.post_investment_review"),
+        ("analyze.risk_register", "rb.function.risk", "rb.deliverable.risk_register"),
+        ("plan.capex_memo", "rb.function.capital_allocation", "rb.deliverable.capex_memo"),
+        (
+            "plan.post_investment_review",
+            "rb.function.capital_allocation",
+            "rb.deliverable.post_investment_review",
+        ),
     ],
 )
 def test_catalog_skill_wired(skill_id, capability, deliverable):
@@ -119,9 +124,13 @@ def test_catalog_skill_wired(skill_id, capability, deliverable):
 @pytest.mark.parametrize(
     "chain_id,inputs_file,expected_token",
     [
-        ("chain.risk_register.v1",          "risk_register_inputs.json",          "Enterprise Risk Register"),
-        ("chain.capex_memo.v1",             "capex_memo_inputs.json",             "Capex Memo"),
-        ("chain.post_investment_review.v1", "post_investment_review_inputs.json", "Post-Investment Review"),
+        ("chain.risk_register.v1", "risk_register_inputs.json", "Enterprise Risk Register"),
+        ("chain.capex_memo.v1", "capex_memo_inputs.json", "Capex Memo"),
+        (
+            "chain.post_investment_review.v1",
+            "post_investment_review_inputs.json",
+            "Post-Investment Review",
+        ),
     ],
 )
 def test_chain_runs_end_to_end(chain_id, inputs_file, expected_token):
@@ -156,8 +165,9 @@ def test_decide_routes_to_risk_register_when_risk_is_weakest():
 
 
 def test_decide_routes_to_capex_memo_when_capital_allocation_is_weakest():
-    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.capital_allocation": 1})
+    by_rubric = _scores(
+        {rid: 4 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.capital_allocation": 1}
+    )
     assess = MaturityAssessor().assess(target_id="t", scores_by_rubric=by_rubric)
     decision = Director(persist=False).decide(assess)
     assert decision.weakest_capability == "rb.function.capital_allocation"
@@ -168,8 +178,9 @@ def test_decide_routes_to_capex_memo_when_capital_allocation_is_weakest():
 
 
 def test_preferred_deliverable_overrides_to_post_investment_review():
-    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.capital_allocation": 1})
+    by_rubric = _scores(
+        {rid: 4 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.capital_allocation": 1}
+    )
     assess = MaturityAssessor().assess(target_id="t", scores_by_rubric=by_rubric)
     decision = Director(persist=False).decide(
         assess, preferred_deliverable="rb.deliverable.post_investment_review"
@@ -183,6 +194,7 @@ def test_preferred_deliverable_overrides_to_post_investment_review():
 
 def test_sample_self_assessment_loads_with_eight_capabilities():
     import yaml
+
     raw = yaml.safe_load((SAMPLES / "maturity_self_assessment.yaml").read_text(encoding="utf-8"))
     for rid in CAPABILITY_RUBRIC_IDS:
         assert rid in raw, f"sample missing scores for '{rid}'"

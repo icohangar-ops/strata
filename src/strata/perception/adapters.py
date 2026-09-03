@@ -12,6 +12,7 @@ Production v4 would add ERP-specific pullers (NetSuite, QuickBooks, Sage Intacct
 behind the same protocol. The CSV adapter exists so chains have something real
 to consume in offline tests and demos.
 """
+
 from __future__ import annotations
 
 import csv

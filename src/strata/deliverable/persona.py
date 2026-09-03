@@ -1,4 +1,5 @@
 """Persona prompts keyed by deliverable rubric_id."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass

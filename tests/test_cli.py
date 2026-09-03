@@ -1,4 +1,5 @@
 """End-to-end CLI smoke tests using Typer's runner."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -21,7 +22,9 @@ def test_rubrics_command_lists_all_rubrics():
 
 
 def test_assess_command_produces_heatmap():
-    result = runner.invoke(app, ["assess", "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml")])
+    result = runner.invoke(
+        app, ["assess", "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml")]
+    )
     assert result.exit_code == 0
     assert "Maturity heatmap" in result.stdout
     assert "overall:" in result.stdout

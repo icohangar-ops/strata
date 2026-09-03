@@ -1,4 +1,5 @@
 """Investor update mock author. Deterministic, used in offline mode and tests."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,35 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "metrics", "headline", "consistent", "restated", "footnoted",
-    "definitions", "published", "deviations", "wins", "losses", "named",
-    "specifically", "learned", "commitments", "tracked", "actual",
-    "explained", "specific", "deadline", "bounded", "routed",
-    "investor", "network", "segmentation", "prior", "year",
-    "comparisons", "appendix", "signal",
+    "metrics",
+    "headline",
+    "consistent",
+    "restated",
+    "footnoted",
+    "definitions",
+    "published",
+    "deviations",
+    "wins",
+    "losses",
+    "named",
+    "specifically",
+    "learned",
+    "commitments",
+    "tracked",
+    "actual",
+    "explained",
+    "specific",
+    "deadline",
+    "bounded",
+    "routed",
+    "investor",
+    "network",
+    "segmentation",
+    "prior",
+    "year",
+    "comparisons",
+    "appendix",
+    "signal",
 ]
 
 

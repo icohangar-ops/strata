@@ -2,11 +2,11 @@ from strata.orchestrator.chains import Chain, ChainStep, all_chains, chain_for_d
 from strata.orchestrator.director import Director, DirectorRun, RouteDecision
 
 __all__ = [
+    "Chain",
+    "ChainStep",
     "Director",
     "DirectorRun",
     "RouteDecision",
-    "Chain",
-    "ChainStep",
     "all_chains",
     "chain_for_deliverable",
 ]

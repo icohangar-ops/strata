@@ -8,6 +8,7 @@ For the MVP the assessor is fed scores directly (e.g. from a CLI prompt or
 a static YAML of self-reported answers). The same RubricScoreReport.compute
 path is used as for deliverables, proving the schema unification.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -81,9 +82,8 @@ class MaturityAssessor:
                 raise ValueError(f"missing scores for capability '{rid}'")
             if tenant_id:
                 from strata.maturity.overrides import apply_overrides, load_overrides
-                rubric, scores = apply_overrides(
-                    rubric, scores, load_overrides(tenant_id, rid)
-                )
+
+                rubric, scores = apply_overrides(rubric, scores, load_overrides(tenant_id, rid))
             report = RubricScoreReport.compute(
                 rubric=rubric,
                 target_id=target_id,

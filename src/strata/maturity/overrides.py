@@ -10,6 +10,7 @@ Override semantics:
   - `disabled`: drop the characteristic from the rubric and the scores entirely;
     siblings are scaled to fill the freed weight.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -38,12 +39,16 @@ def load_overrides(tenant_id: str, rubric_id: str) -> dict[str, CharOverride]:
     """Returns characteristic_id -> CharOverride for a given tenant + rubric."""
     out: dict[str, CharOverride] = {}
     with session_scope() as s:
-        rows = s.execute(
-            select(RubricOverride).where(
-                RubricOverride.tenant_id == tenant_id,
-                RubricOverride.rubric_id == rubric_id,
+        rows = (
+            s.execute(
+                select(RubricOverride).where(
+                    RubricOverride.tenant_id == tenant_id,
+                    RubricOverride.rubric_id == rubric_id,
+                )
             )
-        ).scalars().all()
+            .scalars()
+            .all()
+        )
         for r in rows:
             out[r.characteristic_id] = CharOverride(
                 weight=r.weight,
@@ -67,21 +72,15 @@ def apply_overrides(
     for group in rubric.groups:
         kept_chars = [c for c in group.characteristics if not overrides.get(c.id, _NULL).disabled]
         if not kept_chars:
-            raise ValueError(
-                f"override would disable every characteristic in group '{group.id}'"
-            )
+            raise ValueError(f"override would disable every characteristic in group '{group.id}'")
 
         # Within a group:
         #   - characteristics with weight overrides take their exact override weight
         #   - the remainder (1 - sum-of-overrides) is distributed proportionally to
         #     siblings whose weights were NOT overridden, using their original ratios
         ov_for = {c.id: overrides.get(c.id, _NULL) for c in kept_chars}
-        overridden_total = sum(
-            ov.weight for ov in ov_for.values() if ov.weight is not None
-        )
-        free_orig_total = sum(
-            c.weight for c in kept_chars if ov_for[c.id].weight is None
-        )
+        overridden_total = sum(ov.weight for ov in ov_for.values() if ov.weight is not None)
+        free_orig_total = sum(c.weight for c in kept_chars if ov_for[c.id].weight is None)
 
         if overridden_total > 1.0 + WEIGHT_TOL_LOCAL:
             raise ValueError(

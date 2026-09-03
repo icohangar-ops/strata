@@ -1,4 +1,5 @@
 """M&A IC memo mock author. Deterministic, used in offline mode and tests."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,34 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "thesis", "strategy", "stakeholder", "synergy", "timing", "owner",
-    "workstream", "sensitivity", "quality", "earnings", "adjustments",
-    "bridge", "pro-forma", "triangulated", "multiples", "discounted",
-    "ranked", "impact", "likelihood", "deal-breaker", "mitigation",
-    "gating", "approve", "reject", "conditional", "walk-away",
-    "committed", "post-LOI",
+    "thesis",
+    "strategy",
+    "stakeholder",
+    "synergy",
+    "timing",
+    "owner",
+    "workstream",
+    "sensitivity",
+    "quality",
+    "earnings",
+    "adjustments",
+    "bridge",
+    "pro-forma",
+    "triangulated",
+    "multiples",
+    "discounted",
+    "ranked",
+    "impact",
+    "likelihood",
+    "deal-breaker",
+    "mitigation",
+    "gating",
+    "approve",
+    "reject",
+    "conditional",
+    "walk-away",
+    "committed",
+    "post-LOI",
 ]
 
 

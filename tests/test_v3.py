@@ -1,5 +1,6 @@
 """v3 features: M&A capability, preferred_deliverable, chain composition,
 tenant overrides, perception adapter."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -43,6 +44,7 @@ def test_ma_capability_in_rubric_set():
 
 def test_ma_memo_skill_targets_ma_capability():
     from strata.catalog import load_catalog
+
     cat = load_catalog()
     s = cat.skill("present.ic_memo")
     assert s.capability == "rb.function.ma"
@@ -115,6 +117,7 @@ def test_decide_returns_alternates():
 
 def test_board_pack_chain_declares_dependency_on_bva():
     from strata.orchestrator import chain_for_deliverable
+
     bp = chain_for_deliverable("rb.deliverable.board_pack")
     assert bp.depends_on == ("chain.bva_commentary.v1",)
 
@@ -130,8 +133,9 @@ def test_board_pack_chain_runs_dependency_first():
 
 def test_chain_cycle_detection():
     from dataclasses import replace
+
     import strata.orchestrator.chains as chains_mod
-    bp = chains_mod._REGISTRY["rb.deliverable.board_pack"]
+
     # Make BvA depend on board_pack -> board_pack already depends on BvA -> cycle.
     bva = chains_mod._REGISTRY["rb.deliverable.bva_commentary"]
     cyc = replace(bva, depends_on=("chain.board_pack.v1",))
@@ -139,22 +143,26 @@ def test_chain_cycle_detection():
     chains_mod._REGISTRY["rb.deliverable.bva_commentary"] = cyc
     try:
         with pytest.raises(RuntimeError, match="cycle detected"):
-            Director(persist=False).run_chain("chain.board_pack.v1",
-                                              {"company": "X", "period": "p"})
+            Director(persist=False).run_chain(
+                "chain.board_pack.v1", {"company": "X", "period": "p"}
+            )
     finally:
         chains_mod._REGISTRY["rb.deliverable.bva_commentary"] = saved
 
 
 def test_chain_unknown_dependency_raises():
     from dataclasses import replace
+
     import strata.orchestrator.chains as chains_mod
+
     saved = chains_mod._REGISTRY["rb.deliverable.bva_commentary"]
     bad = replace(saved, depends_on=("chain.does_not_exist.v1",))
     chains_mod._REGISTRY["rb.deliverable.bva_commentary"] = bad
     try:
         with pytest.raises(KeyError, match="depends on unknown chain"):
-            Director(persist=False).run_chain("chain.bva_commentary.v1",
-                                              {"company": "X", "period": "p"})
+            Director(persist=False).run_chain(
+                "chain.bva_commentary.v1", {"company": "X", "period": "p"}
+            )
     finally:
         chains_mod._REGISTRY["rb.deliverable.bva_commentary"] = saved
 
@@ -165,18 +173,22 @@ def test_chain_unknown_dependency_raises():
 def _setup_sqlite(tmp_path, monkeypatch):
     monkeypatch.setenv("STRATA_TEST_DB", f"sqlite:///{tmp_path / 'tenants.sqlite'}")
     from strata import config, db
+
     config.get_settings.cache_clear()
     db._engine = None
     db._SessionLocal = None
-    from strata.db import Base, get_engine
     from strata import models  # noqa: F401
+    from strata.db import Base, get_engine
+
     Base.metadata.create_all(get_engine())
 
 
 def _insert_override(**kw):
     import uuid
+
     from strata.db import session_scope
     from strata.models import RubricOverride
+
     with session_scope() as s:
         s.add(RubricOverride(id=uuid.uuid4(), **kw))
 
@@ -190,15 +202,16 @@ def test_tenant_weight_override_renormalizes(tmp_path, monkeypatch):
         weight=0.80,  # heavy weight; siblings rescale
         note="Acme cares disproportionately about close cycle time",
     )
-    by_rubric = _scores({rid: 1 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.close": 4})
+    by_rubric = _scores({rid: 1 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.close": 4})
     base = MaturityAssessor().assess(target_id="acme", scores_by_rubric=by_rubric)
     overridden = MaturityAssessor().assess(
         target_id="acme", scores_by_rubric=by_rubric, tenant_id="acme"
     )
     # Weights changed but every score is the same, so total stays 100% for close.
     base_close = next(c for c in base.capabilities if c.rubric.rubric_id == "rb.function.close")
-    over_close = next(c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close")
+    over_close = next(
+        c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close"
+    )
     assert base_close.score_pct == pytest.approx(over_close.score_pct, abs=1e-6)
     # But the rubric structure changed: cycle_time_measured weight is now 0.80
     inst = next(g for g in over_close.rubric.groups if g.id == "instrumentation")
@@ -215,12 +228,13 @@ def test_tenant_disable_override_drops_characteristic(tmp_path, monkeypatch):
         disabled=True,
         note="Acme does not measure post-close adjustments yet",
     )
-    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.close": 4})
+    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.close": 4})
     overridden = MaturityAssessor().assess(
         target_id="acme", scores_by_rubric=by_rubric, tenant_id="acme"
     )
-    close_cap = next(c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close")
+    close_cap = next(
+        c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close"
+    )
     inst = next(g for g in close_cap.rubric.groups if g.id == "instrumentation")
     char_ids = {c.id for c in inst.characteristics}
     assert "error_rate_tracked" not in char_ids
@@ -237,13 +251,18 @@ def test_tenant_score_floor_clamps(tmp_path, monkeypatch):
         characteristic_id="cycle_time_measured",
         score_floor=3,
     )
-    by_rubric = _scores({rid: 4 for rid in CAPABILITY_RUBRIC_IDS}
-                        | {"rb.function.close": 1})  # self-reported floor for close
+    by_rubric = _scores(
+        {rid: 4 for rid in CAPABILITY_RUBRIC_IDS} | {"rb.function.close": 1}
+    )  # self-reported floor for close
     overridden = MaturityAssessor().assess(
         target_id="acme", scores_by_rubric=by_rubric, tenant_id="acme"
     )
-    close_cap = next(c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close")
-    cm_score = next(s for s in close_cap.report.scores if s.characteristic_id == "cycle_time_measured")
+    close_cap = next(
+        c for c in overridden.capabilities if c.rubric.rubric_id == "rb.function.close"
+    )
+    cm_score = next(
+        s for s in close_cap.report.scores if s.characteristic_id == "cycle_time_measured"
+    )
     assert cm_score.score == 3  # clamped up from 1
 
 
@@ -277,16 +296,19 @@ def test_csv_gl_adapter_skips_when_path_missing():
 
 def test_csv_gl_adapter_returns_inputs_when_period_not_in_extract(tmp_path):
     adapter = csv_gl_adapter()
-    out = adapter({
-        "period": "Year 3000",
-        "gl_extract_path": str(SAMPLES / "gl_extract.csv"),
-    })
+    out = adapter(
+        {
+            "period": "Year 3000",
+            "gl_extract_path": str(SAMPLES / "gl_extract.csv"),
+        }
+    )
     assert "gl_aggregates" not in out
 
 
 def test_bva_chain_runs_with_perception_enrichment():
     """End-to-end: run BvA chain; perception adapter loads GL aggregates into inputs."""
     import json
+
     inputs = json.loads((SAMPLES / "bva_inputs.json").read_text(encoding="utf-8"))
     run = Director(persist=False).run_chain("chain.bva_commentary.v1", inputs)
     assert run.factory_result.final_draft  # produced something

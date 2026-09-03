@@ -16,6 +16,7 @@ These tests cost real tokens. Pick a cheap model:
     STRATA_GRADER_MODEL=qwen-plus
     STRATA_AUTHOR_MODEL=qwen-plus
 """
+
 from __future__ import annotations
 
 import json
@@ -31,18 +32,18 @@ SAMPLES = Path(__file__).resolve().parents[1] / "samples"
 
 # Map chain_id -> sample inputs file (None = synthetic)
 _CHAIN_INPUTS: dict[str, str | None] = {
-    "chain.board_pack.v1":              "board_pack_inputs.json",
-    "chain.bva_commentary.v1":          "bva_inputs.json",
-    "chain.ma_memo.v1":                 "ma_memo_inputs.json",
-    "chain.investor_update.v1":         "investor_update_inputs.json",
-    "chain.three_statement.v1":         "three_statement_inputs.json",
-    "chain.cfo_dashboard.v1":           "cfo_dashboard_inputs.json",
-    "chain.risk_register.v1":           "risk_register_inputs.json",
-    "chain.capex_memo.v1":              "capex_memo_inputs.json",
-    "chain.post_investment_review.v1":  "post_investment_review_inputs.json",
-    "chain.employee_all_hands.v1":      "employee_all_hands_inputs.json",
-    "chain.cross_functional_brief.v1":  "cross_functional_brief_inputs.json",
-    "chain.earnings_script.v1":         "earnings_script_inputs.json",
+    "chain.board_pack.v1": "board_pack_inputs.json",
+    "chain.bva_commentary.v1": "bva_inputs.json",
+    "chain.ma_memo.v1": "ma_memo_inputs.json",
+    "chain.investor_update.v1": "investor_update_inputs.json",
+    "chain.three_statement.v1": "three_statement_inputs.json",
+    "chain.cfo_dashboard.v1": "cfo_dashboard_inputs.json",
+    "chain.risk_register.v1": "risk_register_inputs.json",
+    "chain.capex_memo.v1": "capex_memo_inputs.json",
+    "chain.post_investment_review.v1": "post_investment_review_inputs.json",
+    "chain.employee_all_hands.v1": "employee_all_hands_inputs.json",
+    "chain.cross_functional_brief.v1": "cross_functional_brief_inputs.json",
+    "chain.earnings_script.v1": "earnings_script_inputs.json",
 }
 
 

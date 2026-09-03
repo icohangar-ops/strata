@@ -1,4 +1,5 @@
 """Strata CLI."""
+
 from __future__ import annotations
 
 import json
@@ -18,12 +19,12 @@ from strata.maturity import (
     MaturityAssessor,
 )
 from strata.mcp import main as _mcp_main
-from strata.orchestrator.chains import all_chains
-from strata.orchestrator.director import Director
-from strata.schema import CharacteristicScore
 
 # --- Datadog LLM Observability (no-op unless DD_LLMOBS_ENABLED) ---
 from strata.observability import init_observability
+from strata.orchestrator.chains import all_chains
+from strata.orchestrator.director import Director
+from strata.schema import CharacteristicScore
 
 init_observability("strata")
 
@@ -31,7 +32,9 @@ app = typer.Typer(no_args_is_help=True, add_completion=False)
 console = Console()
 
 
-def _scores_from_yaml(raw: dict, rubric_ids: tuple[str, ...], path: Path) -> dict[str, list[CharacteristicScore]]:
+def _scores_from_yaml(
+    raw: dict, rubric_ids: tuple[str, ...], path: Path
+) -> dict[str, list[CharacteristicScore]]:
     by_rubric: dict[str, list[CharacteristicScore]] = {}
     for rid in rubric_ids:
         if rid not in raw:
@@ -71,9 +74,12 @@ def _print_factory_result(r) -> None:
     console.print(f"final score: {r.final_report.report.normalized_pct:.1f}%")
     t = Table("iter", "weighted", "normalized_%", "passed")
     for i, gr in enumerate(r.history, start=1):
-        t.add_row(str(i), f"{gr.report.weighted_total:.2f}",
-                  f"{gr.report.normalized_pct:.1f}",
-                  "yes" if gr.report.passed else "no")
+        t.add_row(
+            str(i),
+            f"{gr.report.weighted_total:.2f}",
+            f"{gr.report.normalized_pct:.1f}",
+            "yes" if gr.report.passed else "no",
+        )
     console.print(t)
 
 
@@ -109,16 +115,20 @@ def assess(
         _print_heatmap(c, "Competency-axis heatmap (strategic-CFO pillars)")
         return
     result = _load_assessment(self_assessment, axis=axis)
-    label = "Maturity heatmap" if axis == "function" else "Competency heatmap (strategic-CFO pillars)"
+    label = (
+        "Maturity heatmap" if axis == "function" else "Competency heatmap (strategic-CFO pillars)"
+    )
     _print_heatmap(result, label)
 
 
 @app.command("run")
 def run(
-    self_assessment: Path = typer.Option(..., exists=True, readable=True,
-                                         help="Self-assessment YAML (drives routing)"),
-    inputs: Path = typer.Option(..., exists=True, readable=True,
-                                help="JSON inputs for whichever chain is picked"),
+    self_assessment: Path = typer.Option(
+        ..., exists=True, readable=True, help="Self-assessment YAML (drives routing)"
+    ),
+    inputs: Path = typer.Option(
+        ..., exists=True, readable=True, help="JSON inputs for whichever chain is picked"
+    ),
     persist: bool = typer.Option(False, help="Persist run"),
     use_llm: bool = typer.Option(False, "--use-llm"),
     axis: str = typer.Option(
@@ -136,7 +146,9 @@ def run(
     console.print(f"axis:                {axis}")
     console.print(f"chain picked:        [cyan]{decision.chain.chain_id}[/cyan]")
     console.print(f"deliverable rubric:  {decision.chain.rubric_id}")
-    console.print(f"weakest capability:  {decision.weakest_capability} ({decision.weakest_pct:.1f}%)")
+    console.print(
+        f"weakest capability:  {decision.weakest_capability} ({decision.weakest_pct:.1f}%)"
+    )
     console.print(f"rationale:           {decision.rationale}")
     _print_factory_result(run.factory_result)
     console.rule("Final draft")
@@ -147,7 +159,8 @@ def run(
 def roadmap(
     self_assessment: Path = typer.Option(..., exists=True, readable=True),
     axis: str = typer.Option(
-        "function", "--axis",
+        "function",
+        "--axis",
         help="Which axis to plan against: 'function' or 'competency'",
     ),
 ) -> None:
@@ -156,8 +169,10 @@ def roadmap(
 
     assessment = _load_assessment(self_assessment, axis=axis)
     rmap = plan_90_days(assessment, axis=axis)
-    console.rule(f"[bold]90-day roadmap — {rmap.target_id} ({rmap.axis} axis, "
-                 f"baseline {rmap.overall_pct:.1f}%)")
+    console.rule(
+        f"[bold]90-day roadmap — {rmap.target_id} ({rmap.axis} axis, "
+        f"baseline {rmap.overall_pct:.1f}%)"
+    )
     for phase in rmap.phases:
         console.rule(f"[bold cyan]{phase.label} — {phase.intent}")
         t = Table("capability", "score_%", "action", "chain")
@@ -171,7 +186,9 @@ def roadmap(
         console.print(t)
 
 
-exemplars_app = typer.Typer(no_args_is_help=True, help="Manage the vector exemplar store (Astra DB)")
+exemplars_app = typer.Typer(
+    no_args_is_help=True, help="Manage the vector exemplar store (Astra DB)"
+)
 app.add_typer(exemplars_app, name="exemplars")
 
 
@@ -187,7 +204,7 @@ def exemplars_ingest(
     score_pct: float | None = typer.Option(None, "--score-pct"),
 ) -> None:
     """Add a past deliverable draft to the exemplar store."""
-    from strata.vector import Exemplar, get_default_store, NullExemplarStore
+    from strata.vector import Exemplar, NullExemplarStore, get_default_store
     from strata.vector.exemplars import make_exemplar_id
 
     store = get_default_store()
@@ -213,7 +230,7 @@ def exemplars_search(
     top_k: int = typer.Option(3, "--top-k", "-k"),
 ) -> None:
     """Show top-K most similar past drafts for a chain."""
-    from strata.vector import get_default_store, NullExemplarStore
+    from strata.vector import NullExemplarStore, get_default_store
 
     store = get_default_store()
     if isinstance(store, NullExemplarStore):

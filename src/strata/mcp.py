@@ -1,11 +1,13 @@
 """Minimal stdio MCP server for Strata."""
+
 from __future__ import annotations
 
 import argparse
 import json
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Any
 
 from strata import registry
 from strata.maturity import (
@@ -16,7 +18,6 @@ from strata.maturity import (
 )
 from strata.maturity.roadmap import plan_90_days
 from strata.schema import CharacteristicScore
-
 
 JsonValue = dict[str, Any] | list[Any] | str | int | float | bool | None
 ToolHandler = Callable[[dict[str, Any]], JsonValue]
@@ -88,11 +89,7 @@ class StdioServer:
             return
         _respond(
             message,
-            {
-                "content": [
-                    {"type": "text", "text": json.dumps(result, indent=2, default=str)}
-                ]
-            },
+            {"content": [{"type": "text", "text": json.dumps(result, indent=2, default=str)}]},
         )
 
 
@@ -270,7 +267,7 @@ def _respond(message: dict[str, Any], result: dict[str, Any]) -> None:
         {"jsonrpc": "2.0", "id": message.get("id"), "result": result},
         default=str,
     ).encode("utf-8")
-    sys.stdout.buffer.write(f"Content-Length: {len(payload)}\r\n\r\n".encode("utf-8"))
+    sys.stdout.buffer.write(f"Content-Length: {len(payload)}\r\n\r\n".encode())
     sys.stdout.buffer.write(payload)
     sys.stdout.buffer.flush()
 
@@ -280,7 +277,7 @@ def _error(message: dict[str, Any], code: int, detail: str) -> None:
         {"jsonrpc": "2.0", "id": message.get("id"), "error": {"code": code, "message": detail}},
         default=str,
     ).encode("utf-8")
-    sys.stdout.buffer.write(f"Content-Length: {len(payload)}\r\n\r\n".encode("utf-8"))
+    sys.stdout.buffer.write(f"Content-Length: {len(payload)}\r\n\r\n".encode())
     sys.stdout.buffer.write(payload)
     sys.stdout.buffer.flush()
 

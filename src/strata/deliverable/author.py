@@ -2,6 +2,7 @@
 inputs + history triple, so a single Anthropic-backed author works for every
 deliverable type.
 """
+
 from __future__ import annotations
 
 from typing import Any
@@ -68,6 +69,7 @@ def _format_exemplars(exemplars: list[dict] | None) -> str:
 
 def _dump_inputs(inputs: dict[str, Any]) -> str:
     import json
+
     return json.dumps(inputs, indent=2, default=str)
 
 
@@ -101,7 +103,9 @@ def anthropic_author_factory(model: str | None = None):  # pragma: no cover - in
     return _author
 
 
-def openai_compatible_author_factory(model: str | None = None):  # pragma: no cover - integration only
+def openai_compatible_author_factory(
+    model: str | None = None,
+):  # pragma: no cover - integration only
     """Returns an Author backed by any OpenAI-compatible /chat/completions endpoint.
 
     Default config in Strata points at DashScope International. Set
@@ -130,7 +134,10 @@ def openai_compatible_author_factory(model: str | None = None):  # pragma: no co
         resp = client.chat.completions.create(
             model=use_model,
             messages=[
-                {"role": "system", "content": "You write CFO-grade financial deliverables. Be terse and tie out."},
+                {
+                    "role": "system",
+                    "content": "You write CFO-grade financial deliverables. Be terse and tie out.",
+                },
                 {"role": "user", "content": prompt},
             ],
             max_tokens=4096,

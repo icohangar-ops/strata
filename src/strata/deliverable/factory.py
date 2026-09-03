@@ -13,6 +13,7 @@ the run for top-K similar past drafts of the same chain and injects them into
 inputs under `_exemplars` for the author prompt to splice in. This is purely
 additive — when the store is None or empty, behavior is unchanged.
 """
+
 from __future__ import annotations
 
 from collections.abc import Callable

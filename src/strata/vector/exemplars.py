@@ -15,6 +15,7 @@ Three implementations:
 
 Selection happens via get_default_store() which inspects Settings.has_astra.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -31,10 +32,10 @@ from strata.config import get_settings
 class Exemplar:
     """A single past draft retained as a similar-deliverable seed."""
 
-    id: str                       # stable hash of (chain_id, target_id) or user-supplied
-    chain_id: str                 # partition key — only same-chain exemplars are retrieved
-    target_id: str                # e.g. "acme_robotics::march_2026"
-    draft: str                    # the rendered deliverable text
+    id: str  # stable hash of (chain_id, target_id) or user-supplied
+    chain_id: str  # partition key — only same-chain exemplars are retrieved
+    target_id: str  # e.g. "acme_robotics::march_2026"
+    draft: str  # the rendered deliverable text
     score_pct: float | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -42,7 +43,7 @@ class Exemplar:
 @dataclass(frozen=True)
 class ExemplarHit:
     exemplar: Exemplar
-    similarity: float             # 0..1, higher is more similar
+    similarity: float  # 0..1, higher is more similar
 
 
 # ---------------------------- protocol ----------------------------
@@ -148,17 +149,14 @@ class AstraExemplarStore:  # pragma: no cover - integration only; covered by liv
         try:
             from astrapy import DataAPIClient
         except ImportError as e:
-            raise ImportError(
-                "install with `pip install -e '.[vector]'` to use Astra DB"
-            ) from e
+            raise ImportError("install with `pip install -e '.[vector]'` to use Astra DB") from e
         s = get_settings()
         endpoint = api_endpoint or s.astra_api_endpoint
         tok = token or s.astra_token
         ks = keyspace or s.astra_keyspace
         if not (endpoint and tok):
             raise RuntimeError(
-                "Astra DB not configured. Set ASTRA_DB_API_ENDPOINT and "
-                "ASTRA_DB_APPLICATION_TOKEN."
+                "Astra DB not configured. Set ASTRA_DB_API_ENDPOINT and ASTRA_DB_APPLICATION_TOKEN."
             )
 
         client = DataAPIClient(tok)
@@ -170,6 +168,7 @@ class AstraExemplarStore:  # pragma: no cover - integration only; covered by liv
             return self._db.get_collection(_COLLECTION)
         except Exception:
             from astrapy.constants import VectorMetric
+
             return self._db.create_collection(
                 _COLLECTION,
                 dimension=_VECTOR_DIM,

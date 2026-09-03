@@ -18,6 +18,7 @@ Then run the app normally. Requires ``ddtrace`` (already added to this project's
 dependencies). The ml_app name is what the AgentOps dashboard groups traces by
 in its "By App" breakdown.
 """
+
 from __future__ import annotations
 
 import logging
@@ -27,7 +28,7 @@ _log = logging.getLogger("observability")
 _initialized = False
 
 
-def _truthy(value: "str | None") -> bool:
+def _truthy(value: str | None) -> bool:
     return (value or "").strip().lower() in ("1", "true", "yes", "on")
 
 

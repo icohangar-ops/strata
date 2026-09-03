@@ -1,4 +1,5 @@
 """L1: maturity assessor produces a heatmap and reuses the L5 schema."""
+
 from __future__ import annotations
 
 import yaml
@@ -19,6 +20,7 @@ def _scores_at(rid: str, score: int) -> list[CharacteristicScore]:
 
 def test_uniform_floor_gives_25_pct():
     import pytest as _pytest
+
     assessor = MaturityAssessor()
     by_rubric = {rid: _scores_at(rid, score=1) for rid in CAPABILITY_RUBRIC_IDS}
     res = assessor.assess(target_id="acme", scores_by_rubric=by_rubric)
@@ -29,6 +31,7 @@ def test_uniform_floor_gives_25_pct():
 
 def test_uniform_ceiling_gives_100_pct():
     import pytest as _pytest
+
     assessor = MaturityAssessor()
     by_rubric = {rid: _scores_at(rid, score=4) for rid in CAPABILITY_RUBRIC_IDS}
     res = assessor.assess(target_id="acme", scores_by_rubric=by_rubric)
@@ -36,9 +39,7 @@ def test_uniform_ceiling_gives_100_pct():
 
 
 def test_sample_self_assessment_loads_and_scores():
-    sample = (
-        registry.RUBRICS_DIR.parents[2] / "samples" / "maturity_self_assessment.yaml"
-    )
+    sample = registry.RUBRICS_DIR.parents[2] / "samples" / "maturity_self_assessment.yaml"
     raw = yaml.safe_load(sample.read_text(encoding="utf-8"))
     raw.pop("target_id")
     by_rubric = {

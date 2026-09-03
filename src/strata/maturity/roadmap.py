@@ -13,6 +13,7 @@ This is *analytic*, not graded — the roadmap is an action list, not a
 deliverable. It can be combined with a deliverable factory by feeding
 roadmap actions as inputs.preferred_deliverable to Director.route().
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -32,15 +33,15 @@ class RoadmapAction:
 
 @dataclass(frozen=True)
 class RoadmapPhase:
-    label: str            # e.g. "Days 1-30"
-    intent: str           # e.g. "Baseline & Quick Wins"
+    label: str  # e.g. "Days 1-30"
+    intent: str  # e.g. "Baseline & Quick Wins"
     actions: tuple[RoadmapAction, ...]
 
 
 @dataclass(frozen=True)
 class Roadmap:
     target_id: str
-    axis: str             # "function" | "competency"
+    axis: str  # "function" | "competency"
     overall_pct: float
     phases: tuple[RoadmapPhase, ...]
 
@@ -74,7 +75,7 @@ def plan_90_days(assessment: AssessmentResult, axis: str = "function") -> Roadma
     from strata.orchestrator.director import Director
 
     director = Director(persist=False)
-    cap_to_chains = director._capability_chain_index()  # noqa: SLF001 — clean adapter
+    cap_to_chains = director._capability_chain_index()
 
     # Sort capabilities weakest-first
     ranked: list[CapabilitySnapshot] = sorted(
@@ -145,7 +146,8 @@ def plan_90_days(assessment: AssessmentResult, axis: str = "function") -> Roadma
                 capability_id="rb.function.capital_allocation",
                 capability_name="Capital Allocation Discipline",
                 score_pct=next(
-                    c.score_pct for c in ranked
+                    c.score_pct
+                    for c in ranked
                     if c.rubric.rubric_id == "rb.function.capital_allocation"
                 ),
                 action="Run first capital council review of in-flight investments",
@@ -157,9 +159,9 @@ def plan_90_days(assessment: AssessmentResult, axis: str = "function") -> Roadma
         axis=axis,
         overall_pct=assessment.overall_pct,
         phases=(
-            RoadmapPhase(label="Days 1-30",  intent="Baseline & Quick Wins", actions=tuple(phase1)),
-            RoadmapPhase(label="Days 31-60", intent="Scale & Pilot",         actions=tuple(phase2)),
-            RoadmapPhase(label="Days 61-90", intent="Embed & Measure",       actions=tuple(phase3)),
+            RoadmapPhase(label="Days 1-30", intent="Baseline & Quick Wins", actions=tuple(phase1)),
+            RoadmapPhase(label="Days 31-60", intent="Scale & Pilot", actions=tuple(phase2)),
+            RoadmapPhase(label="Days 61-90", intent="Embed & Measure", actions=tuple(phase3)),
         ),
     )
 

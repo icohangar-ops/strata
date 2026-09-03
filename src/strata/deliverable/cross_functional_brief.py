@@ -1,4 +1,5 @@
 """Cross-functional brief mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,19 +12,40 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "timeboxed", "sections", "performance", "review", "pipeline",
-    "dependencies", "decision-support", "standing", "win-rate", "ACV",
-    "cycle", "time", "yield", "OEE", "activation", "retention",
-    "decisions", "owner", "options", "recommendation", "deadline",
-    "carry-forward", "aging", "cadence", "protected", "rescheduled",
+    "timeboxed",
+    "sections",
+    "performance",
+    "review",
+    "pipeline",
+    "dependencies",
+    "decision-support",
+    "standing",
+    "win-rate",
+    "ACV",
+    "cycle",
+    "time",
+    "yield",
+    "OEE",
+    "activation",
+    "retention",
+    "decisions",
+    "owner",
+    "options",
+    "recommendation",
+    "deadline",
+    "carry-forward",
+    "aging",
+    "cadence",
+    "protected",
+    "rescheduled",
 ]
 
 
 _PEER_METRICS = {
-    "sales":      ["pipeline", "win-rate", "ACV"],
+    "sales": ["pipeline", "win-rate", "ACV"],
     "operations": ["cycle time", "yield", "OEE"],
-    "product":    ["activation", "retention", "feature adoption"],
-    "marketing":  ["pipeline-sourced", "CAC", "channel mix"],
+    "product": ["activation", "retention", "feature adoption"],
+    "marketing": ["pipeline-sourced", "CAC", "channel mix"],
 }
 
 

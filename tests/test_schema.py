@@ -1,4 +1,5 @@
 """L5: validate every YAML rubric loads, weights sum to 1.0, and scoring math is correct."""
+
 from __future__ import annotations
 
 import pytest
@@ -16,10 +17,10 @@ from strata.schema import (
 
 def _attrs() -> tuple[Attribute, ...]:
     return (
-        Attribute(level="Mature",     score=4, anchor="exemplary"),
+        Attribute(level="Mature", score=4, anchor="exemplary"),
         Attribute(level="Developing", score=3, anchor="solid"),
-        Attribute(level="Emerging",   score=2, anchor="patchy"),
-        Attribute(level="Absent",     score=1, anchor="missing"),
+        Attribute(level="Emerging", score=2, anchor="patchy"),
+        Attribute(level="Absent", score=1, anchor="missing"),
     )
 
 

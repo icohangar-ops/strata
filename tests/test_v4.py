@@ -1,4 +1,5 @@
 """v4: competency-axis assessor + CFO value-creation dashboard."""
+
 from __future__ import annotations
 
 import json
@@ -157,11 +158,16 @@ def test_competency_route_picks_dashboard_when_stakeholder_is_weakest():
 
 
 def test_assess_cli_competency_axis():
-    result = runner.invoke(app, [
-        "assess",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-        "--axis", "competency",
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "assess",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+            "--axis",
+            "competency",
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "Competency heatmap" in result.stdout
     assert "Strategic Financial Leadership" in result.stdout
@@ -169,34 +175,50 @@ def test_assess_cli_competency_axis():
 
 
 def test_assess_cli_both_axes():
-    result = runner.invoke(app, [
-        "assess",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-        "--axis", "both",
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "assess",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+            "--axis",
+            "both",
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "Function-axis heatmap" in result.stdout
     assert "Competency-axis heatmap" in result.stdout
 
 
 def test_assess_cli_invalid_axis():
-    result = runner.invoke(app, [
-        "assess",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-        "--axis", "garbage",
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "assess",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+            "--axis",
+            "garbage",
+        ],
+    )
     assert result.exit_code != 0
     combined = (result.stdout + (result.stderr or "")).lower()
     assert "axis must be" in combined
 
 
 def test_run_cli_competency_axis_routes():
-    result = runner.invoke(app, [
-        "run",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-        "--inputs", str(SAMPLES / "cfo_dashboard_inputs.json"),
-        "--axis", "competency",
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "run",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+            "--inputs",
+            str(SAMPLES / "cfo_dashboard_inputs.json"),
+            "--axis",
+            "competency",
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "axis:" in result.stdout
     assert "competency" in result.stdout

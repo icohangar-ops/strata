@@ -1,4 +1,5 @@
 """Capex memo mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,36 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "thesis", "strategic", "fit", "sponsor", "alternative", "build",
-    "partner", "defer", "IRR", "hurdle", "payback", "ceiling",
-    "sensitivity", "two-way", "drivers", "downside", "ranked",
-    "impact", "likelihood", "mitigation", "owner", "gating",
-    "cannibalization", "substitution", "quantified", "tranche",
-    "schedule", "look-back", "review", "committed",
+    "thesis",
+    "strategic",
+    "fit",
+    "sponsor",
+    "alternative",
+    "build",
+    "partner",
+    "defer",
+    "IRR",
+    "hurdle",
+    "payback",
+    "ceiling",
+    "sensitivity",
+    "two-way",
+    "drivers",
+    "downside",
+    "ranked",
+    "impact",
+    "likelihood",
+    "mitigation",
+    "owner",
+    "gating",
+    "cannibalization",
+    "substitution",
+    "quantified",
+    "tranche",
+    "schedule",
+    "look-back",
+    "review",
+    "committed",
 ]
 
 

@@ -1,4 +1,5 @@
 """v6: communication-playbook deliverable parity + 90-day roadmap generator."""
+
 from __future__ import annotations
 
 import json
@@ -71,9 +72,9 @@ def test_chain_registry_has_twelve_chains():
 @pytest.mark.parametrize(
     "skill_id,deliverable",
     [
-        ("present.employee_all_hands",     "rb.deliverable.employee_all_hands"),
+        ("present.employee_all_hands", "rb.deliverable.employee_all_hands"),
         ("present.cross_functional_brief", "rb.deliverable.cross_functional_brief"),
-        ("present.earnings_script",        "rb.deliverable.earnings_script"),
+        ("present.earnings_script", "rb.deliverable.earnings_script"),
     ],
 )
 def test_catalog_skill_wired(skill_id, deliverable):
@@ -86,9 +87,17 @@ def test_catalog_skill_wired(skill_id, deliverable):
 @pytest.mark.parametrize(
     "chain_id,inputs_file,expected_token",
     [
-        ("chain.employee_all_hands.v1",     "employee_all_hands_inputs.json",     "All-Hands Finance Segment"),
-        ("chain.cross_functional_brief.v1", "cross_functional_brief_inputs.json", "Bi-Weekly Brief"),
-        ("chain.earnings_script.v1",        "earnings_script_inputs.json",        "Earnings Call Script"),
+        (
+            "chain.employee_all_hands.v1",
+            "employee_all_hands_inputs.json",
+            "All-Hands Finance Segment",
+        ),
+        (
+            "chain.cross_functional_brief.v1",
+            "cross_functional_brief_inputs.json",
+            "Bi-Weekly Brief",
+        ),
+        ("chain.earnings_script.v1", "earnings_script_inputs.json", "Earnings Call Script"),
     ],
 )
 def test_chain_runs_end_to_end(chain_id, inputs_file, expected_token):
@@ -135,11 +144,13 @@ def test_plan_90_days_phase1_pilots_weakest_with_chain():
 
 
 def test_plan_90_days_phase2_scales_next_weakest():
-    scores = _scores_at_pct({
-        "rb.function.risk": 1,
-        "rb.function.bva":  1,
-        "rb.function.capital_allocation": 1,
-    })
+    scores = _scores_at_pct(
+        {
+            "rb.function.risk": 1,
+            "rb.function.bva": 1,
+            "rb.function.capital_allocation": 1,
+        }
+    )
     assess = MaturityAssessor().assess(target_id="t", scores_by_rubric=scores)
     rmap = plan_90_days(assess)
     phase2_chains = {a.chain_id for a in rmap.phases[1].actions if a.chain_id}
@@ -170,10 +181,14 @@ def test_director_exposes_plan_90_days():
 
 
 def test_roadmap_cli_renders_three_phases():
-    result = runner.invoke(app, [
-        "roadmap",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "roadmap",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "Days 1-30" in result.stdout
     assert "Days 31-60" in result.stdout
@@ -182,10 +197,15 @@ def test_roadmap_cli_renders_three_phases():
 
 
 def test_roadmap_cli_competency_axis():
-    result = runner.invoke(app, [
-        "roadmap",
-        "--self-assessment", str(SAMPLES / "maturity_self_assessment.yaml"),
-        "--axis", "competency",
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "roadmap",
+            "--self-assessment",
+            str(SAMPLES / "maturity_self_assessment.yaml"),
+            "--axis",
+            "competency",
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "Days 1-30" in result.stdout

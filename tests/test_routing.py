@@ -1,4 +1,5 @@
 """L3 v2: dynamic Director.route() picks chain based on weakest capability."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -49,13 +50,15 @@ def test_chain_for_deliverable_unknown_raises():
 
 def test_route_picks_bva_when_bva_is_weakest_with_chain():
     # BvA is weakest among capabilities that have chains.
-    by_rubric = _scores_at_per_rubric({
-        "rb.function.close":      4,
-        "rb.function.reconcile":  4,
-        "rb.function.board_pack": 4,
-        "rb.function.bva":        2,   # weakest with chain
-        "rb.function.forecast":   4,
-    })
+    by_rubric = _scores_at_per_rubric(
+        {
+            "rb.function.close": 4,
+            "rb.function.reconcile": 4,
+            "rb.function.board_pack": 4,
+            "rb.function.bva": 2,  # weakest with chain
+            "rb.function.forecast": 4,
+        }
+    )
     assess = MaturityAssessor().assess(target_id="acme", scores_by_rubric=by_rubric)
     director = Director(persist=False)
     decision = director.decide(assess)
@@ -64,13 +67,15 @@ def test_route_picks_bva_when_bva_is_weakest_with_chain():
 
 
 def test_route_picks_board_pack_when_board_pack_is_weakest():
-    by_rubric = _scores_at_per_rubric({
-        "rb.function.close":      4,
-        "rb.function.reconcile":  4,
-        "rb.function.board_pack": 1,   # weakest with chain
-        "rb.function.bva":        4,
-        "rb.function.forecast":   4,
-    })
+    by_rubric = _scores_at_per_rubric(
+        {
+            "rb.function.close": 4,
+            "rb.function.reconcile": 4,
+            "rb.function.board_pack": 1,  # weakest with chain
+            "rb.function.bva": 4,
+            "rb.function.forecast": 4,
+        }
+    )
     assess = MaturityAssessor().assess(target_id="acme", scores_by_rubric=by_rubric)
     decision = Director(persist=False).decide(assess)
     assert decision.chain.rubric_id == "rb.deliverable.board_pack"
@@ -79,6 +84,7 @@ def test_route_picks_board_pack_when_board_pack_is_weakest():
 def test_route_raises_when_no_capability_has_chain(monkeypatch):
     # Drop all chains -> assessor result has no capability that maps to a chain.
     import strata.orchestrator.chains as chains_mod
+
     monkeypatch.setattr(chains_mod, "_REGISTRY", {})
 
     by_rubric = _scores_at_per_rubric({rid: 2 for rid in CAPABILITY_RUBRIC_IDS})
@@ -88,13 +94,15 @@ def test_route_raises_when_no_capability_has_chain(monkeypatch):
 
 
 def test_route_runs_chain_end_to_end():
-    by_rubric = _scores_at_per_rubric({
-        "rb.function.bva":        2,
-        "rb.function.forecast":   4,
-        "rb.function.close":      4,
-        "rb.function.reconcile":  4,
-        "rb.function.board_pack": 4,
-    })
+    by_rubric = _scores_at_per_rubric(
+        {
+            "rb.function.bva": 2,
+            "rb.function.forecast": 4,
+            "rb.function.close": 4,
+            "rb.function.reconcile": 4,
+            "rb.function.board_pack": 4,
+        }
+    )
     assess = MaturityAssessor().assess(target_id="acme", scores_by_rubric=by_rubric)
     inputs = {"company": "Acme", "period": "Mar 2026", "materiality_threshold_pct": 5}
     decision, run = Director(persist=False).route(assess, inputs)
@@ -134,11 +142,16 @@ def test_run_cli_routes_dynamically(tmp_path):
         payload[rid] = {c.id: score for g in rb.groups for c in g.characteristics}
     sa.write_text(yaml.safe_dump(payload), encoding="utf-8")
 
-    result = runner.invoke(app, [
-        "run",
-        "--self-assessment", str(sa),
-        "--inputs", str(SAMPLES / "bva_inputs.json"),
-    ])
+    result = runner.invoke(
+        app,
+        [
+            "run",
+            "--self-assessment",
+            str(sa),
+            "--inputs",
+            str(SAMPLES / "bva_inputs.json"),
+        ],
+    )
     assert result.exit_code == 0, result.stdout
     assert "chain.bva_commentary.v1" in result.stdout
     assert "Routing decision" in result.stdout

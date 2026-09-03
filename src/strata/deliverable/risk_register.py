@@ -1,4 +1,5 @@
 """Risk register mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,36 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "financial", "operational", "strategic", "compliance", "cyber",
-    "reputational", "ESG", "category", "business", "unit", "calibrated",
-    "anchors", "likelihood", "impact", "heat", "score", "threshold",
-    "escalation", "movement", "controls", "effectiveness", "tested",
-    "gap", "owner", "remediation", "deadline", "committee", "quarterly",
-    "appetite", "out-of-appetite",
+    "financial",
+    "operational",
+    "strategic",
+    "compliance",
+    "cyber",
+    "reputational",
+    "ESG",
+    "category",
+    "business",
+    "unit",
+    "calibrated",
+    "anchors",
+    "likelihood",
+    "impact",
+    "heat",
+    "score",
+    "threshold",
+    "escalation",
+    "movement",
+    "controls",
+    "effectiveness",
+    "tested",
+    "gap",
+    "owner",
+    "remediation",
+    "deadline",
+    "committee",
+    "quarterly",
+    "appetite",
+    "out-of-appetite",
 ]
 
 

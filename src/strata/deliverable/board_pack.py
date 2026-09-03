@@ -1,4 +1,5 @@
 """Board-pack mock author. Deterministic, used in offline mode and tests."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -12,10 +13,27 @@ __all__ = ["build_author_prompt", "mock_author"]
 
 
 _CUE_BANK = [
-    "tie", "ledger", "reconciling", "comparatives", "restated", "currency",
-    "driver", "volume", "price", "mix", "owner", "action", "materiality",
-    "bridge", "scenario", "downside", "upside", "headline", "decision-required",
-    "FYI", "FYA",
+    "tie",
+    "ledger",
+    "reconciling",
+    "comparatives",
+    "restated",
+    "currency",
+    "driver",
+    "volume",
+    "price",
+    "mix",
+    "owner",
+    "action",
+    "materiality",
+    "bridge",
+    "scenario",
+    "downside",
+    "upside",
+    "headline",
+    "decision-required",
+    "FYI",
+    "FYA",
 ]
 
 

@@ -1,4 +1,5 @@
 """Post-investment review mock author. Deterministic, used in offline mode."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -11,12 +12,38 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "actual", "projected", "delta", "IRR", "payback", "cumulative",
-    "decomposition", "volume", "price", "mix", "timing", "one-time",
-    "quantified", "blame-free", "decisions", "assumptions", "system-level",
-    "verdict", "yes-with-changes", "lessons", "owner", "checklist",
-    "hurdle", "template", "update", "continue", "kill", "double-down",
-    "council", "board", "escalated", "cadence",
+    "actual",
+    "projected",
+    "delta",
+    "IRR",
+    "payback",
+    "cumulative",
+    "decomposition",
+    "volume",
+    "price",
+    "mix",
+    "timing",
+    "one-time",
+    "quantified",
+    "blame-free",
+    "decisions",
+    "assumptions",
+    "system-level",
+    "verdict",
+    "yes-with-changes",
+    "lessons",
+    "owner",
+    "checklist",
+    "hurdle",
+    "template",
+    "update",
+    "continue",
+    "kill",
+    "double-down",
+    "council",
+    "board",
+    "escalated",
+    "cadence",
 ]
 
 

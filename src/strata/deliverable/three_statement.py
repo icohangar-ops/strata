@@ -4,6 +4,7 @@ The 'draft' here is a model spec / build plan written in markdown; an LLM
 backend would either emit Excel-formula scaffolding or python (pandas / openpyxl)
 glue to render the actual workbook. The rubric grades the spec equally.
 """
+
 from __future__ import annotations
 
 from typing import Any
@@ -16,12 +17,39 @@ __all__ = ["mock_author"]
 
 
 _CUE_BANK = [
-    "retained", "earnings", "depreciation", "accumulated", "indirect",
-    "method", "deltas", "reconciles", "rounding", "inputs", "labeled",
-    "units", "source", "hardcodes", "formulas", "toggle", "named",
-    "single", "scenario", "sensitivity", "two-way", "drivers",
-    "auto-refresh", "balance", "assets", "liabilities", "equity",
-    "conditional", "flag", "tie-out", "filed", "financials", "links",
+    "retained",
+    "earnings",
+    "depreciation",
+    "accumulated",
+    "indirect",
+    "method",
+    "deltas",
+    "reconciles",
+    "rounding",
+    "inputs",
+    "labeled",
+    "units",
+    "source",
+    "hardcodes",
+    "formulas",
+    "toggle",
+    "named",
+    "single",
+    "scenario",
+    "sensitivity",
+    "two-way",
+    "drivers",
+    "auto-refresh",
+    "balance",
+    "assets",
+    "liabilities",
+    "equity",
+    "conditional",
+    "flag",
+    "tie-out",
+    "filed",
+    "financials",
+    "links",
 ]
 
 

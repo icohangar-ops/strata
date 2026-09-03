@@ -1,4 +1,5 @@
 """Chain registry. One Chain per executable deliverable."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -16,15 +17,16 @@ class ChainStep:
 @dataclass(frozen=True)
 class Chain:
     chain_id: str
-    rubric_id: str            # the L4 deliverable rubric this chain produces
+    rubric_id: str  # the L4 deliverable rubric this chain produces
     steps: tuple[ChainStep, ...]
-    mock_author: Author       # used when Director runs in offline / mock mode
+    mock_author: Author  # used when Director runs in offline / mock mode
     depends_on: tuple[str, ...] = ()  # chain_ids whose final draft this chain consumes
-    perception: Any | None = None     # optional callable: (inputs) -> enriched inputs
+    perception: Any | None = None  # optional callable: (inputs) -> enriched inputs
 
 
 def _board_pack_chain() -> Chain:
     from strata.deliverable.board_pack import mock_author
+
     return Chain(
         chain_id="chain.board_pack.v1",
         rubric_id="rb.deliverable.board_pack",
@@ -44,6 +46,7 @@ def _board_pack_chain() -> Chain:
 def _bva_commentary_chain() -> Chain:
     from strata.deliverable.bva_commentary import mock_author
     from strata.perception import csv_gl_adapter
+
     return Chain(
         chain_id="chain.bva_commentary.v1",
         rubric_id="rb.deliverable.bva_commentary",
@@ -63,6 +66,7 @@ def _bva_commentary_chain() -> Chain:
 
 def _ma_memo_chain() -> Chain:
     from strata.deliverable.ma_memo import mock_author
+
     return Chain(
         chain_id="chain.ma_memo.v1",
         rubric_id="rb.deliverable.ma_memo",
@@ -70,7 +74,9 @@ def _ma_memo_chain() -> Chain:
             ChainStep("perception.pull_target_financials", "Pull target financials and CIM"),
             ChainStep("perception.pull_market_comps", "Pull peer and transaction comps"),
             ChainStep("brain.qoe_adjust", "Apply QoE adjustments to reported EBITDA"),
-            ChainStep("brain.triangulate_valuation", "Triangulate DCF / peer / transaction multiples"),
+            ChainStep(
+                "brain.triangulate_valuation", "Triangulate DCF / peer / transaction multiples"
+            ),
             ChainStep("brain.compose_memo", "Compose IC memo per persona"),
             ChainStep("brain.grade", "Grade against IC memo rubric"),
             ChainStep("brain.revise", "Revise until threshold met"),
@@ -82,6 +88,7 @@ def _ma_memo_chain() -> Chain:
 
 def _investor_update_chain() -> Chain:
     from strata.deliverable.investor_update import mock_author
+
     return Chain(
         chain_id="chain.investor_update.v1",
         rubric_id="rb.deliverable.investor_update",
@@ -100,6 +107,7 @@ def _investor_update_chain() -> Chain:
 
 def _three_statement_chain() -> Chain:
     from strata.deliverable.three_statement import mock_author
+
     return Chain(
         chain_id="chain.three_statement.v1",
         rubric_id="rb.deliverable.three_statement",
@@ -119,6 +127,7 @@ def _three_statement_chain() -> Chain:
 
 def _cfo_dashboard_chain() -> Chain:
     from strata.deliverable.cfo_dashboard import mock_author
+
     return Chain(
         chain_id="chain.cfo_dashboard.v1",
         rubric_id="rb.deliverable.cfo_dashboard",
@@ -138,13 +147,16 @@ def _cfo_dashboard_chain() -> Chain:
 
 def _risk_register_chain() -> Chain:
     from strata.deliverable.risk_register import mock_author
+
     return Chain(
         chain_id="chain.risk_register.v1",
         rubric_id="rb.deliverable.risk_register",
         steps=(
             ChainStep("perception.pull_risks", "Pull risks from BU + functional inputs"),
             ChainStep("perception.pull_controls", "Pull existing controls and last-test dates"),
-            ChainStep("brain.score_likelihood_impact", "Score likelihood and impact 1-5 with anchors"),
+            ChainStep(
+                "brain.score_likelihood_impact", "Score likelihood and impact 1-5 with anchors"
+            ),
             ChainStep("brain.compute_heat", "Compute heat score and flag > 15"),
             ChainStep("brain.compose_register", "Compose register per persona"),
             ChainStep("brain.grade", "Grade against risk-register rubric"),
@@ -157,6 +169,7 @@ def _risk_register_chain() -> Chain:
 
 def _capex_memo_chain() -> Chain:
     from strata.deliverable.capex_memo import mock_author
+
     return Chain(
         chain_id="chain.capex_memo.v1",
         rubric_id="rb.deliverable.capex_memo",
@@ -175,13 +188,19 @@ def _capex_memo_chain() -> Chain:
 
 def _post_investment_review_chain() -> Chain:
     from strata.deliverable.post_investment_review import mock_author
+
     return Chain(
         chain_id="chain.post_investment_review.v1",
         rubric_id="rb.deliverable.post_investment_review",
         steps=(
             ChainStep("perception.pull_actuals", "Pull actuals through review window"),
-            ChainStep("perception.recall_projections", "Recall projected returns from original memo"),
-            ChainStep("brain.decompose_variance", "Decompose variance into volume / price / mix / timing / one-time"),
+            ChainStep(
+                "perception.recall_projections", "Recall projected returns from original memo"
+            ),
+            ChainStep(
+                "brain.decompose_variance",
+                "Decompose variance into volume / price / mix / timing / one-time",
+            ),
             ChainStep("brain.compose_review", "Compose review per persona"),
             ChainStep("brain.grade", "Grade against post-investment-review rubric"),
             ChainStep("brain.revise", "Revise until threshold met"),
@@ -193,12 +212,17 @@ def _post_investment_review_chain() -> Chain:
 
 def _employee_all_hands_chain() -> Chain:
     from strata.deliverable.employee_all_hands import mock_author
+
     return Chain(
         chain_id="chain.employee_all_hands.v1",
         rubric_id="rb.deliverable.employee_all_hands",
         steps=(
-            ChainStep("perception.pull_business_highlights", "Pull period highlights for the all-hands"),
-            ChainStep("brain.translate_to_plain_english", "Translate finance jargon to plain English"),
+            ChainStep(
+                "perception.pull_business_highlights", "Pull period highlights for the all-hands"
+            ),
+            ChainStep(
+                "brain.translate_to_plain_english", "Translate finance jargon to plain English"
+            ),
             ChainStep("brain.compose_segment", "Compose 10-minute segment per persona"),
             ChainStep("brain.draft_qa", "Draft top 5 anticipated employee questions"),
             ChainStep("brain.grade", "Grade against employee-all-hands rubric"),
@@ -211,6 +235,7 @@ def _employee_all_hands_chain() -> Chain:
 
 def _cross_functional_brief_chain() -> Chain:
     from strata.deliverable.cross_functional_brief import mock_author
+
     return Chain(
         chain_id="chain.cross_functional_brief.v1",
         rubric_id="rb.deliverable.cross_functional_brief",
@@ -228,11 +253,14 @@ def _cross_functional_brief_chain() -> Chain:
 
 def _earnings_script_chain() -> Chain:
     from strata.deliverable.earnings_script import mock_author
+
     return Chain(
         chain_id="chain.earnings_script.v1",
         rubric_id="rb.deliverable.earnings_script",
         steps=(
-            ChainStep("perception.pull_quarterly_results", "Pull quarterly results and prior guidance"),
+            ChainStep(
+                "perception.pull_quarterly_results", "Pull quarterly results and prior guidance"
+            ),
             ChainStep("brain.draft_prepared_remarks", "Draft prepared remarks with safe-harbor"),
             ChainStep("brain.draft_guidance_bridge", "Draft guidance change bridge"),
             ChainStep("brain.draft_capital_message", "Draft capital allocation message"),
@@ -268,7 +296,6 @@ def all_chains() -> tuple[Chain, ...]:
 def chain_for_deliverable(rubric_id: str) -> Chain:
     if rubric_id not in _REGISTRY:
         raise KeyError(
-            f"no chain registered for deliverable '{rubric_id}'. "
-            f"known: {list(_REGISTRY)}"
+            f"no chain registered for deliverable '{rubric_id}'. known: {list(_REGISTRY)}"
         )
     return _REGISTRY[rubric_id]
