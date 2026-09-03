@@ -1,1 +1,0 @@
-/Users/cubiczan/Documents/Default\ Project/repos/strata/rust/target/debug/strata-core: /Users/cubiczan/Documents/Default\ Project/repos/strata/rust/src/bin/strata-core.rs /Users/cubiczan/Documents/Default\ Project/repos/strata/rust/src/lib.rs
