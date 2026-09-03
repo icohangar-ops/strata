@@ -17,6 +17,7 @@ from strata.maturity import (
     CompetencyAssessor,
     MaturityAssessor,
 )
+from strata.mcp import main as _mcp_main
 from strata.orchestrator.chains import all_chains
 from strata.orchestrator.director import Director
 from strata.schema import CharacteristicScore
@@ -265,6 +266,12 @@ def list_chains() -> None:
     for c in all_chains():
         t.add_row(c.chain_id, c.rubric_id, str(len(c.steps)))
     console.print(t)
+
+
+@app.command("mcp")
+def mcp() -> None:
+    """Run the stdio MCP server."""
+    _mcp_main([])
 
 
 if __name__ == "__main__":  # pragma: no cover
