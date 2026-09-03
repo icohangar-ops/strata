@@ -20,8 +20,6 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from strata.rust_core import run_strata_core
-
 WEIGHT_MIN = 0.05
 WEIGHT_MAX = 1.0
 WEIGHT_TOL = 1e-6
@@ -145,13 +143,19 @@ class RubricScoreReport(BaseModel):
         if missing:
             raise ValueError(f"missing score for characteristic '{missing[0]}'")
 
-        payload = run_strata_core(
-            "compute_rubric_score",
-            {
-                "rubric": rubric.model_dump(),
-                "target_id": target_id,
-                "scores": [score.model_dump() for score in scores],
-                "pass_threshold_pct": pass_threshold_pct,
-            },
+        score_by_id = {score.characteristic_id: score.score for score in scores}
+        weighted_total = 0.0
+        for group in rubric.groups:
+            for characteristic in group.characteristics:
+                weighted_total += group.weight * characteristic.weight * score_by_id[characteristic.id]
+
+        max_score = max(rubric.max_score, 1)
+        normalized_pct = (weighted_total / float(max_score)) * 100.0
+        return cls(
+            rubric_id=rubric.rubric_id,
+            target_id=target_id,
+            scores=tuple(scores),
+            weighted_total=weighted_total,
+            normalized_pct=normalized_pct,
+            passed=normalized_pct >= pass_threshold_pct,
         )
-        return cls.model_validate(payload["value"])

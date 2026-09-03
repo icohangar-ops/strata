@@ -28,7 +28,7 @@ create_demo_video.py
 streamlit.log
 rust/target/
 
-# Railway / deploy artifacts that shouldn't ship
+# Legacy deploy artifacts that shouldn't ship
 .railway/
 
 .idea/

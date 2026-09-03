@@ -27,7 +27,7 @@ https://github.com/user-attachments/assets/demo.mp4
 | ![Roadmap tab](docs/screenshots/02-roadmap.png) | **Roadmap** tab — 90-day phased plan (Baseline, Scale, Embed) with capability scores |
 | ![Deliver tab](docs/screenshots/03-deliver.png) | **Deliver** tab — chain selector + 5-stage execution pipeline + score history |
 | ![12 Deliverables](docs/screenshots/04-deliverables.png) | **12 chain-driven deliverables** covering board, BvA, M&A, investor, 3-statement, risk, and more |
-| ![Tech Stack](docs/screenshots/05-techstack.png) | **Tech stack** — Python 3.12, Streamlit, PostgreSQL, Pydantic, pluggable LLM backends |
+| ![Tech Stack](docs/screenshots/05-techstack.png) | **Tech stack** — Python 3.12, FastAPI, PostgreSQL, Pydantic, pluggable LLM backends |
 
 ---
 
@@ -45,8 +45,7 @@ so the same engine that scores "how mature is your monthly close" also scores
 It's an opinionated implementation of the modern strategic-CFO function:
 the operational scorecard, the competency archetype, the standing
 deliverables, and the 90-day rollout plan — wired together as a single
-clean-room codebase shipping with Postgres schema, Streamlit UI, and
-Railway deployment.
+clean-room codebase shipping with Postgres schema and a Vercel-ready FastAPI UI.
 
 ---
 
@@ -54,7 +53,7 @@ Railway deployment.
 
 ```
 ┌───────────────────────────────────────────────────────────────────┐
-│  L0  USER SHELL                  (CLI · Streamlit UI)             │
+│  L0  USER SHELL                  (CLI · FastAPI web UI)           │
 ├───────────────────────────────────────────────────────────────────┤
 │  L1  MATURITY ASSESSMENT                                          │
 │      Function axis      : 8 process capabilities                  │
@@ -138,7 +137,7 @@ Railway deployment.
 | Communication playbook across 5 venues | ✅ board, investor letter, employee, cross-functional, earnings |
 | Enterprise risk management framework | ✅ capability + risk-register deliverable |
 | Capital-allocation discipline (4-stage gate) | ✅ capability + capex memo + post-investment review |
-| 90-day phased rollout roadmap | ✅ `plan_90_days` API + CLI + Streamlit tab |
+| 90-day phased rollout roadmap | ✅ `plan_90_days` API + CLI + FastAPI dashboard |
 
 ---
 
@@ -152,7 +151,7 @@ cd strata
 # 2) Virtualenv + install (Windows bash; on macOS/Linux use .venv/bin/activate)
 python -m venv .venv
 source .venv/Scripts/activate
-pip install -e ".[dev,llm,ui]"
+pip install -e ".[dev,llm]"
 
 # 3) Configure env (copy then edit; never commit your real .env)
 cp .env.example .env
@@ -166,22 +165,20 @@ strata assess --self-assessment samples/maturity_self_assessment.yaml --axis bot
 strata roadmap --self-assessment samples/maturity_self_assessment.yaml
 strata board-pack --inputs samples/board_pack_inputs.json
 
-# 6) Or launch the Streamlit UI
-streamlit run streamlit_app.py
+# 6) Or launch the FastAPI web app
+uvicorn app:app --reload
 ```
 
-## Quick start — Railway (deployed)
+## Quick start — Vercel (deployed)
 
-The repo ships with a [`Dockerfile`](./Dockerfile), [`railway.toml`](./railway.toml),
-and a [`.streamlit/config.toml`](./.streamlit/config.toml) tuned for headless
-production.
+The repo ships with a Vercel entrypoint at [`app.py`](./app.py) and a
+[`vercel.json`](./vercel.json) that trims the deployment bundle.
 
-1. In the Railway dashboard: **+ New** → **Deploy from GitHub repo** → select this repo.
-2. **+ New** → **Database** → **PostgreSQL** (auto-injects `DATABASE_URL`).
-3. Service → **Variables** → set the env vars in [`.env.example`](./.env.example).
-4. Service → **Settings** → **Networking** → **Generate Domain**.
+1. In Vercel: **Add New** → **Project** → import this repo.
+2. Set the env vars in [`.env.example`](./.env.example).
+3. Deploy on push to `main` through Vercel Git integration.
 
-Every push to `main` auto-redeploys via Railway's native GitHub integration.
+Every push to `main` redeploys through Vercel.
 
 ---
 
@@ -191,7 +188,7 @@ Environment variables (full list in [`.env.example`](./.env.example)):
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `DATABASE_URL` | `postgresql+psycopg://strata:strata@localhost:5433/strata` | Postgres connection (Railway injects automatically) |
+| `DATABASE_URL` | `postgresql+psycopg://strata:strata@localhost:5433/strata` | Postgres connection for local or hosted deployments |
 | `STRATA_LLM_BACKEND` | `openai` | `openai` (DashScope/OpenAI-compatible) or `anthropic` |
 | `STRATA_LLM_BASE_URL` | DashScope China endpoint | OpenAI-compatible base URL |
 | `DASHSCOPE_API_KEY` | _unset_ | Active when `backend=openai` |
@@ -250,16 +247,16 @@ The `--use-llm` flag swaps the mock author + grader for the configured LLM backe
 
 ---
 
-## Streamlit UI
+## FastAPI UI
 
-`streamlit run streamlit_app.py` opens a three-tab UI:
+`uvicorn app:app --reload` opens a single-page dashboard:
 
-- **Assess** — dual-axis heatmap with weak/developing/mature verdicts
-- **Roadmap** — phased 90-day plan with chain pointers
-- **Deliver** — chain selector, JSON inputs editor, optional GL CSV uploader for
-  perception-aware chains, draft renderer, score history, Markdown download
+- **Assess** - dual-axis heatmap with weak/developing/mature verdicts
+- **Roadmap** - phased 90-day plan with chain pointers
+- **Deliver** - chain selector, JSON inputs editor, and draft renderer
 
-Sidebar shows live backend status (which key is set, which model, which base URL).
+The API is also available directly at `/api/assess`, `/api/roadmap`,
+`/api/deliver`, and `/api/meta`.
 
 ---
 
@@ -315,11 +312,11 @@ strata/
 ├── migrations/                # Alembic migrations
 ├── samples/                   # 12 input JSONs + GL extract CSV + self-assessment YAML
 ├── tests/                     # 155 tests
-├── streamlit_app.py
+├── app.py
 ├── Dockerfile
-├── railway.toml
+├── vercel.json
 ├── docker-compose.yml         # local Postgres
-├── .github/workflows/         # test.yml + deploy.yml
+├── .github/workflows/         # test.yml
 └── NOTICE                     # upstream attribution
 ```
 

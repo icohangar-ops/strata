@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "app.py": {
+      "excludeFiles": [
+        "docs/**",
+        "samples/**",
+        "tests/**",
+        "streamlit_app.py",
+        "rust/target/**",
+        "**/__pycache__/**"
+      ]
+    }
+  }
+}
